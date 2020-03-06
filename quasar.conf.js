@@ -56,7 +56,8 @@ module.exports = function (ctx) {
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
-      vueRouterMode: 'hash', // available values: 'hash', 'history'
+      scopeHoisting: true,
+      vueRouterMode: 'history',
 
       // showProgress: false,
       // gzip: true,
@@ -77,14 +78,28 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         })
+        cfg.module.rules.push({
+          test: /\.pug$/,
+          loader: 'pug-plain-loader'
+        })
       }
     },
 
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: false,
-      port: 8080,
-      open: true // opens browser window automatically
+      https: true,
+      port: 8081,
+      host: '127.0.0.1',
+      open: false, // opens browser window automatically
+      proxy: {
+        '/api': {
+          target: 'https://127.0.0.1:443/',
+          ws: true,
+          secure: false,
+          changeOrigin: false,
+          logLevel: 'debug'
+        }
+      }
     },
 
     // animations: 'all', // --- includes all animations
