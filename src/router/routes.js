@@ -37,6 +37,7 @@ const routes = [
     path: '/:collectionId',
     component: Collection,
     meta: {
+      title: 'Records',
       preloader: {
         store: 'oarepoCollection'
       }

@@ -9,9 +9,13 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator'
+import LocaleSwitcher from './i18n/LocaleSwitcher'
 
 export default @Component({
   name: 'Collections',
+  components: {
+    LocaleSwitcher
+  },
   props: {
     query: Object
   }

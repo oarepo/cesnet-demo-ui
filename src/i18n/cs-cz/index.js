@@ -3,8 +3,8 @@
 
 export default {
   app: {
-    title: 'CESNET Repository - DEMO'
+    title: 'CESNET Repozitář - DEMO'
   },
-  failed: 'Action failed',
-  success: 'Action was successful'
+  failed: 'Operace se nezdařila',
+  success: 'Akce byla úspěšná'
 }
