@@ -4,26 +4,30 @@ import Collections from 'components/Collections'
 import Record from 'components/Record'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
+import LandingPageLayout from 'layouts/LandingPageLayout'
 
 const routes = [
   {
     path: '/',
-    component: () => ''
+    component: LandingPageLayout,
+    redirect: '/collections',
+    children: [
+      routerCollectionList(
+        {
+          path: '/collections',
+          component: Collections,
+          meta: {
+            preloader: {
+              store: 'oarepoCollectionList'
+            }
+          }
+        })
+    ]
   },
   {
     path: '/error/404',
     component: Error404
   },
-  routerCollectionList(
-    {
-      path: '/collections',
-      component: Collections,
-      meta: {
-        preloader: {
-          store: 'oarepoCollectionList'
-        }
-      }
-    }),
   routerRecord({
     path: '/:collectionId/:recordId',
     component: Record,
@@ -42,7 +46,11 @@ const routes = [
         store: 'oarepoCollection'
       }
     },
-    props: query()
+    props: query([
+      'string:filter'
+    ], {}, {
+      passParams: true
+    })
   })
 ]
 

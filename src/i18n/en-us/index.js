@@ -3,7 +3,18 @@
 
 export default {
   app: {
-    title: 'CESNET Repository - DEMO'
+    title: 'Repository DEMO'
+  },
+  labels: {
+    searchInput: 'I\'m looking for…',
+    searchBtn: 'Search',
+    localeSwitcher: 'Language'
+  },
+  values: {
+    lang: {
+      csCZ: 'Czech',
+      enUS: 'English'
+    }
   },
   failed: 'Action failed',
   success: 'Action was successful'

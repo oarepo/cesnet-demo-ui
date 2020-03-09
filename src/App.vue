@@ -5,7 +5,7 @@
 </template>
 
 <script>
-const title = 'Bla'
+const title = 'CESNET Repository - DEMO'
 
 export default {
   name: 'App',

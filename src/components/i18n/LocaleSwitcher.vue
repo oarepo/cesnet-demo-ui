@@ -1,17 +1,22 @@
 
-<template>
-  <q-select
+<template lang="pug">
+  q-select(
+    menu-anchor="bottom left"
+    label-color="grey-4"
+    bg-color="info"
+    color="grey-4"
+    standout
+    dark
     v-model="lang"
     :options="langOptions"
-    label="Quasar Language"
+    :label="$t('labels.localeSwitcher')"
     dense
-    borderless
     emit-value
     map-options
     options-dense
-    style="min-width: 150px"
-  />
-  <!-- ...... -->
+  )
+    template(v-slot="prepend")
+      q-icon(name="flag")
 </template>
 
 <script>
@@ -20,8 +25,8 @@ export default {
     return {
       lang: this.$i18n.locale,
       langOptions: [
-        { value: 'en-us', label: 'English' },
-        { value: 'cs-cz', label: 'Czech' }
+        { value: 'en-us', label: this.$t('values.lang.enUS') },
+        { value: 'cs-cz', label: this.$t('values.lang.csCZ') }
       ]
     }
   },

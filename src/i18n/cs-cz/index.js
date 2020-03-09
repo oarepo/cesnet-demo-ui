@@ -3,7 +3,18 @@
 
 export default {
   app: {
-    title: 'CESNET Repozitář - DEMO'
+    title: 'DEMO Repozitář'
+  },
+  labels: {
+    searchInput: 'Hledám…',
+    searchBtn: 'Hledat',
+    localeSwitcher: 'Language'
+  },
+  values: {
+    lang: {
+      csCZ: 'Česky',
+      enUS: 'Anglicky'
+    }
   },
   failed: 'Operace se nezdařila',
   success: 'Akce byla úspěšná'
