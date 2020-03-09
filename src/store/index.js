@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import InvenioAPI from '@oarepo/invenio-api-vuex'
 
 // import example from './module-example'
 
@@ -24,11 +23,6 @@ export default function (/* { ssrContext } */) {
     // enable strict mode (adds overhead!)
     // for dev mode only
     strict: process.env.DEV
-  })
-
-  Vue.use(InvenioAPI, {
-    store: Store,
-    apiURL: '/api'
   })
 
   return Store

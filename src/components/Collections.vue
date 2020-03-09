@@ -17,10 +17,6 @@ export default @Component({
   }
 })
 class Collections extends Vue {
-  created () {
-    this.reload()
-  }
-
   get collections () {
     return this.$oarepo.collections.collections
   }
