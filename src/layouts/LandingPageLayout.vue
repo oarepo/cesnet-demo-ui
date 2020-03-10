@@ -16,20 +16,13 @@
 </template>
 
 <script>
-// q-drawer.landing-hero.shadow-3(elevated overlay
-//   :value="true"
-// :width="560"
-// behavior="desktop"
-// side="right")
 import { Component, Vue } from 'vue-property-decorator'
-import LocaleSwitcher from '../components/i18n/LocaleSwitcher'
 import LandingPage from '../pages/LandingPage'
 
 export default @Component({
   name: 'LandingPageLayout',
   components: {
-    LandingPage,
-    LocaleSwitcher
+    LandingPage
   }
 })
 class LandingPageLayout extends Vue {
