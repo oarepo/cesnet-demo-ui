@@ -1,13 +1,20 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
   app: {
     title: 'Repository DEMO'
   },
+  menu: {
+    createRecord: 'Record'
+  },
   labels: {
-    searchInput: 'I\'m looking for…',
+    // Inputs
+    searchInput: 'I\'m looking for',
+    // Buttons
     searchBtn: 'Search',
+    submitBtn: 'Submit',
+    createRecordBtn: 'Add record',
+    // Sections
+    createNew: 'Create New',
+    // Other components
     localeSwitcher: 'Language'
   },
   values: {
@@ -16,6 +23,12 @@ export default {
       enUS: 'English'
     }
   },
-  failed: 'Action failed',
-  success: 'Action was successful'
+  tooltips: {
+    anonymous: 'Anonymous user',
+    notifications: 'Notifications'
+  },
+  messages: {
+    failed: 'Action failed',
+    success: 'Action was successful'
+  }
 }

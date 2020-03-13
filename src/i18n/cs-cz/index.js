@@ -1,13 +1,20 @@
-// This is just an example,
-// so you can safely delete all default props below
-
 export default {
   app: {
     title: 'DEMO Repozitář'
   },
+  menu: {
+    createRecord: 'Záznam'
+  },
   labels: {
-    searchInput: 'Hledám…',
+    // Inputs
+    searchInput: 'Hledám',
+    // Buttons
     searchBtn: 'Hledat',
+    submitBtn: 'Uložit',
+    createRecordBtn: 'Přidat záznam',
+    // Sections
+    createNew: 'Vytvořit',
+    // Other components
     localeSwitcher: 'Language'
   },
   values: {
@@ -16,6 +23,12 @@ export default {
       enUS: 'Anglicky'
     }
   },
-  failed: 'Operace se nezdařila',
-  success: 'Akce byla úspěšná'
+  tooltips: {
+    anonymous: 'Nepřihlášený uživatel',
+    notifications: 'Notifikace'
+  },
+  messages: {
+    failed: 'Operace se nezdařila',
+    success: 'Akce byla úspěšná'
+  }
 }
