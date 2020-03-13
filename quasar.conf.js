@@ -8,10 +8,13 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       'i18n',
+      'filters',
       'axios',
       'invenio-api',
       'preloader',
       'query-sync',
+      'renderer',
+      'editor',
       'particles'
     ],
 
@@ -49,20 +52,31 @@ module.exports = function (ctx) {
       all: 'auto',
 
       components: [
+        'QAvatar',
+        'QBadge',
         'QBtn',
+        'QDate',
         'QDrawer',
         'QFooter',
         'QHeader',
         'QIcon',
         'QImg',
         'QInput',
+        'QItem',
+        'QItemSection',
         'QLayout',
+        'QList',
+        'QMenu',
         'QPage',
         'QPageContainer',
+        'QSpace',
         'QToolbar',
-        'QToolbarTitle'
+        'QToolbarTitle',
+        'QTooltip'
       ],
-      directives: [],
+      directives: [
+        'ClosePopup'
+      ],
 
       // Quasar plugins
       plugins: [
