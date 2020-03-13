@@ -17,14 +17,12 @@
 
 <script>
 import { Component, Vue } from 'vue-property-decorator'
-import LocaleSwitcher from '../components/i18n/LocaleSwitcher'
 import LandingPage from '../pages/LandingPage'
 
 export default @Component({
   name: 'LandingPageLayout',
   components: {
-    LandingPage,
-    LocaleSwitcher
+    LandingPage
   }
 })
 class LandingPageLayout extends Vue {
