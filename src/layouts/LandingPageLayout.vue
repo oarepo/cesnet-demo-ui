@@ -60,7 +60,7 @@ class LandingPageLayout extends Vue {
     t1.to(left, 1, { width: '10vw' }, 'start')
     t1.to(hero, 1, { background: 'rgba(255,255,255,0.95)' }, 'start')
     t1.to(hdr.$el, 1, { top: 0 }, 'start')
-    t1.to(routerContainer.$el, 1.5, { opacity: 0, top: body.clientHeight }, 'start')
+    t1.to(routerContainer.$el, 1.5, { opacity: 0, top: -body.clientHeight }, 'start')
     t1.to(particles.$el, 1, { opacity: 0 }, 'start')
     // this.$router.push({ name: 'search' })
   }
