@@ -1,10 +1,10 @@
-import { routerCollectionList, routerCollection, routerRecord } from '@oarepo/invenio-api-vuex'
+import { routerCollection, routerCollectionList, routerRecord } from '@oarepo/invenio-api-vuex'
 import Collection from 'components/Collection'
-import Collections from 'components/Collections'
 import Record from 'components/Record'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
 import LandingPageLayout from 'layouts/LandingPageLayout'
+import LandingPage from 'pages/LandingPage'
 
 const routes = [
   {
@@ -15,13 +15,33 @@ const routes = [
       routerCollectionList(
         {
           path: '/collections',
-          component: Collections,
+          component: LandingPage,
           meta: {
             preloader: {
               store: 'oarepoCollectionList'
             }
           }
-        })
+        }),
+      routerCollection({
+        path: 'search',
+        name: 'search',
+        component: Collection,
+        meta: {
+          title: 'Records',
+          preloader: {
+            store: 'oarepoCollection'
+          }
+        },
+        props: query(
+          [
+            'string:filter'
+          ], {
+            collectionId: 'records'
+          },
+          {
+            passParams: true
+          })
+      })
     ]
   },
   {

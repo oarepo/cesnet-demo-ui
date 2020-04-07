@@ -27,12 +27,12 @@
           color="positive"
           :label="$t('labels.createRecordBtn')")
       .col-5
-        q-btn.full-height.full-width.col(:to="`/records/?filter=${search}`"
+        q-btn.full-height.full-width.col(
           no-wrap
           color="accent"
           size="lg"
           icon="search"
-          :label="$t('labels.searchBtn')")
+          :label="$t('labels.searchBtn')" @click="doSearch")
 </template>
 
 <script>
@@ -58,6 +58,10 @@ class Collections extends Vue {
   reload () {
     return this.$oarepo.collections.reload()
   }
+
+  doSearch () {
+    this.$emit('search')
+  }
 }
 </script>
 
@@ -69,8 +73,10 @@ class Collections extends Vue {
   &__logo
     min-height: 150px
     max-height: 150px
+
   &__title
     letter-spacing: .3rem
+
   &__search
     font-size: 1.3rem
 </style>

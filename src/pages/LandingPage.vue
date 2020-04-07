@@ -1,9 +1,9 @@
 <template lang="pug">
-  q-page.full-height.text-white(padding)
-    .row.justify-end
-        .col-3.col-md-2
-          locale-switcher.text-white
-    collections
+q-page.full-height.text-white(padding)
+  .row.justify-end
+    .col-3.col-md-2
+      locale-switcher.text-white
+  collections(@search="search")
 </template>
 
 <script>
@@ -19,6 +19,9 @@ export default @Component({
   }
 })
 class LandingPage extends Vue {
+  search () {
+    this.$emit('search')
+  }
 }
 </script>
 <style lang="sass">
