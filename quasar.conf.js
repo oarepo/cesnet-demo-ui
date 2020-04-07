@@ -126,10 +126,10 @@ module.exports = function (ctx) {
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://127.0.0.1:443/',
+          target: 'https://repozitar.cesnet.cz/',
           ws: true,
           secure: false,
-          changeOrigin: false,
+          changeOrigin: true,
           logLevel: 'debug'
         }
       }
