@@ -6,6 +6,7 @@ import Error404 from 'pages/Error404'
 import LandingPageLayout from 'layouts/LandingPageLayout'
 import CollectionLayout from 'layouts/CollectionLayout'
 import RecordCreate from 'pages/records/RecordCreate'
+import Collection from 'components/Collection'
 
 const routes = [
   {
@@ -34,6 +35,20 @@ const routes = [
     path: '/:collectionId',
     component: CollectionLayout,
     children: [
+      {
+        path: '/',
+        component: Collection,
+        meta: {
+          preloader: {
+            store: 'oarepoCollection'
+          }
+        },
+        props: query([
+          'string:filter'
+        ], {}, {
+          passParams: true
+        })
+      },
       {
         // Create a new Record in a Collection
         path: '/:collectionId/create',
