@@ -15,7 +15,9 @@ module.exports = function (ctx) {
       'query-sync',
       'renderer',
       'editor',
-      'particles'
+      'particles',
+      'local-stores',
+      'portal'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -50,6 +52,11 @@ module.exports = function (ctx) {
       // * true   - Import everything from Quasar
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
+      config: {
+        screen: {
+          bodyClasses: true
+        }
+      },
 
       components: [
         'QAvatar',

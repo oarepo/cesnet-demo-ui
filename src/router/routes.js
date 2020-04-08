@@ -1,3 +1,12 @@
+import Index from 'pages/Index'
+
+const routes = [
+  {
+    path: '/',
+    component: Index
+  }
+]
+/*
 import { routerCollection, routerCollectionList, routerRecord } from '@oarepo/invenio-api-vuex'
 import Collection from 'components/Collection'
 import Record from 'components/Record'
@@ -81,5 +90,5 @@ if (process.env.MODE !== 'ssr') {
     component: () => import('pages/Error404.vue')
   })
 }
-
+*/
 export default routes
