@@ -10,6 +10,7 @@ export default {
     searchInput: 'Hledám',
     // Buttons
     searchBtn: 'Hledat',
+    browseBtn: 'Zobrazit',
     submitBtn: 'Uložit',
     createRecordBtn: 'Přidat záznam',
     // Sections

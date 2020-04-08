@@ -10,6 +10,7 @@ export default {
     searchInput: 'I\'m looking for',
     // Buttons
     searchBtn: 'Search',
+    browseBtn: 'Show',
     submitBtn: 'Submit',
     createRecordBtn: 'Add record',
     // Sections

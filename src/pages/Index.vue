@@ -42,18 +42,18 @@ layout.index(ref="layout" @change="state = $event" :layout="layout" :animateProp
                 .index__search_target.full-width(ref="portal")
             .row.justify-between
               .col-5
+                q-btn.full-height.full-width.col(
+                  no-wrap
+                  color="positive"
+                  size="lg"
+                  icon="search"
+                  :label="$t('labels.browseBtn')" @click="doSearch")
+              .col-5
                 q-btn.full-height.full-width(to="/records/create"
                   icon="add"
                   size="lg"
-                  color="positive"
-                  :label="$t('labels.createRecordBtn')")
-              .col-5
-                q-btn.full-height.full-width.col(
-                  no-wrap
                   color="accent"
-                  size="lg"
-                  icon="search"
-                  :label="$t('labels.searchBtn')" @click="doSearch")
+                  :label="$t('labels.createRecordBtn')")
           .col-1
 </template>
 
