@@ -9,6 +9,7 @@ export default @Component({
 })
 class LayoutMixin extends Vue {
   transforming = false
+  currentLayout = null
 
   colWidth (num) {
     return this.$q.screen.width * num / 12
@@ -33,18 +34,18 @@ class LayoutMixin extends Vue {
   }
 
   get bodyClass () {
-    console.log('state is', this.layout, this.layout.bodyClass)
-    return this.layout && this.layout.bodyClass
+    return this.currentLayout && this.currentLayout.bodyClass
   }
 
   mounted () {
+    this.currentLayout = this.layout
     this.emitChange()
   }
 
   emitChange () {
     this.$emit('change', {
       transforming: this.transforming,
-      state: this.layout.code
+      code: this.currentLayout.code
     })
   }
 
@@ -63,13 +64,13 @@ class LayoutMixin extends Vue {
     } = options
 
     if (!animate) {
-      this.layout = target
+      this.currentLayout = target
     }
     const tl = gsap.timeline({
       onComplete: () => {
         // this.$refs.left.style = {}
         // this.$refs.right.style = {}
-        // this.layout = target
+        this.currentLayout = target
         if (timelineComplete) {
           timelineComplete(tl)
         }

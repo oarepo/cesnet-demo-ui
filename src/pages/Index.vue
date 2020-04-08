@@ -23,8 +23,8 @@ layout.index(ref="layout" @change="state = $event" :layout="layout" :animateProp
             template(v-slot:append)
               q-icon(v-if="search === ''" name="search")
               q-icon.cursor-pointer(v-else name="clear" @click="search = ''")
-      .full-width.row(ref="container")
-        .column.col-8.offset-2(ref="intro")
+      .row(ref="container")
+        .column.col-8.offset-2(ref="intro" v-if="state.code === 'intro'")
           .col-1
             .row.justify-end
               .col-4.col-md-3
@@ -148,12 +148,15 @@ export default @Component({
 })
 class Index extends Vue {
   layout = LayoutTypes.INTRO
-  animateProps = ['left', 'right', 'header', 'main', 'mainBg2', 'body']
+  animateProps = ['left', 'right', 'header', 'main', 'mainBg2', { element: 'body', position: '<+.1' }]
 
   collectionLogo = 'statics/logos/datacare_White.svg'
   search = ''
   floatingSearch = false
   started = false
+  state = {
+    code: 'intro'
+  }
 
   doSearch () {
     this.positionSearch()
@@ -202,6 +205,9 @@ class Index extends Vue {
         timeline.to(this.$refs.particles.$el, { opacity: 0.0 }, 'start')
         timeline.to(this.$refs.searchboxContainer, { left: 100, top: 0, duration: 1.5 }, 'start')
         this.$refs.searchbox.blur()
+      },
+      timelineComplete: (timeline) => {
+
       }
     })
   }
