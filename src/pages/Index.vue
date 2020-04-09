@@ -23,6 +23,7 @@ layout.index(ref="layout" @change="state = $event" :layout="layout" :animateProp
             template(v-slot:append)
               q-icon(v-if="search === ''" name="search")
               q-icon.cursor-pointer(v-else name="clear" @click="search = ''")
+      router-view.index__router
       .row(ref="container")
         .column.col-8.offset-2(ref="intro" v-if="state.code === 'intro'")
           .col-1
@@ -158,7 +159,23 @@ class Index extends Vue {
     code: 'intro'
   }
 
+  beforeMount () {
+    console.log('route', this.$route)
+    if (this.$route.name === 'landing') {
+      this.layout = LayoutTypes.INTRO
+    } else {
+      this.layout = LayoutTypes.NORMAL
+      this.floatingSearch = true
+    }
+  }
+
   doSearch () {
+    this.$oarepo.collection.load({
+      collectionId: 'records',
+      query: {
+        q: this.search
+      }
+    })
     this.positionSearch()
     this.animate()
   }
@@ -176,15 +193,19 @@ class Index extends Vue {
   }
 
   positionSearch () {
-    // set searchbox dimensions and position, it wil lbe taken from the portal in the next tick with :disabled
-    const portal = this.$refs.portal
-    const searchboxPositionSize = portal.getBoundingClientRect()
-    const containerPositionSize = this.$refs.container.getBoundingClientRect()
+    if (this.layout.code === 'intro') {
+      // set searchbox dimensions and position, it wil lbe taken from the portal in the next tick with :disabled
+      const portal = this.$refs.portal
+      const searchboxPositionSize = portal.getBoundingClientRect()
+      const containerPositionSize = this.$refs.container.getBoundingClientRect()
 
-    this.$refs.searchboxContainer.style.left = `${searchboxPositionSize.left - containerPositionSize.left}px`
-    this.$refs.searchboxContainer.style.top = `${searchboxPositionSize.top - containerPositionSize.top}px` // todo: hack, need to find where extra 50 pixels is
-    this.$refs.searchboxContainer.style.width = `${searchboxPositionSize.width}px`
-    this.$refs.searchboxContainer.height = `${searchboxPositionSize.height}px`
+      this.$refs.searchboxContainer.style.left = `${searchboxPositionSize.left - containerPositionSize.left}px`
+      this.$refs.searchboxContainer.style.top = `${searchboxPositionSize.top - containerPositionSize.top}px`
+      this.$refs.searchboxContainer.style.width = `${searchboxPositionSize.width}px`
+      this.$refs.searchboxContainer.height = `${searchboxPositionSize.height}px`
+    } else {
+      this.$refs.searchboxContainer.style.left = '100px'
+    }
   }
 
   animate () {
@@ -207,7 +228,7 @@ class Index extends Vue {
         this.$refs.searchbox.blur()
       },
       timelineComplete: (timeline) => {
-
+        this.$router.push({ name: 'search', query: { q: this.search } })
       }
     })
   }
@@ -215,15 +236,17 @@ class Index extends Vue {
 </script>
 <style lang="sass">
 .index
-  .layout__main_bg_2
-    display: inline-block
-    width: 40vw
-    position: relative
-    background: rgb(0, 150, 231)
-    background: -moz-linear-gradient(170deg, rgba(0, 150, 231, .8) 0%, rgba(0, 105, 162, 1) 47%, rgba(0, 85, 131, .8) 100%)
-    background: -webkit-linear-gradient(170deg, rgba(0, 150, 231, .8) 0%, rgba(0, 105, 162, 1) 47%, rgba(0, 85, 131, .8) 100%)
-    background: linear-gradient(170deg, rgba(0, 150, 231, .8) 0%, rgba(0, 105, 162, 1) 47%, rgba(0, 85, 131, .8) 100%)
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0096e7", endColorstr="#005583", GradientType=1)
+  .intro
+    .layout__main_bg_2
+      background: rgb(0, 150, 231)
+      background: -moz-linear-gradient(170deg, rgba(0, 150, 231, .8) 0%, rgba(0, 105, 162, 1) 47%, rgba(0, 85, 131, .8) 100%)
+      background: -webkit-linear-gradient(170deg, rgba(0, 150, 231, .8) 0%, rgba(0, 105, 162, 1) 47%, rgba(0, 85, 131, .8) 100%)
+      background: linear-gradient(170deg, rgba(0, 150, 231, .8) 0%, rgba(0, 105, 162, 1) 47%, rgba(0, 85, 131, .8) 100%)
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0096e7", endColorstr="#005583", GradientType=1)
+
+  .normal
+    .layout__main
+      background-color: rgba(255, 255, 255, 0.9)
 
 .index
   position: relative
@@ -246,4 +269,7 @@ class Index extends Vue {
 
   &__search_target
     height: 52px
+
+  &__router
+    padding: 20px
 </style>

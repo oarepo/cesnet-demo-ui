@@ -31,6 +31,7 @@
     "vue-particles": "^1.0.9",
     "vue-property-decorator": "^8.4.0",
     "vue-runtime-helpers": "^1.1.2",
+    "vue-timers": "^2.0.4",
     "vue-uid": "^0.4.5",
     "vuex-class-modules": "^1.1.2"
   },

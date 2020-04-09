@@ -100,6 +100,9 @@ class Layout extends mixins(LayoutMixin) {
     &__body
       padding-top: 60px !important
 
+    &__main_bg2
+      background: none
+
   body.screen--xs &
     .layout
       &__left
