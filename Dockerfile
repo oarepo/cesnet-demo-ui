@@ -6,7 +6,7 @@ RUN yarn global add @quasar/cli@1.0.5
 COPY package*.json ./
 RUN yarn install
 COPY . .
-RUN yarn build
+RUN quasar build
 
 ENTRYPOINT [ "/usr/local/bin/quasar" ]
 CMD ["serve", "dist/spa/", "--proxy", "proxy.js", "-p 8000"]
