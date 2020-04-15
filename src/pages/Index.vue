@@ -65,7 +65,6 @@ import { Vue, Component } from 'vue-property-decorator'
 import LocaleSwitcher from '../components/i18n/LocaleSwitcher'
 import Collections from '../components/Collections'
 
-
 export const LayoutTypes = {
   INTRO: {
     code: 'intro',
@@ -137,7 +136,6 @@ export const LayoutTypes = {
     }
   }
 }
-
 
 export default @Component({
   name: 'Index',
