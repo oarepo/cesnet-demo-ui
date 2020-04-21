@@ -8,7 +8,6 @@
   "author": "Miroslav Bauer <bauer@cesnet.cz>",
   "private": true,
   "scripts": {
-    "serve": "quasar serve dist/spa --proxy proxy.js",
     "build": "quasar build",
     "runserver": "quasar dev",
     "lint": "eslint --ext .js,.vue src",
@@ -35,7 +34,6 @@
     "vuex-class-modules": "^1.1.2"
   },
   "devDependencies": {
-    "http-proxy-middleware": "^0.19.1",
     "@quasar/app": "^1.0.0",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.8.0",

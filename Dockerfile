@@ -1,12 +1,14 @@
 # build stage
 FROM node:alpine as build-stage
 WORKDIR /app
-# newer cli breaks compatibility with http-proxy-middleware
-RUN yarn global add @quasar/cli@1.0.5
+RUN yarn global add @quasar/cli
 COPY package*.json ./
 RUN yarn install
 COPY . .
 RUN quasar build
 
-ENTRYPOINT [ "/usr/local/bin/quasar" ]
-CMD ["serve", "dist/spa/", "--proxy", "proxy.js", "-p 8000"]
+# production stage
+FROM iamfreee/docker-nginx-static-spa:latest as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

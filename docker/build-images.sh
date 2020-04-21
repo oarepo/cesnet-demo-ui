@@ -1,1 +1,1 @@
-docker build . -t oarepo-cesnet-demo-ui:latest
+docker build . -t oarepo-demo-ui:latest
