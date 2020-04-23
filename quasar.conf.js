@@ -126,7 +126,7 @@ module.exports = function (ctx) {
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://repozitar.cesnet.cz/',
+          target: 'https://localhost:5000/',
           ws: true,
           secure: false,
           changeOrigin: true,
@@ -137,7 +137,7 @@ module.exports = function (ctx) {
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: 'all',
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {

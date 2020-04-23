@@ -3,8 +3,9 @@
     <div class="row">
       <div class="col">
         <b>Records</b><br><br>
+        <pre>{{ records }}</pre>
         <div v-for="record of records" :key="record.links.self">
-          <router-link :to="record.links.ui">{{ record.metadata.title[0].value }}</router-link>
+          <router-link :to="record.links.ui">{{ record }}</router-link>
         </div>
         <br>Page 1 of {{ pages }}
         <br>Filter in effect:

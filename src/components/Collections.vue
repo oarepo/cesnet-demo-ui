@@ -27,7 +27,7 @@
           color="positive"
           :label="$t('labels.createRecordBtn')")
       .col-5
-        q-btn.full-height.full-width.col(:to="`/records/?filter=${search}`"
+        q-btn.full-height.full-width.col(:to="`/records/?q=${search}`"
           no-wrap
           color="accent"
           size="lg"
