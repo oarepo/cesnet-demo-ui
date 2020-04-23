@@ -17,7 +17,7 @@ layout.index(ref="layout" @change="state = $event" :layout="layout" :animateProp
             :standout='!floatingSearch'
             :label="$t('labels.searchInput') + '…'"
             label-color='blue'
-            v-model="search"
+            v-model="query.q"
             @keydown.enter.prevent="doSearch"
             ref="searchbox")
             template(v-slot:append)
@@ -139,6 +139,9 @@ export const LayoutTypes = {
 
 export default @Component({
   name: 'Index',
+  props: {
+    query: Object
+  },
   components: {
     Layout,
     LocaleSwitcher,
@@ -171,7 +174,7 @@ class Index extends Vue {
     this.$oarepo.collection.load({
       collectionId: 'records',
       query: {
-        q: this.search
+        q: this.query.q
       }
     })
     this.positionSearch()

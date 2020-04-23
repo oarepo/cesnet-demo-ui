@@ -134,7 +134,7 @@ module.exports = function (ctx) {
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://repozitar.cesnet.cz/',
+          target: 'https://localhost:5000/',
           ws: true,
           secure: false,
           changeOrigin: true,
