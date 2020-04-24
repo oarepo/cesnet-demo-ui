@@ -1,28 +1,34 @@
-<template>
-  <div class="collection">
-    <div class="row">
-      <div class="col">
-        <b>Records</b><br><br>
-        <pre>{{ records }}</pre>
-        <div v-for="record of records" :key="record.links.self">
-          <router-link :to="record.links.ui">{{ record }}</router-link>
-        </div>
-        <br>Page 1 of {{ pages }}
-        <br>Filter in effect:
-        <pre>{{ queryParams }}</pre>
-      </div>
-      <div class="col">
-        <b>Facets</b><br><br>
-        <div v-for="facet of facetsWithQuery" :key="facet.code">
-          {{ facet.label }}
-          <div class="facet-values">
-            <div v-for="fb in facet.facets" :key="fb.code">
-              <input type="checkbox" v-model="fb.model"> {{ fb.count }} {{ fb.label }}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<template lang="pug">
+q-page.q-ma-xl
+  .q-gutter-sm.z-max.q-pt-xs.q-pr-lg
+    q-list(bordered separator).records__list
+      q-item(v-for="record of records" :key="record.id")
+        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")
+
+<!--  <div class="collection">-->
+<!--    <div class="row">-->
+<!--      <div class="col">-->
+<!--        <b>Records</b><br><br>-->
+<!--        <pre>{{ records }}</pre>-->
+<!--        <div v-for="record of records" :key="record.links.self">-->
+<!--          <router-link :to="record.links.ui">{{ record }}</router-link>-->
+<!--        </div>-->
+<!--        <br>Page 1 of {{ pages }}-->
+<!--        <br>Filter in effect:-->
+<!--        <pre>{{ queryParams }}</pre>-->
+<!--      </div>-->
+<!--      <div class="col">-->
+<!--        <b>Facets</b><br><br>-->
+<!--        <div v-for="facet of facetsWithQuery" :key="facet.code">-->
+<!--          {{ facet.label }}-->
+<!--          <div class="facet-values">-->
+<!--            <div v-for="fb in facet.facets" :key="fb.code">-->
+<!--              <input type="checkbox" v-model="fb.model"> {{ fb.count }} {{ fb.label }}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -49,6 +55,37 @@ export default @Component({
   }
 })
 class RecordList extends Vue {
+  pathLayouts = {
+    title: {
+      value: {
+        element: 'h4'
+      }
+    }
+  }
+
+  layout = {
+    showEmpty: true,
+    childrenWrapper: {
+      element: 'div'
+    },
+    children: [{
+      prop: 'metadata',
+      label: {
+        label: 'Record Metadata'
+      },
+      children: [
+        {
+          prop: 'title',
+          label: {
+            label: 'Title'
+          },
+          value: {
+            element: 'h3'
+          }
+        }
+      ]
+    }]
+  }
 }
 </script>
 

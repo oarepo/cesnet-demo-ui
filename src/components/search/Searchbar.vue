@@ -8,7 +8,7 @@ q-input.searchbar__input.q-my-xl.full-width(
   autofocus
   standout
   @keydown.enter.prevent="doSearch"
-  v-model.trim="search")
+  v-model.trim="query.q")
   template(v-slot:append)
     q-icon.cursor-pointer(v-if="search === ''" name="search" @click="doSearch")
 </template>
@@ -19,6 +19,7 @@ import { Component, Vue } from 'vue-property-decorator'
 export default @Component({
   name: 'Searchbar',
   props: {
+    query: Object,
     maximized: Boolean
   }
 })

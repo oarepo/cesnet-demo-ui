@@ -15,6 +15,11 @@ const routes = [
           store: 'oarepoCollectionList'
         }
       },
+      props: query([
+        'string:q'
+      ], {}, {
+        passParams: true
+      }),
       children: [
         routerCollection({
           name: 'RecordSearch',

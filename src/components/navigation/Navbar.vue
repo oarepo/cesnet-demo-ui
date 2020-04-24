@@ -11,7 +11,7 @@ q-toolbar.bg-primary.col-grow.text-grey-2
         .row.navbar__collection-description(v-if="maximized")
           small {{ collection.description[$i18n.locale] }}
         .row.search-input
-          searchbar(:maximized="maximized" @search="doSearch")
+          searchbar(:maximized="maximized" :query="query" @search="doSearch")
       .col-auto(v-if=maximized)
 </template>
 
@@ -29,6 +29,7 @@ export default @Component({
     LocaleSwitcher
   },
   props: {
+    query: Object,
     maximized: Boolean
   }
 })

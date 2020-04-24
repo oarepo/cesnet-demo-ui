@@ -1,7 +1,7 @@
 <template lang="pug">
 q-layout(view="lHh Lpr fff" class="bg-grey-1")
   .row.no-wrap.bg-primary.layout__header(:class="[maximized? 'layout__header__maximized': 'layout__header__minimized']")
-    navbar(:maximized="maximized" @search="doSearch")
+    navbar(:maximized="maximized" :query="query" @search="doSearch")
     transition(leave leave-active-class="animated slideOutRight")
       particles-box(v-show="maximized")
   transition(:name="slidePageUp")
@@ -16,6 +16,9 @@ import ParticlesBox from 'components/landing/ParticlesBox'
 
 export default @Component({
   name: 'MainLayout',
+  props: {
+    query: Object
+  },
   components: {
     Navbar,
     ParticlesBox
@@ -24,6 +27,12 @@ export default @Component({
 class LandingPageLayout extends Vue {
   maximized = true
   slidePageUp = 'overlap-left'
+
+  created () {
+    if (this.$route.name !== 'oarepoCollectionList') {
+      this.maximized = false
+    }
+  }
 
   beforeRouteUpdate (to, from, next) {
     if (to.name === 'oarepoCollectionList') {
