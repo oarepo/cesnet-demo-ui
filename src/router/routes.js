@@ -1,22 +1,41 @@
 import { routerCollectionList, routerCollection, routerRecord } from '@oarepo/invenio-api-vuex'
-import Collection from 'components/Collection'
 import Record from 'components/Record'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
-import LandingPageLayout from 'layouts/LandingPageLayout'
+import MainLayout from 'layouts/MainLayout'
+import RecordList from 'pages/records/RecordList'
 
 const routes = [
   routerCollectionList(
     {
       path: '/',
-      component: LandingPageLayout,
+      component: MainLayout,
       meta: {
         preloader: {
           store: 'oarepoCollectionList'
         }
-      }
+      },
+      children: [
+        routerCollection({
+          name: 'RecordSearch',
+          path: '/:collectionId',
+          component: RecordList,
+          meta: {
+            title: 'Records',
+            preloader: {
+              store: 'oarepoCollection'
+            }
+          },
+          props: query([
+            'string:q'
+          ], {}, {
+            passParams: true
+          })
+        })
+      ]
     }),
   {
+    name: 'Error404',
     path: '/error/404',
     component: Error404
   },
@@ -28,21 +47,6 @@ const routes = [
         store: 'oarepoCollection'
       }
     }
-  }),
-  routerCollection({
-    path: '/:collectionId',
-    component: Collection,
-    meta: {
-      title: 'Records',
-      preloader: {
-        store: 'oarepoCollection'
-      }
-    },
-    props: query([
-      'string:filter'
-    ], {}, {
-      passParams: true
-    })
   })
 ]
 
