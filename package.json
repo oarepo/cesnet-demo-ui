@@ -14,8 +14,8 @@
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
-    "@oarepo/data-editor": "^1.0.13",
-    "@oarepo/data-renderer": "^1.15.1",
+    "@oarepo/data-editor": "^2.2.0",
+    "@oarepo/data-renderer": "^2.4.0",
     "@oarepo/invenio-api-vuex": "^2.3.0",
     "@oarepo/vue-query-synchronizer": "^1.4.1",
     "@oarepo/vuex-preloader": "^1.3.5",
