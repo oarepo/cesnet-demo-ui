@@ -1,9 +1,13 @@
 <template lang="pug">
 q-toolbar.bg-primary.col-grow.text-grey-2
   q-toolbar(inset)
-    .row.full-width.q-px-lg
-      .col-auto(v-if=maximized)
-      q-toolbar-title.col-12.col-md-10.navbar__toolbar-title.text-center
+    .row.justify-between.full-width.q-px-lg
+      .self-center(:class="[ maximized? 'col-6 q-mb-xl': 'col-auto']")
+        q-btn(flat @click="goHome")
+          img.q-mb-md(
+            src="statics/logos/datacare_White.svg"
+            :class="[ maximized? 'navbar__logo__maximized': 'navbar__logo']")
+      q-toolbar-title.navbar__toolbar-title.text-center(:class="[ maximized? 'col-12 col-md-10' : 'col6']")
         .row.navbar__collection-title(v-if="maximized")
           h3.col-auto {{ $t('app.title') }}
           q-space.col-auto
@@ -12,7 +16,9 @@ q-toolbar.bg-primary.col-grow.text-grey-2
           small {{ collection.description[$i18n.locale] }}
         .row.search-input
           searchbar(:maximized="maximized" :query="query" @search="doSearch")
-      .col-auto(v-if=maximized)
+      .col-auto(v-if="maximized")
+      .col-auto.self-center.full-height.q-pb-md.q-ml-lg(v-else)
+        locale-switcher
 </template>
 
 <script>
@@ -38,11 +44,20 @@ class Navbar extends mixins(Collection) {
   doSearch (search) {
     return search
   }
+
+  @Emit('home')
+  goHome () {
+  }
 }
 </script>
 
 <style lang="sass" scoped>
 .navbar
+  &__logo
+    min-height: 50px
+    height: 75px
+    &__maximized
+      margin-left: -20px
   &__collection-title h3
     letter-spacing: .2rem
   &__toolbar-title

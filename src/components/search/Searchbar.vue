@@ -4,9 +4,10 @@ q-input.searchbar__input.q-my-xl.full-width(
   type="search"
   :hint="maximized? $t('labels.searchInput') + '…': ''"
   clear-icon="clear"
-  :dark="maximized"
+  dark
   autofocus
   standout
+  @clear="doSearch"
   @keydown.enter.prevent="doSearch"
   v-model.trim="search")
   template(v-slot:append)
@@ -36,6 +37,10 @@ class Searchbar extends Vue {
   }
 
   doSearch () {
+    if (!this.search) {
+      // Prevent null from being sent in event
+      this.search = ''
+    }
     this.$emit('search', this.search)
   }
 }

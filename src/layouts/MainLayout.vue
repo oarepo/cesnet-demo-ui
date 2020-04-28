@@ -1,9 +1,10 @@
 <template lang="pug">
 q-layout(view="lHh Lpr fff" class="bg-grey-1")
-  .row.no-wrap.bg-primary.layout__header(:class="[maximized? 'layout__header__maximized': 'layout__header__minimized']")
-    navbar(:maximized="maximized" :query="query" @search="doSearch")
-    transition(leave leave-active-class="animated slideOutRight")
-      particles-box(v-show="maximized")
+  q-header(elevated)
+    .row.no-wrap.bg-primary.layout__header(:class="[maximized? 'layout__header__maximized': 'layout__header__minimized']")
+      navbar(:maximized="maximized" :query="query" @home="maximize" @search="doSearch")
+      transition(leave leave-active-class="animated slideOutRight")
+        particles-box(v-show="maximized")
   transition(:name="slidePageUp")
     q-page-container.layout__content(v-if="!maximized")
       router-view
@@ -39,6 +40,10 @@ class LandingPageLayout extends Vue {
     if (to.name === 'oarepoCollectionList') {
       this.maximized = true
     }
+  }
+
+  maximize () {
+    this.$router.push({ name: 'oarepoCollectionList' })
   }
 
   doSearch (search) {
