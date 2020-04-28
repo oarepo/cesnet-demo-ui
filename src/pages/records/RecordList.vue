@@ -1,19 +1,25 @@
 <template lang="pug">
-q-page.q-ma-xl
+q-page(padding)
   .row.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
     q-list
       q-item-label(header) {{ Object.keys(queryParams).length > 0 ?  $t('labels.activeFilters.header'): $t('labels.activeFilters.empty') }}
-      active-filters(:query="queryParams" @remove="removeFilter")
+      active-filters(:query="filteredQueryParams" @remove="removeFilter")
   .row
-    q-list(separator).records__list
-      q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
-        record(
-          v-for="record in records"
-          :key="record.id"
-          :links="record.links"
-          :created="record.created"
-          :updated="record.updated"
-          :metadata="record.metadata")
+    transition(
+      appear
+      enter-active-class="animated fadeIn"
+      leave-active-class="animated fadeOut")
+      q-list(separator).records__list
+        q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
+          record(
+            v-for="record in records"
+            :key="record.id"
+            :links="record.links"
+            :created="record.created"
+            :updated="record.updated"
+            :metadata="record.metadata")
+        q-inner-loading(:showing="!loaded")
+          q-spinner-gears(size="100px" color="accent")
   .row.justify-center
     .col-auto.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
       q-pagination(
@@ -54,7 +60,7 @@ q-page.q-ma-xl
 </template>
 
 <script>
-import { facetQuerySynchronization } from '@oarepo/invenio-api-vuex'
+import { facetQuerySynchronization, State } from '@oarepo/invenio-api-vuex'
 import { Component, Vue } from 'vue-property-decorator'
 import Record from 'components/records/Record'
 import ActiveFilters from 'components/search/ActiveFilters'
@@ -71,6 +77,7 @@ export default @Component({
 })
 class RecordList extends Vue {
   currentPage=1
+  prevPage = 1
 
   pathLayouts = {
     title: {
@@ -78,6 +85,16 @@ class RecordList extends Vue {
         element: 'h4'
       }
     }
+  }
+
+  get filteredQueryParams () {
+    const excluded = ['page']
+    return Object.keys(this.queryParams)
+      .filter(key => !excluded.includes(key))
+      .reduce((obj, key) => {
+        obj[key] = this.queryParams[key]
+        return obj
+      }, {})
   }
 
   get totalRecords () {
@@ -96,6 +113,10 @@ class RecordList extends Vue {
     return this.$oarepo.collection.queryParams
   }
 
+  get loaded () {
+    return this.$oarepo.collection.state === State.LOADED
+  }
+
   get facets () {
     return this.$oarepo.collection.facets
   }
@@ -105,7 +126,10 @@ class RecordList extends Vue {
   }
 
   changePage (num) {
-    console.log('changePage', num)
+    if (this.prevPage !== this.currentPage) {
+      this.prevPage = num
+      this.query.page = num
+    }
   }
 
   removeFilter (name) {

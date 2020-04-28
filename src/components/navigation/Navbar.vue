@@ -3,6 +3,7 @@ q-toolbar.bg-primary.col-grow.text-grey-2
   q-toolbar(inset)
     .row.justify-between.full-width.q-px-lg
       .self-center(:class="[ maximized? 'col-6 q-mb-xl': 'col-auto']")
+        q-btn(v-if="!maximized" flat @click="toggleFacetsDrawer" round dense icon="menu")
         q-btn(flat @click="goHome")
           img.q-mb-md(
             src="statics/logos/datacare_White.svg"
@@ -47,6 +48,10 @@ class Navbar extends mixins(Collection) {
 
   @Emit('home')
   goHome () {
+  }
+
+  @Emit('facets')
+  toggleFacetsDrawer () {
   }
 }
 </script>
