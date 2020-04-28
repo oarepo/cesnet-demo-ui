@@ -1,5 +1,5 @@
 <template lang="pug">
-q-page(padding)
+q-page(padding).q-pb-xl
   .row.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
     q-list
       q-item-label(header) {{ Object.keys(queryParams).length > 0 ?  $t('labels.activeFilters.header'): $t('labels.activeFilters.empty') }}
@@ -15,12 +15,13 @@ q-page(padding)
             v-for="record in records"
             :key="record.id"
             :links="record.links"
+            :revision="record.revision"
             :created="record.created"
             :updated="record.updated"
             :metadata="record.metadata")
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
-  .row.justify-center
+  .row.justify-center.q-pb-xl
     .col-auto.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
       q-pagination(
         color="accent"

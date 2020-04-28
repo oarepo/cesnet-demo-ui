@@ -17,7 +17,14 @@ export default {
     // Other components
     localeSwitcher: 'Language',
     record: {
-      abstract: 'Abstract'
+      creator: 'Author',
+      contributors: 'Contributors',
+      abstract: 'Abstract',
+      identifier: 'Identifier',
+      created: 'Creation date',
+      updated: 'Last modification date',
+      revision: 'Revision',
+      links: 'Links'
     },
     recordList: {
       header: 'Found {num} records'

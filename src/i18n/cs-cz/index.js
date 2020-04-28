@@ -20,7 +20,14 @@ export default {
       header: 'Filtry'
     },
     record: {
-      abstract: 'Abstrakt'
+      creator: 'Autor',
+      contributors: 'Spoluautoři',
+      abstract: 'Abstrakt',
+      identifier: 'ID záznamu',
+      created: 'Datum vytvoření',
+      updated: 'Datum poslední úpravy',
+      revision: 'Verze',
+      links: 'Odkazy'
     },
     recordList: {
       header: 'Nalezeno {num} záznamů'
