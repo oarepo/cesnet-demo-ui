@@ -1,5 +1,5 @@
 import { routerCollectionList, routerCollection, routerRecord } from '@oarepo/invenio-api-vuex'
-import Record from 'components/Record'
+import Record from 'components/records/Record'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
 import MainLayout from 'layouts/MainLayout'

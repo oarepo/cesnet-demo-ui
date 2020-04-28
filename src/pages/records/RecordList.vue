@@ -1,9 +1,30 @@
 <template lang="pug">
 q-page.q-ma-xl
-  .q-gutter-sm.z-max.q-pt-xs.q-pr-lg
-    q-list(bordered separator).records__list
-      q-item(v-for="record of records" :key="record.id")
-        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")
+  .row.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
+    q-list
+      q-item-label(header) {{ Object.keys(queryParams).length > 0 ?  $t('labels.activeFilters.header'): $t('labels.activeFilters.empty') }}
+      active-filters(:query="queryParams" @remove="removeFilter")
+  .row
+    q-list(separator).records__list
+      q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
+        record(
+          v-for="record in records"
+          :key="record.id"
+          :links="record.links"
+          :created="record.created"
+          :updated="record.updated"
+          :metadata="record.metadata")
+  .row.justify-center
+    .col-auto.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
+      q-pagination(
+        color="accent"
+        @input="changePage"
+        v-model="currentPage"
+        :max="totalPages"
+        :max-pages="6"
+        :boundary-numbers="true"
+    )
+<!--        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")-->
 
 <!--  <div class="collection">-->
 <!--    <div class="row">-->
@@ -33,58 +54,64 @@ q-page.q-ma-xl
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { facetQuerySynchronization } from '@oarepo/invenio-api-vuex'
 import { Component, Vue } from 'vue-property-decorator'
+import Record from 'components/records/Record'
+import ActiveFilters from 'components/search/ActiveFilters'
 
 export default @Component({
   name: 'RecordList',
+  components: {
+    Record,
+    ActiveFilters
+  },
   props: {
     query: Object
-  },
-  computed: {
-    ...mapState({
-      records: state => state.oarepoCollection.records,
-      pages: state => state.oarepoCollection.totalPages,
-      queryParams: state => state.oarepoCollection.queryParams,
-      facets: state => state.oarepoCollection.facets
-    }),
-    facetsWithQuery () {
-      return facetQuerySynchronization(this.facets, this.query)
-    }
   }
 })
 class RecordList extends Vue {
+  currentPage=1
+
   pathLayouts = {
     title: {
-      value: {
+      arrayWrapper: {
         element: 'h4'
       }
     }
   }
 
-  layout = {
-    showEmpty: true,
-    childrenWrapper: {
-      element: 'div'
-    },
-    children: [{
-      prop: 'metadata',
-      label: {
-        label: 'Record Metadata'
-      },
-      children: [
-        {
-          prop: 'title',
-          label: {
-            label: 'Title'
-          },
-          value: {
-            element: 'h3'
-          }
-        }
-      ]
-    }]
+  get totalRecords () {
+    return this.$oarepo.collection.totalRecords
+  }
+
+  get records () {
+    return this.$oarepo.collection.records
+  }
+
+  get totalPages () {
+    return this.$oarepo.collection.totalPages
+  }
+
+  get queryParams () {
+    return this.$oarepo.collection.queryParams
+  }
+
+  get facets () {
+    return this.$oarepo.collection.facets
+  }
+
+  facetsWithQuery () {
+    return facetQuerySynchronization(this.facets, this.query)
+  }
+
+  changePage (num) {
+    console.log('changePage', num)
+  }
+
+  removeFilter (name) {
+    if (name === 'q') {
+      this.query.q = ''
+    }
   }
 }
 </script>
@@ -96,15 +123,5 @@ class RecordList extends Vue {
     width: 100%;
     flex-direction: row;
     flex-wrap: wrap;
-  }
-
-  .col {
-    flex: 1
-  }
-
-  .facet-values {
-    margin-left: 30px;
-    margin-top: 10px;
-    margin-bottom: 20px;
   }
 </style>

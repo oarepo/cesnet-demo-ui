@@ -34,17 +34,6 @@ class LandingPageLayout extends Vue {
     }
   }
 
-  beforeRouteUpdate (to, from, next) {
-    if (to.name === 'oarepoCollectionList') {
-      console.log('maximizing layout')
-      this.maximized = true
-    }
-    const toDepth = to.path.split('/').length
-    const fromDepth = from.path.split('/').length
-    this.slidePageUp = toDepth < fromDepth ? 'overlap-left' : 'overlap-right'
-    next()
-  }
-
   @Watch('$route', { immediate: true, deep: true })
   routeChange (to) {
     if (to.name === 'oarepoCollectionList') {

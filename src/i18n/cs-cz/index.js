@@ -15,7 +15,15 @@ export default {
     // Sections
     createNew: 'Vytvořit',
     // Other components
-    localeSwitcher: 'Language'
+    localeSwitcher: 'Language',
+    recordList: {
+      header: 'Nalezeno {num} záznamů'
+    },
+    activeFilters: {
+      header: 'Aktivní filtry',
+      empty: 'Žádné aplikované filtry',
+      q: 'Hledaný výraz'
+    }
   },
   values: {
     lang: {

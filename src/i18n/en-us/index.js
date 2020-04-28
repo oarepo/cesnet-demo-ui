@@ -15,7 +15,15 @@ export default {
     // Sections
     createNew: 'Create New',
     // Other components
-    localeSwitcher: 'Language'
+    localeSwitcher: 'Language',
+    recordList: {
+      header: 'Found {num} records'
+    },
+    activeFilters: {
+      header: 'Active Filters',
+      empty: 'No filters applied',
+      q: 'Search'
+    }
   },
   values: {
     lang: {
