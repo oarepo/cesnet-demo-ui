@@ -21,6 +21,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
     content-class="bg-secondary text-white")
     q-scroll-area.fit
       .q-pa-md
+        span {{ facetsWithQuery() }}
         q-list(dark padding bordered).rounded-borders.text-white
           q-item-label(header) {{ $t('labels.facets.header') }}
           q-expansion-item(
@@ -71,6 +72,11 @@ class LandingPageLayout extends Vue {
     if (this.maximized) {
       this.facetsDrawer = false
     }
+  }
+
+  get facets () {
+    console.log(this.$oarepo.collection.facets)
+    return this.$oarepo.collection.facets
   }
 
   facetsWithQuery () {
