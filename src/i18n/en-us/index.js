@@ -16,6 +16,9 @@ export default {
     createNew: 'Create New',
     // Other components
     localeSwitcher: 'Language',
+    record: {
+      abstract: 'Abstract'
+    },
     recordList: {
       header: 'Found {num} records'
     },

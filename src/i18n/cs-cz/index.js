@@ -19,6 +19,9 @@ export default {
     facets: {
       header: 'Filtry'
     },
+    record: {
+      abstract: 'Abstrakt'
+    },
     recordList: {
       header: 'Nalezeno {num} záznamů'
     },
