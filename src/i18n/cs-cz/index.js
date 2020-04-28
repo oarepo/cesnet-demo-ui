@@ -16,6 +16,9 @@ export default {
     createNew: 'Vytvořit',
     // Other components
     localeSwitcher: 'Language',
+    facets: {
+      header: 'Filtry'
+    },
     recordList: {
       header: 'Nalezeno {num} záznamů'
     },

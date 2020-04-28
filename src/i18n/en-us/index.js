@@ -19,6 +19,9 @@ export default {
     recordList: {
       header: 'Found {num} records'
     },
+    facets: {
+      header: 'Filters'
+    },
     activeFilters: {
       header: 'Active Filters',
       empty: 'No filters applied',

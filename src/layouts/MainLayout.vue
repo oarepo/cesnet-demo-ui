@@ -21,13 +21,22 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
     content-class="bg-secondary text-white")
     q-scroll-area.fit
       .q-pa-md
-        div(v-for="n in 50" :key="n") Drawer {{ n }} / 50
+        q-list(dark padding bordered).rounded-borders.text-white
+          q-item-label(header) {{ $t('labels.facets.header') }}
+          q-expansion-item(
+            v-for="facet of facetsWithQuery"
+            :key="facet.code"
+            :label="facet.label")
+            q-card.bg-grey-9
+              q-card-section(v-for="fb in facet.facets" :key="fb.code")
+                input(type="checkbox" v-model="fb.model" :label="fb.count + ' ' + fb.label")
 </template>
 
 <script>
 import { Component, Vue, Watch } from 'vue-property-decorator'
 import Navbar from 'components/navigation/Navbar'
 import ParticlesBox from 'components/landing/ParticlesBox'
+import { facetQuerySynchronization } from '@oarepo/invenio-api-vuex'
 
 export default @Component({
   name: 'MainLayout',
@@ -62,6 +71,10 @@ class LandingPageLayout extends Vue {
     if (this.maximized) {
       this.facetsDrawer = false
     }
+  }
+
+  facetsWithQuery () {
+    return facetQuerySynchronization(this.facets, this.query)
   }
 
   maximize () {

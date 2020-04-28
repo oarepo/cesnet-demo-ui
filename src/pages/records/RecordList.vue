@@ -5,12 +5,12 @@ q-page(padding)
       q-item-label(header) {{ Object.keys(queryParams).length > 0 ?  $t('labels.activeFilters.header'): $t('labels.activeFilters.empty') }}
       active-filters(:query="filteredQueryParams" @remove="removeFilter")
   .row
-    transition(
-      appear
-      enter-active-class="animated fadeIn"
-      leave-active-class="animated fadeOut")
-      q-list(separator).records__list
-        q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
+    q-list(separator).records__list
+      q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
+        transition-group(
+          appear
+          enter-active-class="animated slideInUp"
+          leave-active-class="animated fadeOut")
           record(
             v-for="record in records"
             :key="record.id"
@@ -18,8 +18,8 @@ q-page(padding)
             :created="record.created"
             :updated="record.updated"
             :metadata="record.metadata")
-        q-inner-loading(:showing="!loaded")
-          q-spinner-gears(size="100px" color="accent")
+      q-inner-loading(:showing="!loaded")
+        q-spinner-gears(size="100px" color="accent")
   .row.justify-center
     .col-auto.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
       q-pagination(
@@ -60,7 +60,7 @@ q-page(padding)
 </template>
 
 <script>
-import { facetQuerySynchronization, State } from '@oarepo/invenio-api-vuex'
+import { State } from '@oarepo/invenio-api-vuex'
 import { Component, Vue } from 'vue-property-decorator'
 import Record from 'components/records/Record'
 import ActiveFilters from 'components/search/ActiveFilters'
@@ -118,11 +118,8 @@ class RecordList extends Vue {
   }
 
   get facets () {
+    console.log(this.$oarepo.collection.facets)
     return this.$oarepo.collection.facets
-  }
-
-  facetsWithQuery () {
-    return facetQuerySynchronization(this.facets, this.query)
   }
 
   changePage (num) {
