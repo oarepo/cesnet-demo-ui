@@ -18,51 +18,23 @@ q-page(padding).q-pb-xl
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
   active-filters(:query="filteredQueryParams" @remove="removeFilter")
-  q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[0, 30]")
+  q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[-10, 30]")
     q-toolbar.bg-accent.rounded-borders.shadow-4
       q-toolbar-title
         q-pagination(
           dark
           color="white"
           text-color="primary"
-          @input="changePage"
-          v-model="currentPage"
+          v-model="query.page"
           :max="totalPages"
           :max-pages="6"
           :boundary-numbers="true"
         )
-  <!--        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")-->
-
-  <!--  <div class="collection">-->
-  <!--    <div class="row">-->
-  <!--      <div class="col">-->
-  <!--        <b>Records</b><br><br>-->
-  <!--        <pre>{{ records }}</pre>-->
-  <!--        <div v-for="record of records" :key="record.links.self">-->
-  <!--          <router-link :to="record.links.ui">{{ record }}</router-link>-->
-  <!--        </div>-->
-  <!--        <br>Page 1 of {{ pages }}-->
-  <!--        <br>Filter in effect:-->
-  <!--        <pre>{{ queryParams }}</pre>-->
-  <!--      </div>-->
-  <!--      <div class="col">-->
-  <!--        <b>Facets</b><br><br>-->
-  <!--        <div v-for="facet of facetsWithQuery" :key="facet.code">-->
-  <!--          {{ facet.label }}-->
-  <!--          <div class="facet-values">-->
-  <!--            <div v-for="fb in facet.facets" :key="fb.code">-->
-  <!--              <input type="checkbox" v-model="fb.model"> {{ fb.count }} {{ fb.label }}-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  </div>
 </template>
 
 <script>
 import { State } from '@oarepo/invenio-api-vuex'
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import Record from 'components/records/Record'
 import ActiveFilters from 'components/search/ActiveFilters'
 
@@ -77,15 +49,28 @@ export default @Component({
   }
 })
 class RecordList extends Vue {
-  currentPage = 1
-  prevPage = 1
+  prevPage = this.query.page
 
-  pathLayouts = {
-    title: {
-      arrayWrapper: {
-        element: 'h4'
-      }
+  validatePageQuery () {
+    // Sanity check if page query does not exceed total pages
+    if (this.query.page > this.totalPages) {
+      console.error(`Page query exceeds total pages (${this.query.page} > ${this.totalPages})`)
+      this.query.page = 1
     }
+  }
+
+  created () {
+    this.validatePageQuery()
+  }
+
+  @Watch('query.page')
+  onPageChange () {
+    this.validatePageQuery()
+  }
+
+  @Watch('totalPages')
+  onTotalPagesChange () {
+    this.validatePageQuery()
   }
 
   get filteredQueryParams () {
@@ -121,13 +106,6 @@ class RecordList extends Vue {
   get facets () {
     console.log(this.$oarepo.collection.facets)
     return this.$oarepo.collection.facets
-  }
-
-  changePage (num) {
-    if (this.prevPage !== this.currentPage) {
-      this.prevPage = num
-      this.query.page = num
-    }
   }
 
   removeFilter (filter) {
