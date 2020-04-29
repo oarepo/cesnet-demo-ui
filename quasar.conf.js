@@ -76,6 +76,7 @@ module.exports = function (ctx) {
         'QMenu',
         'QPage',
         'QPageContainer',
+        'QPageSticky',
         'QPagination',
         'QScrollArea',
         'QSeparator',

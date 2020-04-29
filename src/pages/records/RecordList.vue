@@ -1,10 +1,6 @@
 <template lang="pug">
 q-page(padding).q-pb-xl
-  .row.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
-    q-list
-      q-item-label(header) {{ Object.keys(queryParams).length > 0 ?  $t('labels.activeFilters.header'): $t('labels.activeFilters.empty') }}
-      active-filters(:query="filteredQueryParams" @remove="removeFilter")
-  .row
+  .row.q-my-xl
     q-list(separator).records__list
       q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
         transition-group(
@@ -21,16 +17,20 @@ q-page(padding).q-pb-xl
             :metadata="record.metadata")
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
-  .row.justify-center.q-pb-xl
-    .col-auto.q-gutter-sm.z-max.q-pt-xs.q-pr-lg
-      q-pagination(
-        color="accent"
-        @input="changePage"
-        v-model="currentPage"
-        :max="totalPages"
-        :max-pages="6"
-        :boundary-numbers="true"
-      )
+  active-filters(:query="filteredQueryParams" @remove="removeFilter")
+  q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[0, 30]")
+    q-toolbar.bg-accent.rounded-borders.shadow-4
+      q-toolbar-title
+        q-pagination(
+          dark
+          color="white"
+          text-color="primary"
+          @input="changePage"
+          v-model="currentPage"
+          :max="totalPages"
+          :max-pages="6"
+          :boundary-numbers="true"
+        )
   <!--        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")-->
 
   <!--  <div class="collection">-->
