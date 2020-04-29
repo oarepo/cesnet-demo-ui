@@ -58,5 +58,8 @@ export default {
     failed: 'Action failed',
     success: 'Action was successful'
   },
-  creator: 'Author'
+  creator: 'Author',
+  title: {
+    lang: 'Language'
+  }
 }

@@ -65,6 +65,5 @@ export default {
   creator: 'Autor',
   title: {
     lang: 'Jazyk'
-  },
-  cs: 'Cesky'
+  }
 }

@@ -1,6 +1,7 @@
 <template lang="pug">
-q-list(dark padding bordered).rounded-borders.text-white
-  q-item-label(header) {{ $t('labels.facets.header') }}
+q-list(dark padding).rounded-borders.text-white
+  q-item-label.text-overline.text-uppercase(header) {{ $t('labels.facets.header') }}
+  q-separator
   q-expansion-item(
     v-for="facet of facetsWithQuery()"
     :key="facet.code"
