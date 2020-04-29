@@ -65,5 +65,16 @@ export default {
   creator: 'Autor',
   title: {
     lang: 'Jazyk'
+  },
+  facets: {
+    values: {
+      language: {
+        cs: 'Česky',
+        fr: 'Francouzsky',
+        en: 'Anglicky',
+        es: 'Španělsky',
+        de: 'Německy'
+      }
+    }
   }
 }
