@@ -33,7 +33,9 @@ const routes = [
           },
           props: query([
             'string:q',
-            'number:page'
+            'number:page',
+            'array:creator',
+            'array:title.lang'
           ], {}, {
             passParams: true
           })

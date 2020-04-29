@@ -49,7 +49,7 @@ export default @Component({
     links: Object,
     created: String,
     updated: String,
-    revision: String
+    revision: Number
   }
 })
 class RecordList extends Vue {

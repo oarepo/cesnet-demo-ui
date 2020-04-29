@@ -32,7 +32,16 @@ export default {
     recordList: {
       header: 'Nalezeno {num} záznamů'
     },
+    facetList: {
+      filter: {
+        creator: 'Filtrovat autory'
+      }
+    },
     activeFilters: {
+      title: {
+        lang: 'Jazyk'
+      },
+      creator: 'Autor',
       header: 'Aktivní filtry',
       empty: 'Žádné aplikované filtry',
       q: 'Hledaný výraz'
@@ -51,5 +60,11 @@ export default {
   messages: {
     failed: 'Operace se nezdařila',
     success: 'Akce byla úspěšná'
-  }
+  },
+  // Facet translations
+  creator: 'Autor',
+  title: {
+    lang: 'Jazyk'
+  },
+  cs: 'Cesky'
 }

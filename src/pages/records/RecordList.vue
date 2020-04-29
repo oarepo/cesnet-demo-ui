@@ -30,33 +30,33 @@ q-page(padding).q-pb-xl
         :max="totalPages"
         :max-pages="6"
         :boundary-numbers="true"
-    )
-<!--        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")-->
+      )
+  <!--        data-renderer(:data="record" :pathLayouts="pathLayouts" schema="block")-->
 
-<!--  <div class="collection">-->
-<!--    <div class="row">-->
-<!--      <div class="col">-->
-<!--        <b>Records</b><br><br>-->
-<!--        <pre>{{ records }}</pre>-->
-<!--        <div v-for="record of records" :key="record.links.self">-->
-<!--          <router-link :to="record.links.ui">{{ record }}</router-link>-->
-<!--        </div>-->
-<!--        <br>Page 1 of {{ pages }}-->
-<!--        <br>Filter in effect:-->
-<!--        <pre>{{ queryParams }}</pre>-->
-<!--      </div>-->
-<!--      <div class="col">-->
-<!--        <b>Facets</b><br><br>-->
-<!--        <div v-for="facet of facetsWithQuery" :key="facet.code">-->
-<!--          {{ facet.label }}-->
-<!--          <div class="facet-values">-->
-<!--            <div v-for="fb in facet.facets" :key="fb.code">-->
-<!--              <input type="checkbox" v-model="fb.model"> {{ fb.count }} {{ fb.label }}-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+  <!--  <div class="collection">-->
+  <!--    <div class="row">-->
+  <!--      <div class="col">-->
+  <!--        <b>Records</b><br><br>-->
+  <!--        <pre>{{ records }}</pre>-->
+  <!--        <div v-for="record of records" :key="record.links.self">-->
+  <!--          <router-link :to="record.links.ui">{{ record }}</router-link>-->
+  <!--        </div>-->
+  <!--        <br>Page 1 of {{ pages }}-->
+  <!--        <br>Filter in effect:-->
+  <!--        <pre>{{ queryParams }}</pre>-->
+  <!--      </div>-->
+  <!--      <div class="col">-->
+  <!--        <b>Facets</b><br><br>-->
+  <!--        <div v-for="facet of facetsWithQuery" :key="facet.code">-->
+  <!--          {{ facet.label }}-->
+  <!--          <div class="facet-values">-->
+  <!--            <div v-for="fb in facet.facets" :key="fb.code">-->
+  <!--              <input type="checkbox" v-model="fb.model"> {{ fb.count }} {{ fb.label }}-->
+  <!--            </div>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
   </div>
 </template>
 
@@ -77,7 +77,7 @@ export default @Component({
   }
 })
 class RecordList extends Vue {
-  currentPage=1
+  currentPage = 1
   prevPage = 1
 
   pathLayouts = {
@@ -130,9 +130,13 @@ class RecordList extends Vue {
     }
   }
 
-  removeFilter (name) {
-    if (name === 'q') {
+  removeFilter (filter) {
+    if (filter.name === 'q') {
       this.query.q = ''
+    } else {
+      console.log(filter, this.query)
+      this.query._remove(filter.name, filter.value)
+      console.log(this.query)
     }
   }
 }

@@ -57,6 +57,7 @@ module.exports = function (ctx) {
         'QBtn',
         'QCard',
         'QCardSection',
+        'QCheckbox',
         'QChip',
         'QDate',
         'QDrawer',

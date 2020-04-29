@@ -7,7 +7,7 @@ div
     :icon="icon(name)"
     removable
     :label="$t('labels.activeFilters.' + name) + ': '+ value"
-    @remove="remove(name)"
+    @remove="remove(name, value)"
     )
 </template>
 
@@ -28,9 +28,8 @@ class ActiveFilters extends Vue {
   }
 
   @Emit('remove')
-  remove (chip) {
-    console.log(chip)
-    return chip
+  remove (name, value) {
+    return { name: name, value: value }
   }
 }
 </script>

@@ -33,9 +33,15 @@ export default {
       header: 'Filters'
     },
     activeFilters: {
+      creator: 'Author',
       header: 'Active Filters',
       empty: 'No filters applied',
       q: 'Search'
+    },
+    facetList: {
+      filter: {
+        creator: 'Filter by author name'
+      }
     }
   },
   values: {
@@ -51,5 +57,6 @@ export default {
   messages: {
     failed: 'Action failed',
     success: 'Action was successful'
-  }
+  },
+  creator: 'Author'
 }
