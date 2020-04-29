@@ -16,7 +16,10 @@ const routes = [
         }
       },
       props: query([
-        'string:q'
+        'string:q',
+        '1:number:page',
+        'array:creator',
+        'array:title.lang'
       ], {}, {
         passParams: true
       }),
@@ -33,7 +36,7 @@ const routes = [
           },
           props: query([
             'string:q',
-            'number:page',
+            '1:number:page',
             'array:creator',
             'array:title.lang'
           ], {}, {

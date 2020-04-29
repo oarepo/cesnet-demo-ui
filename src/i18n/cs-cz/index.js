@@ -43,7 +43,6 @@ export default {
       },
       creator: 'Autor',
       header: 'Aktivní filtry',
-      empty: 'Žádné aplikované filtry',
       q: 'Hledaný výraz'
     }
   },

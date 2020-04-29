@@ -38,7 +38,6 @@ export default {
       },
       creator: 'Author',
       header: 'Active Filters',
-      empty: 'No filters applied',
       q: 'Search'
     },
     facetList: {
