@@ -66,6 +66,11 @@ class LandingPageLayout extends Vue {
     }
   }
 
+  @Watch('$i18n.locale')
+  localeChange () {
+    this.$oarepo.collection.transform()
+  }
+
   maximize () {
     this.$router.push({ name: 'oarepoCollectionList' })
   }

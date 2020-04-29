@@ -33,6 +33,9 @@ export default {
       header: 'Filters'
     },
     activeFilters: {
+      title: {
+        lang: 'Language'
+      },
       creator: 'Author',
       header: 'Active Filters',
       empty: 'No filters applied',
