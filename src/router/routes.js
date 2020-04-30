@@ -1,30 +1,52 @@
 import { routerCollectionList, routerCollection, routerRecord } from '@oarepo/invenio-api-vuex'
-import Collection from 'components/Collection'
-import Collections from 'components/Collections'
-import Record from 'components/Record'
+import Record from 'components/records/Record'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
-import LandingPageLayout from 'layouts/LandingPageLayout'
+import MainLayout from 'layouts/MainLayout'
+import RecordList from 'pages/records/RecordList'
 
 const routes = [
-  {
-    path: '/',
-    component: LandingPageLayout,
-    redirect: '/collections',
-    children: [
-      routerCollectionList(
-        {
-          path: '/collections',
-          component: Collections,
+  routerCollectionList(
+    {
+      path: '/',
+      component: MainLayout,
+      meta: {
+        preloader: {
+          store: 'oarepoCollectionList'
+        }
+      },
+      props: query([
+        'string:q',
+        '1:number:page',
+        'array:creator',
+        'array:title.lang'
+      ], {}, {
+        passParams: true
+      }),
+      children: [
+        routerCollection({
+          name: 'RecordSearch',
+          path: '/:collectionId',
+          component: RecordList,
           meta: {
+            title: 'Records',
             preloader: {
-              store: 'oarepoCollectionList'
+              store: 'oarepoCollection'
             }
-          }
+          },
+          props: query([
+            'string:q',
+            '1:number:page',
+            'array:creator',
+            'array:title.lang'
+          ], {}, {
+            passParams: true
+          })
         })
-    ]
-  },
+      ]
+    }),
   {
+    name: 'Error404',
     path: '/error/404',
     component: Error404
   },
@@ -36,21 +58,6 @@ const routes = [
         store: 'oarepoCollection'
       }
     }
-  }),
-  routerCollection({
-    path: '/:collectionId',
-    component: Collection,
-    meta: {
-      title: 'Records',
-      preloader: {
-        store: 'oarepoCollection'
-      }
-    },
-    props: query([
-      'string:filter'
-    ], {}, {
-      passParams: true
-    })
   })
 ]
 

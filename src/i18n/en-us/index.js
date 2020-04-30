@@ -8,6 +8,7 @@ export default {
   labels: {
     // Inputs
     searchInput: 'I\'m looking for',
+    searchInputMaximized: 'Search by title',
     // Buttons
     searchBtn: 'Search',
     submitBtn: 'Submit',
@@ -15,7 +16,36 @@ export default {
     // Sections
     createNew: 'Create New',
     // Other components
-    localeSwitcher: 'Language'
+    localeSwitcher: 'Language',
+    record: {
+      creator: 'Author',
+      contributors: 'Contributors',
+      abstract: 'Abstract',
+      identifier: 'Identifier',
+      created: 'Creation date',
+      updated: 'Last modification date',
+      revision: 'Revision',
+      links: 'Links'
+    },
+    recordList: {
+      header: 'Found {num} records'
+    },
+    facets: {
+      header: 'Filters'
+    },
+    activeFilters: {
+      title: {
+        lang: 'Language'
+      },
+      creator: 'Author',
+      header: 'Active Filters',
+      q: 'Search'
+    },
+    facetList: {
+      filter: {
+        creator: 'Filter by author name'
+      }
+    }
   },
   values: {
     lang: {
@@ -30,5 +60,20 @@ export default {
   messages: {
     failed: 'Action failed',
     success: 'Action was successful'
+  },
+  creator: 'Author',
+  title: {
+    lang: 'Language'
+  },
+  facets: {
+    values: {
+      language: {
+        cs: 'Czech',
+        fr: 'French',
+        en: 'English',
+        es: 'Spanish',
+        de: 'German'
+      }
+    }
   }
 }

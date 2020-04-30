@@ -55,21 +55,33 @@ module.exports = function (ctx) {
         'QAvatar',
         'QBadge',
         'QBtn',
+        'QCard',
+        'QCardSection',
+        'QCheckbox',
+        'QChip',
         'QDate',
         'QDrawer',
+        'QExpansionItem',
         'QFooter',
         'QHeader',
         'QIcon',
         'QImg',
+        'QInnerLoading',
         'QInput',
         'QItem',
         'QItemSection',
+        'QItemLabel',
         'QLayout',
         'QList',
         'QMenu',
         'QPage',
         'QPageContainer',
+        'QPageSticky',
+        'QPagination',
+        'QScrollArea',
+        'QSeparator',
         'QSpace',
+        'QSpinnerGears',
         'QToolbar',
         'QToolbarTitle',
         'QTooltip'
@@ -126,10 +138,10 @@ module.exports = function (ctx) {
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://127.0.0.1:443/',
+          target: 'https://localhost:5000/',
           ws: true,
           secure: false,
-          changeOrigin: false,
+          changeOrigin: true,
           logLevel: 'debug'
         }
       }
@@ -137,7 +149,7 @@ module.exports = function (ctx) {
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: 'all',
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
