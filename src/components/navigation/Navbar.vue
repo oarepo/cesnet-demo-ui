@@ -42,8 +42,7 @@ export default @Component({
 })
 class Navbar extends mixins(Collection) {
   @Emit('search')
-  doSearch (search) {
-    return search
+  doSearch () {
   }
 
   @Emit('home')

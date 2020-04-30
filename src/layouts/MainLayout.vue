@@ -75,14 +75,16 @@ class LandingPageLayout extends Vue {
     this.$router.push({ name: 'oarepoCollectionList' })
   }
 
-  doSearch (search) {
+  doSearch () {
     this.maximized = false
     this.facetsDrawer = true
-    this.$router.push({
-      name: 'RecordSearch',
-      params: { collectionId: 'records' },
-      query: { q: search }
-    })
+    if (this.$route.name === 'oarepoCollectionList') {
+      this.$router.push({
+        name: 'RecordSearch',
+        params: { collectionId: 'records' },
+        query: { q: this.query.q }
+      })
+    }
   }
 }
 </script>
