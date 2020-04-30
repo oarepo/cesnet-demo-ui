@@ -18,7 +18,7 @@ q-page(padding).q-pb-xl
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
   active-filters(:query="filteredQueryParams" @remove="removeFilter")
-  q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[-10, 30]")
+  q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[-100, 30]")
     q-toolbar.bg-accent.rounded-borders.shadow-4
       q-toolbar-title
         q-pagination(
@@ -49,8 +49,6 @@ export default @Component({
   }
 })
 class RecordList extends Vue {
-  prevPage = this.query.page
-
   validatePageQuery () {
     // Sanity check if page query does not exceed total pages
     if (this.query.page > this.totalPages) {

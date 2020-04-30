@@ -8,6 +8,7 @@ export default {
   labels: {
     // Inputs
     searchInput: 'Hledám',
+    searchInputMaximized: 'Hledat podle názvu',
     // Buttons
     searchBtn: 'Hledat',
     submitBtn: 'Uložit',

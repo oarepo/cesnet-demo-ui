@@ -8,6 +8,7 @@ export default {
   labels: {
     // Inputs
     searchInput: 'I\'m looking for',
+    searchInputMaximized: 'Search by title',
     // Buttons
     searchBtn: 'Search',
     submitBtn: 'Submit',
