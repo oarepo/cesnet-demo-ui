@@ -6,7 +6,7 @@ q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[-50, 30]")
         dark
         color="white"
         text-color="primary"
-        v-model="query.page"
+        v-model="pageModel.model"
         :max="totalPages"
         :max-pages="6"
         :boundary-numbers="true"
@@ -25,6 +25,23 @@ export default @Component({
   }
 })
 class Pagination extends Vue {
+  get pageModel () {
+    // This getter trick provides a default page if not present in query props
+    const query = this.query
+    const ret = {
+      model: this.query.page || 1
+    }
+    Object.defineProperty(ret, 'model', {
+      get () {
+        return query.page || 1
+      },
+      set (value) {
+        query.page = value
+      }
+    })
+    return ret
+  }
+
   get totalPages () {
     return this.$oarepo.collection.totalPages
   }
