@@ -42,8 +42,25 @@ export default {
       q: 'Search'
     },
     facetList: {
-      filter: {
+      filters: {
         creator: 'Filter by author name'
+      },
+      facets: {
+        creator: 'Author',
+        title: {
+          lang: 'Language'
+        }
+      },
+      values: {
+        title: {
+          lang: {
+            cs: 'Czech',
+            fr: 'French',
+            en: 'English',
+            es: 'Spanish',
+            de: 'German'
+          }
+        }
       }
     }
   },
@@ -60,20 +77,5 @@ export default {
   messages: {
     failed: 'Action failed',
     success: 'Action was successful'
-  },
-  creator: 'Author',
-  title: {
-    lang: 'Language'
-  },
-  facets: {
-    values: {
-      language: {
-        cs: 'Czech',
-        fr: 'French',
-        en: 'English',
-        es: 'Spanish',
-        de: 'German'
-      }
-    }
   }
 }
