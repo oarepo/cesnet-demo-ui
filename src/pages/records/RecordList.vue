@@ -18,59 +18,28 @@ q-page(padding).q-pb-xl
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
   active-filters(:query="filteredQueryParams" @remove="removeFilter")
-  q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[-100, 30]")
-    q-toolbar.bg-accent.rounded-borders.shadow-4
-      q-toolbar-title
-        q-pagination(
-          dark
-          color="white"
-          text-color="primary"
-          v-model="query.page"
-          :max="totalPages"
-          :max-pages="6"
-          :boundary-numbers="true"
-        )
+  pagination(:query="query")
 </template>
 
 <script>
 import { State } from '@oarepo/invenio-api-vuex'
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import Record from 'components/records/Record'
 import ActiveFilters from 'components/search/ActiveFilters'
+import Pagination from 'components/navigation/Pagination'
 
 export default @Component({
   name: 'RecordList',
   components: {
     Record,
-    ActiveFilters
+    ActiveFilters,
+    Pagination
   },
   props: {
     query: Object
   }
 })
 class RecordList extends Vue {
-  validatePageQuery () {
-    // Sanity check if page query does not exceed total pages
-    if (this.query.page > this.totalPages) {
-      console.error(`Page query exceeds total pages (${this.query.page} > ${this.totalPages})`)
-      this.query.page = 1
-    }
-  }
-
-  created () {
-    this.validatePageQuery()
-  }
-
-  @Watch('query.page')
-  onPageChange () {
-    this.validatePageQuery()
-  }
-
-  @Watch('totalPages')
-  onTotalPagesChange () {
-    this.validatePageQuery()
-  }
-
   get filteredQueryParams () {
     const excluded = ['page']
     return Object.keys(this.queryParams)
@@ -89,10 +58,6 @@ class RecordList extends Vue {
     return this.$oarepo.collection.records
   }
 
-  get totalPages () {
-    return this.$oarepo.collection.totalPages
-  }
-
   get queryParams () {
     return this.$oarepo.collection.queryParams
   }
@@ -102,7 +67,6 @@ class RecordList extends Vue {
   }
 
   get facets () {
-    console.log(this.$oarepo.collection.facets)
     return this.$oarepo.collection.facets
   }
 
