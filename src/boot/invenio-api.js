@@ -8,10 +8,7 @@ export default async ({ store, app, Vue }) => {
       return i18n.t(x)
     },
     defaultFacetOptions: new FacetOptions({
-      defaultTranslateTitles: TranslationOptions.TRANSLATE,
-      translateValues: {
-        'title.lang': 'facets.values.language.'
-      }
+      defaultTranslateTitles: TranslationOptions.NO_TRANSLATION
     }),
     facetOptions: {},
     apiURL: '/api'

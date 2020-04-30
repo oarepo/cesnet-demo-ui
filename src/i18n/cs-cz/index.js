@@ -34,8 +34,25 @@ export default {
       header: 'Nalezeno {num} záznamů'
     },
     facetList: {
-      filter: {
+      filters: {
         creator: 'Filtrovat autory'
+      },
+      facets: {
+        creator: 'Autor',
+        title: {
+          lang: 'Jazyk'
+        }
+      },
+      values: {
+        title: {
+          lang: {
+            cs: 'Česky',
+            fr: 'Francouzsky',
+            en: 'Anglicky',
+            es: 'Španělsky',
+            de: 'Německy'
+          }
+        }
       }
     },
     activeFilters: {
@@ -60,21 +77,5 @@ export default {
   messages: {
     failed: 'Operace se nezdařila',
     success: 'Akce byla úspěšná'
-  },
-  // Facet translations
-  creator: 'Autor',
-  title: {
-    lang: 'Jazyk'
-  },
-  facets: {
-    values: {
-      language: {
-        cs: 'Česky',
-        fr: 'Francouzsky',
-        en: 'Anglicky',
-        es: 'Španělsky',
-        de: 'Německy'
-      }
-    }
   }
 }
