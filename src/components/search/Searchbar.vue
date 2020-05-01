@@ -7,7 +7,7 @@ q-input.searchbar__input.q-my-xl.full-width(
   dark
   autofocus
   standout
-  @clear="doSearch"
+  @clear="query.q = ''"
   :placeholder="!maximized? $t('labels.searchInputMaximized') + '…': ''"
   v-model.trim="query.q"
   @keydown.enter.prevent="doSearch")

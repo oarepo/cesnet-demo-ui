@@ -1,6 +1,7 @@
 export default {
-  app: {
-    title: 'DEMO Repozitář'
+  collection: {
+    title: 'DEMO Repozitář',
+    description: 'Kolekce ukázkových záznamů odpovídajících DCObject metadatovému schematu'
   },
   menu: {
     createRecord: 'Záznam'

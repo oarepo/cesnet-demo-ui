@@ -41,7 +41,7 @@ export default @Component({
 })
 class RecordList extends Vue {
   get filteredQueryParams () {
-    const excluded = ['page']
+    const excluded = ['page', 'list']
     return Object.keys(this.queryParams)
       .filter(key => !excluded.includes(key))
       .reduce((obj, key) => {

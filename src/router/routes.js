@@ -1,61 +1,35 @@
-import { routerCollectionList, routerCollection, routerRecord } from '@oarepo/invenio-api-vuex'
-import Record from 'components/records/Record'
+import { routerCollection } from '@oarepo/invenio-api-vuex'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
 import MainLayout from 'layouts/MainLayout'
-import RecordList from 'pages/records/RecordList'
 
 const routes = [
-  routerCollectionList(
+  routerCollection(
     {
       path: '/',
+      name: 'index',
       component: MainLayout,
       meta: {
         preloader: {
-          store: 'oarepoCollectionList'
-        }
+          store: 'oarepoCollection'
+        },
+        title: 'Records'
       },
       props: query([
-        'string:q'
-      ], {}, {
-        passParams: true
-      }),
-      children: [
-        routerCollection({
-          name: 'RecordSearch',
-          path: '/:collectionId',
-          component: RecordList,
-          meta: {
-            title: 'Records',
-            preloader: {
-              store: 'oarepoCollection'
-            }
-          },
-          props: query([
-            'string:q',
-            '1:number:page',
-            'array:creator',
-            'array:title.lang'
-          ], {}, {
-            passParams: true
-          })
-        })
-      ]
+        '1000:string:q',
+        'bool:list',
+        '500:number:page:1',
+        'array:creator',
+        'array:title.lang'
+      ], {
+        collectionId: 'records'
+      })
     }),
   {
     name: 'Error404',
     path: '/error/404',
     component: Error404
-  },
-  routerRecord({
-    path: '/:collectionId/:recordId',
-    component: Record,
-    meta: {
-      preloader: {
-        store: 'oarepoCollection'
-      }
-    }
-  })
+  }
 ]
 
 // Always leave this as last one

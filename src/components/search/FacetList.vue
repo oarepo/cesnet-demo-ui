@@ -56,21 +56,17 @@ class FacetList extends Vue {
 
   get pagingFacets () {
     const query = this.query
-    const ret = this.facetsWithQuery().map(facet => {
+    return this.facetsWithQuery().map(facet => {
       const values = [...facet.facets]
       czechSort(values, x => this.valueLabel(facet.code, x.value))
-      query._prop({ name: facet.code, debounce: 1 })
-      const ret = {
-        code: facet.code,
-        label: this.$t(`labels.facetList.facets.${facet.code}`),
-        model: this.query[facet.code] || [],
-        values: values.map(val => ({
-          ...val,
-          value: val.value.toString(),
-          label: this.valueLabel(facet.code, val.value)
-        }))
-      }
-      Object.defineProperty(ret, 'model', {
+
+      query._prop({
+        name: facet.code,
+        debounce: 1
+      })
+
+      const fo = this.facetObject(facet, values)
+      Object.defineProperty(fo, 'model', {
         get () {
           return query[facet.code] || []
         },
@@ -79,9 +75,21 @@ class FacetList extends Vue {
           query.page = 1
         }
       })
-      return ret
+      return fo
     })
-    return ret
+  }
+
+  facetObject (facet, values) {
+    return {
+      code: facet.code,
+      label: this.$t(`labels.facetList.facets.${facet.code}`),
+      model: this.query[facet.code] || [],
+      values: values.map(val => ({
+        ...val,
+        value: val.value.toString(),
+        label: this.valueLabel(facet.code, val.value)
+      }))
+    }
   }
 
   valueLabel (code, value) {

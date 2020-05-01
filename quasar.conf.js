@@ -80,6 +80,7 @@ module.exports = function (ctx) {
         'QPagination',
         'QScrollArea',
         'QSeparator',
+        'QSlideTransition',
         'QSpace',
         'QSpinnerGears',
         'QToolbar',
