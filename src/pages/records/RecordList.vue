@@ -23,7 +23,7 @@ q-page(padding).q-pb-xl
 
 <script>
 import { State } from '@oarepo/invenio-api-vuex'
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Emit, Vue } from 'vue-property-decorator'
 import Record from 'components/records/Record'
 import ActiveFilters from 'components/search/ActiveFilters'
 import Pagination from 'components/navigation/Pagination'
@@ -70,13 +70,12 @@ class RecordList extends Vue {
     return this.$oarepo.collection.facets
   }
 
+  @Emit('remove-filter')
   removeFilter (filter) {
     if (filter.name === 'q') {
       this.query.q = ''
     } else {
-      console.log(filter, this.query)
       this.query._remove(filter.name, filter.value)
-      console.log(this.query)
     }
   }
 }

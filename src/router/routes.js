@@ -18,7 +18,7 @@ const routes = [
       props: query([
         '1000:string:q',
         'bool:list',
-        '500:number:page:1',
+        'number:page:1',
         'array:creator',
         'array:title.lang'
       ], {

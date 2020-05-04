@@ -13,7 +13,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
           particles-box(v-show="maximized")
   q-slide-transition(appear)
     q-page-container.layout__content(v-if="!maximized")
-      record-list(v-if="!maximized" :query="query")
+      record-list(v-if="!maximized" :query="query" @remove-filter="resetPaging()")
   q-drawer(
     v-model="facetsDrawer"
     :width="300"
@@ -73,6 +73,10 @@ class MainLayout extends Vue {
     this.$oarepo.collection.transform()
   }
 
+  resetPaging () {
+    this.query.page = 1
+  }
+
   maximize () {
     this.maximized = true
     this.query.list = 0
@@ -84,6 +88,8 @@ class MainLayout extends Vue {
       this.facetsDrawer = true
       this.query.list = 1
       console.log('show record list', this.query)
+    } else {
+      this.resetPaging()
     }
   }
 }
