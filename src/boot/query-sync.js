@@ -5,6 +5,6 @@ export default async ({ router, Vue }) => {
     router: router,
     debounce: 700,
     passUnknownProperties: false,
-    debug: true
+    debug: process.env.DEV
   })
 }
