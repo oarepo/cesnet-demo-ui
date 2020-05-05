@@ -7,16 +7,18 @@ q-input.searchbar__input.q-my-xl.full-width(
   dark
   autofocus
   standout
-  @clear="doSearch"
+  @clear="query.q = ''"
+  @input="doSearch"
+  :debounce="1000"
   :placeholder="!maximized? $t('labels.searchInputMaximized') + '…': ''"
-  @keydown.enter.prevent="doSearch"
-  v-model.trim="search")
+  v-model.trim="query.q"
+  @keydown.enter.prevent="doSearch")
   template(v-slot:append)
-    q-icon.cursor-pointer(v-if="search === ''" name="search" @click="doSearch")
+    q-icon(v-if="query.q === ''" name="search")
 </template>
 
 <script>
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Vue } from 'vue-property-decorator'
 
 export default @Component({
   name: 'Searchbar',
@@ -26,23 +28,8 @@ export default @Component({
   }
 })
 class Searchbar extends Vue {
-  search = ''
-
-  created () {
-    this.search = this.query.q
-  }
-
-  @Watch('query')
-  queryChange () {
-    this.search = this.query.q
-  }
-
+  @Emit('search')
   doSearch () {
-    if (!this.search) {
-      // Prevent null from being sent in event
-      this.search = ''
-    }
-    this.$emit('search', this.search)
   }
 }
 </script>

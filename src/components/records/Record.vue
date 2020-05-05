@@ -1,5 +1,11 @@
 <template lang="pug">
-q-expansion-item(group="records" popup clickable ripple).q-my-lg
+q-expansion-item.q-my-lg(
+  group="records"
+  expand-separator
+  header-class="bg-grey-2 shadow-1"
+  popup
+  clickable
+  ripple)
   template(v-slot:header)
     q-item-section(avatar top)
       q-icon(name="book" size="34px")

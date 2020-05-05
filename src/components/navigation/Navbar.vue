@@ -10,11 +10,11 @@ q-toolbar.bg-primary.col-grow.text-grey-2
             :class="[ maximized? 'navbar__logo__maximized': 'navbar__logo']")
       q-toolbar-title.navbar__toolbar-title.text-center(:class="[ maximized? 'col-12 col-md-10' : 'col6']")
         .row.navbar__collection-title(v-if="maximized")
-          h3.col-auto {{ $t('app.title') }}
+          h3.col-auto {{ $t('collection.title') }}
           q-space.col-auto
           locale-switcher.col-2.gt-md
         .row.navbar__collection-description(v-if="maximized")
-          small {{ collection.description[$i18n.locale] }}
+          small {{ $t('collection.description') }}
         .row.search-input
           searchbar(:maximized="maximized" :query="query" @search="doSearch")
       .col-auto(v-if="maximized")
@@ -23,11 +23,9 @@ q-toolbar.bg-primary.col-grow.text-grey-2
 </template>
 
 <script>
-import { Component, Emit } from 'vue-property-decorator'
+import { Vue, Component, Emit } from 'vue-property-decorator'
 import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
-import Collection from 'components/mixins/Collection'
 import Searchbar from 'components/search/Searchbar'
-import { mixins } from 'vue-class-component'
 
 export default @Component({
   name: 'Navbar',
@@ -40,10 +38,9 @@ export default @Component({
     maximized: Boolean
   }
 })
-class Navbar extends mixins(Collection) {
+class Navbar extends Vue {
   @Emit('search')
-  doSearch (search) {
-    return search
+  doSearch () {
   }
 
   @Emit('home')

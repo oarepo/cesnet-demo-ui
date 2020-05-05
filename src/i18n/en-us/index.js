@@ -1,6 +1,7 @@
 export default {
-  app: {
-    title: 'Repository DEMO'
+  collection: {
+    title: 'Repository DEMO',
+    description: 'A collection of a Demo Records that adhere to the DCObject metadata schema'
   },
   menu: {
     createRecord: 'Record'

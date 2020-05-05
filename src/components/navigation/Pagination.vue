@@ -1,20 +1,21 @@
 <template lang="pug">
 q-page-sticky(v-if="totalPages > 1" position="bottom" :offset="[-50, 30]")
-  q-toolbar.bg-accent.rounded-borders.shadow-4
-    q-toolbar-title
-      q-pagination(
-        dark
-        color="white"
-        text-color="primary"
-        v-model="query.page"
-        :max="totalPages"
-        :max-pages="6"
-        :boundary-numbers="true"
+  q-toolbar.bg-secondary.rounded-borders.shadow-4
+    q-toolbar-title.q-py-xs
+      q-btn.q-mx-xs(
+        v-for="p in totalPages"
+        :color="p === query.page ? 'white' : 'primary'"
+        :text-color="p === query.page ? 'black' : 'white'"
+        dense
+        round
+        :key="p"
+        :label="p"
+        :to="pageRoute(p)"
       )
 </template>
 
 <script>
-import { Vue, Component } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 
 export default @Component({
   name: 'Pagination',
@@ -25,6 +26,19 @@ export default @Component({
   }
 })
 class Pagination extends Vue {
+  created () {
+    if (this.query.page > this.totalPages) {
+      this.query.page = 1
+    }
+  }
+
+  pageRoute (page) {
+    const toRoute = (({ path, name }) => ({ path, name }))(this.$router.currentRoute)
+    toRoute.query = Object.assign({}, this.$router.currentRoute.query)
+    toRoute.query.page = page
+    return toRoute
+  }
+
   get totalPages () {
     return this.$oarepo.collection.totalPages
   }
