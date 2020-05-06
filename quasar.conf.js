@@ -15,6 +15,7 @@ module.exports = function (ctx) {
       'preloader',
       'query-sync',
       'renderer',
+      'validations',
       'editor',
       'particles'
     ],
@@ -55,16 +56,21 @@ module.exports = function (ctx) {
       components: [
         'QAvatar',
         'QBadge',
+        'QBar',
         'QBtn',
         'QBtnDropdown',
         'QCard',
+        'QCardActions',
         'QCardSection',
         'QCheckbox',
         'QChip',
         'QDate',
+        'QDialog',
         'QDrawer',
         'QExpansionItem',
+        'QFile',
         'QFooter',
+        'QForm',
         'QHeader',
         'QIcon',
         'QImg',
@@ -95,6 +101,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
+        'Dialog',
         'Notify',
         'Meta'
       ]

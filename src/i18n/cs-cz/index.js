@@ -3,30 +3,33 @@ export default {
     title: 'DEMO Repozitář',
     description: 'Kolekce ukázkových záznamů odpovídajících DCObject metadatovému schematu'
   },
-  menu: {
-    createRecord: 'Záznam'
-  },
   labels: {
     // Inputs
     searchInput: 'Hledám',
     searchInputMaximized: 'Hledat podle názvu',
+    fileInput: 'Vyberte soubor',
+    // Buttons
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
-    // Buttons
     searchBtn: 'Hledat',
+    resetBtn: 'Vrátit změny',
     submitBtn: 'Uložit',
+    createFormBtn: 'Zpět na formulář',
     createRecordBtn: 'Přidat záznam',
+    importJSONBtn: 'Importovat JSON',
     // Sections
-    createNew: 'Vytvořit',
+    createNew: 'Vytvořit záznam',
     // Other components
     localeSwitcher: 'Language',
     facets: {
       header: 'Filtry'
     },
     record: {
+      title: 'Název záznamu',
       creator: 'Autor',
       contributors: 'Spoluautoři',
       abstract: 'Abstrakt',
+      description: 'Krátký popis',
       identifier: 'ID záznamu',
       created: 'Datum vytvoření',
       updated: 'Datum poslední úpravy',
@@ -74,10 +77,15 @@ export default {
     }
   },
   tooltips: {
+    close: 'Zavřít',
+    importJSON: 'Importovat záznamy z JSON souboru odpovídajícího DCObject schematu',
     anonymous: 'Nepřihlášený uživatel',
     notifications: 'Notifikace'
   },
   messages: {
+    validation: {
+      fieldRequired: 'Toto pole je vyžadováno'
+    },
     allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',
     success: 'Akce byla úspěšná'

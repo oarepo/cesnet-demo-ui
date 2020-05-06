@@ -1,5 +1,5 @@
 <template lang="pug">
-q-toolbar.bg-primary.col-grow.text-grey-2
+q-toolbar.navbar.col-grow.text-grey-2
   q-toolbar(inset)
     .row.justify-between.full-width.q-px-lg
       .self-center(:class="[ maximized? 'col-6 q-mb-xl': 'col-auto']")
@@ -20,31 +20,7 @@ q-toolbar.bg-primary.col-grow.text-grey-2
       .col-auto.self-center.full-height.q-pb-md.q-ml-lg(v-if="!maximized")
         locale-switcher
       .col-auto.self-center.full-height.q-pb-md.q-ml-md(v-if="!maximized")
-        q-btn-dropdown(
-          unelevated
-          no-wrap
-          rounded
-          clickable
-          color="accent"
-          size="sm"
-          text-color="white"
-          v-if="loggedIn")
-          template(v-slot:label)
-            .row.items-center.no-wrap.q-gutter-sm.q-py-xs
-              q-avatar(size="md")
-                img(src="https://cdn.quasar.dev/img/boy-avatar.png")
-              .text-caption {{ auth.user.email }}
-          q-list(separator).bg-secondary.text-white.rounded-borders
-            q-item(clickable v-close-popup @click="createRecord")
-              q-item-section
-                q-item-label {{ $t('labels.createRecordBtn') }}
-              q-item-section(side)
-                q-avatar(square icon="add" text-color="white")
-            q-item(clickable v-close-popup @click="logout")
-              q-item-section
-                q-item-label {{ $t('labels.logoutBtn') }}
-              q-item-section(side)
-                q-avatar(square icon="exit_to_app" text-color="white")
+        account-dropdown(v-if="loggedIn" @create-record="createRecord")
         q-chip(clickable @click="login()" size="xl" icon="https" v-else)
           .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
 </template>
@@ -53,11 +29,13 @@ q-toolbar.bg-primary.col-grow.text-grey-2
 import { Vue, Component, Emit } from 'vue-property-decorator'
 import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
 import Searchbar from 'components/search/Searchbar'
+import AccountDropdown from 'components/navigation/AccountDropdown'
 
 export default @Component({
   name: 'Navbar',
   components: {
     Searchbar,
+    AccountDropdown,
     LocaleSwitcher
   },
   props: {
@@ -66,37 +44,25 @@ export default @Component({
   }
 })
 class Navbar extends Vue {
-  get auth () {
-    return this.auth$.authInfo
-  }
-
   get loggedIn () {
     return this.auth$.loggedLocally
-  }
-
-  createRecord () {
-    this.$router.push({ name: 'records-create' })
   }
 
   login () {
     this.auth$.login(this)
   }
 
-  logout () {
-    window.location = this.auth$.authLogoutURL
-  }
+  @Emit('create-record')
+  createRecord () { }
 
   @Emit('search')
-  doSearch () {
-  }
+  doSearch () { }
 
   @Emit('home')
-  goHome () {
-  }
+  goHome () { }
 
   @Emit('facets')
-  toggleFacetsDrawer () {
-  }
+  toggleFacetsDrawer () { }
 }
 </script>
 
