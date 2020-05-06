@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
+import { loginGuard } from 'src/router/guards'
 
 Vue.use(VueRouter)
 
@@ -26,5 +27,6 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
+  loginGuard.Router = Router
   return Router
 }

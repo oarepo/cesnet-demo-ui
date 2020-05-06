@@ -16,10 +16,37 @@ q-toolbar.bg-primary.col-grow.text-grey-2
         .row.navbar__collection-description(v-if="maximized")
           small {{ $t('collection.description') }}
         .row.search-input
-          searchbar(:maximized="maximized" :query="query" @search="doSearch")
-      .col-auto(v-if="maximized")
-      .col-auto.self-center.full-height.q-pb-md.q-ml-lg(v-else)
+          searchbar(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
+      .col-auto.self-center.full-height.q-pb-md.q-ml-lg(v-if="!maximized")
         locale-switcher
+      .col-auto.self-center.full-height.q-pb-md.q-ml-md(v-if="!maximized")
+        q-btn-dropdown(
+          unelevated
+          no-wrap
+          rounded
+          clickable
+          color="accent"
+          size="sm"
+          text-color="white"
+          v-if="loggedIn")
+          template(v-slot:label)
+            .row.items-center.no-wrap.q-gutter-sm.q-py-xs
+              q-avatar(size="md")
+                img(src="https://cdn.quasar.dev/img/boy-avatar.png")
+              .text-caption {{ auth.user.email }}
+          q-list(separator).bg-secondary.text-white.rounded-borders
+            q-item(clickable v-close-popup @click="createRecord")
+              q-item-section
+                q-item-label {{ $t('labels.createRecordBtn') }}
+              q-item-section(side)
+                q-avatar(square icon="add" text-color="white")
+            q-item(clickable v-close-popup @click="logout")
+              q-item-section
+                q-item-label {{ $t('labels.logoutBtn') }}
+              q-item-section(side)
+                q-avatar(square icon="exit_to_app" text-color="white")
+        q-chip(clickable @click="login()" size="xl" icon="https" v-else)
+          .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
 </template>
 
 <script>
@@ -39,6 +66,26 @@ export default @Component({
   }
 })
 class Navbar extends Vue {
+  get auth () {
+    return this.auth$.authInfo
+  }
+
+  get loggedIn () {
+    return this.auth$.loggedLocally
+  }
+
+  createRecord () {
+    this.$router.push({ name: 'records-create' })
+  }
+
+  login () {
+    this.auth$.login(this)
+  }
+
+  logout () {
+    window.location = this.auth$.authLogoutURL
+  }
+
   @Emit('search')
   doSearch () {
   }

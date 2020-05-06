@@ -2,19 +2,21 @@
 q-layout(view="hHh Lpr fff" class="bg-grey-1")
   q-header(elevated)
     q-slide-transition(:duration="100")
-      .row.no-wrap.bg-primary.layout__header(:class="[maximized? 'layout__header__maximized': 'layout__header__minimized']")
+      .row.no-wrap.bg-primary.layout__header(:class="[view === views.INTRO? 'layout__header__maximized': 'layout__header__minimized']")
         navbar(
-          :maximized="maximized"
+          :maximized="view === views.INTRO"
           :query="query"
           @facets="facetsDrawer = !facetsDrawer"
-          @home="maximize"
+          @home="view = views.INTRO"
           @search="doSearch")
         transition(leave leave-active-class="animated slideOutRight")
-          particles-box(v-show="maximized")
+          particles-box(v-show="view === views.INTRO")
   q-slide-transition(appear)
-    q-page-container.layout__content(v-if="!maximized")
-      record-list(v-if="!maximized" :query="query" @remove-filter="resetPaging()")
+    q-page-container.layout__content(v-if="view !== views.INTRO")
+      record-list(v-if="view === views.LIST" :query="query" @remove-filter="resetPaging()")
+      record-create(v-if="view === views.CREATE")
   q-drawer(
+    v-if="facetsDrawerEnabled"
     v-model="facetsDrawer"
     :width="300"
     :breakpoint="700"
@@ -31,6 +33,7 @@ import Navbar from 'components/navigation/Navbar'
 import ParticlesBox from 'components/landing/ParticlesBox'
 import FacetList from 'components/search/FacetList'
 import RecordList from 'pages/records/RecordList'
+import RecordCreate from 'pages/records/RecordCreate'
 
 export default @Component({
   name: 'MainLayout',
@@ -41,30 +44,62 @@ export default @Component({
     Navbar,
     FacetList,
     RecordList,
+    RecordCreate,
     ParticlesBox
   }
 })
 class MainLayout extends Vue {
   maximized = true
   facetsDrawer = false
+  hideIntro = false
+  facetsDrawerEnabled = false
+  views = Object.freeze({ INTRO: 0, LIST: 1, CREATE: 2 })
+  view = this.views.INTRO
 
   created () {
-    if (this.query.list) {
-      this.maximized = false
+    this.updateView()
+  }
+
+  @Watch('$route', { immediate: false, deep: true })
+  routeChanged (to) {
+    this.updateView()
+  }
+
+  updateView (to) {
+    const crn = to || this.$router.currentRoute
+    console.log('update view for route', crn.name)
+
+    if (this.query) {
+      // Query dependent views
+      if (!this.hideIntro && crn.name === 'index') {
+        this.view = this.views.INTRO
+      } else if (this.hideIntro && crn.name === 'index') {
+        this.view = this.views.LIST
+      } else if (crn.name === 'records-create') {
+        this.view = this.views.CREATE
+      }
     }
   }
 
-  @Watch('$route', { immediate: true, deep: true })
-  routeChange (to) {
-    if (to.name === 'landing') {
-      this.maximized = true
-    }
-  }
-
-  @Watch('maximized')
-  hideFacetsOnMaximize () {
-    if (this.maximized) {
-      this.facetsDrawer = false
+  @Watch('view')
+  viewChanged () {
+    switch (this.view) {
+      case this.views.INTRO:
+        if (this.hideIntro) {
+          this.hideIntro = false
+        }
+        this.$router.replace({ name: 'index' })
+        this.facetsDrawer = false
+        break
+      case this.views.LIST:
+        this.hideIntro = true
+        this.facetsDrawerEnabled = true
+        this.facetsDrawer = true
+        break
+      case this.views.CREATE:
+        this.facetsDrawerEnabled = false
+        this.facetsDrawer = false
+        break
     }
   }
 
@@ -77,17 +112,12 @@ class MainLayout extends Vue {
     this.query.page = 1
   }
 
-  maximize () {
-    this.maximized = true
-    this.query.list = 0
-  }
-
   doSearch () {
-    if (!this.query.list) {
-      this.maximized = false
-      this.facetsDrawer = true
-      this.query.list = 1
-      console.log('show record list', this.query)
+    if (this.$router.currentRoute.name !== 'index') {
+      this.$router.push({ name: 'index' })
+    }
+    if (!this.hideIntro) {
+      this.view = this.views.LIST
     } else {
       this.resetPaging()
     }

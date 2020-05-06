@@ -10,6 +10,8 @@ export default {
     // Inputs
     searchInput: 'Hledám',
     searchInputMaximized: 'Hledat podle názvu',
+    loginBtn: 'Přihlásit se',
+    logoutBtn: 'Odhlásit se',
     // Buttons
     searchBtn: 'Hledat',
     submitBtn: 'Uložit',
@@ -76,6 +78,7 @@ export default {
     notifications: 'Notifikace'
   },
   messages: {
+    allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',
     success: 'Akce byla úspěšná'
   }
