@@ -19,7 +19,6 @@ const routes = [
       },
       props: query([
         '1000:string:q',
-        'bool:list',
         'number:page:1',
         'array:creator',
         'array:title.lang'
@@ -41,7 +40,10 @@ const routes = [
     name: 'records-create',
     path: '/records/create',
     component: MainLayout,
-    beforeEnter: loginGuard
+    beforeEnter: loginGuard,
+    props: query([
+      '1000:string:q'
+    ], {})
   }
 ]
 

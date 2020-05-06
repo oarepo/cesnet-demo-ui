@@ -37,7 +37,9 @@ q-toolbar.bg-primary.col-grow.text-grey-2
           q-list(separator).bg-secondary.text-white.rounded-borders
             q-item(clickable v-close-popup @click="createRecord")
               q-item-section
-                q-item-label {{ $t('labels.') }}
+                q-item-label {{ $t('labels.createRecordBtn') }}
+              q-item-section(side)
+                q-avatar(square icon="add" text-color="white")
             q-item(clickable v-close-popup @click="logout")
               q-item-section
                 q-item-label {{ $t('labels.logoutBtn') }}
@@ -70,6 +72,10 @@ class Navbar extends Vue {
 
   get loggedIn () {
     return this.auth$.loggedLocally
+  }
+
+  createRecord () {
+    this.$router.push({ name: 'records-create' })
   }
 
   login () {

@@ -16,6 +16,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
       record-list(v-if="view === views.LIST" :query="query" @remove-filter="resetPaging()")
       record-create(v-if="view === views.CREATE")
   q-drawer(
+    v-if="facetsDrawerEnabled"
     v-model="facetsDrawer"
     :width="300"
     :breakpoint="700"
@@ -50,6 +51,8 @@ export default @Component({
 class MainLayout extends Vue {
   maximized = true
   facetsDrawer = false
+  hideIntro = false
+  facetsDrawerEnabled = false
   views = Object.freeze({ INTRO: 0, LIST: 1, CREATE: 2 })
   view = this.views.INTRO
 
@@ -57,17 +60,24 @@ class MainLayout extends Vue {
     this.updateView()
   }
 
+  @Watch('$route', { immediate: false, deep: true })
+  routeChanged (to) {
+    this.updateView()
+  }
+
   updateView (to) {
     const crn = to || this.$router.currentRoute
+    console.log('update view for route', crn.name)
+
     if (this.query) {
       // Query dependent views
-      if (!this.query.list && crn.name === 'index') {
+      if (!this.hideIntro && crn.name === 'index') {
         this.view = this.views.INTRO
-      } else if (this.query.list && crn.name === 'index') {
-        this.view = this.view.LIST
+      } else if (this.hideIntro && crn.name === 'index') {
+        this.view = this.views.LIST
+      } else if (crn.name === 'records-create') {
+        this.view = this.views.CREATE
       }
-    } else if (crn.name === 'records-create') {
-      this.view = this.views.CREATE
     }
   }
 
@@ -75,17 +85,20 @@ class MainLayout extends Vue {
   viewChanged () {
     switch (this.view) {
       case this.views.INTRO:
-        if (this.query && this.query.list) {
-          this.query.list = 0
+        if (this.hideIntro) {
+          this.hideIntro = false
         }
-        if (this.$router.currentRoute.name === 'records-create') {
-          this.$router.push({ name: 'index' })
-        }
+        this.$router.replace({ name: 'index' })
         this.facetsDrawer = false
         break
       case this.views.LIST:
-        this.query.list = 1
+        this.hideIntro = true
+        this.facetsDrawerEnabled = true
         this.facetsDrawer = true
+        break
+      case this.views.CREATE:
+        this.facetsDrawerEnabled = false
+        this.facetsDrawer = false
         break
     }
   }
@@ -100,7 +113,10 @@ class MainLayout extends Vue {
   }
 
   doSearch () {
-    if (!this.query.list) {
+    if (this.$router.currentRoute.name !== 'index') {
+      this.$router.push({ name: 'index' })
+    }
+    if (!this.hideIntro) {
       this.view = this.views.LIST
     } else {
       this.resetPaging()
