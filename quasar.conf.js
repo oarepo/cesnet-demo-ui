@@ -11,6 +11,7 @@ module.exports = function (ctx) {
       'filters',
       'axios',
       'invenio-api',
+      'login',
       'preloader',
       'query-sync',
       'renderer',
@@ -55,6 +56,7 @@ module.exports = function (ctx) {
         'QAvatar',
         'QBadge',
         'QBtn',
+        'QBtnDropdown',
         'QCard',
         'QCardSection',
         'QCheckbox',
@@ -93,6 +95,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
+        'Notify',
         'Meta'
       ]
     },
@@ -104,6 +107,11 @@ module.exports = function (ctx) {
     build: {
       scopeHoisting: true,
       vueRouterMode: 'history',
+
+      // Environment variables
+      env: {
+        VUE_APP_OAREPO_API_URL: JSON.stringify('/api/1.0/oarepo/')
+      },
 
       // showProgress: false,
       // gzip: true,
@@ -134,15 +142,15 @@ module.exports = function (ctx) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       https: true,
-      port: 8081,
+      port: 5000,
       host: '127.0.0.1',
       open: false, // opens browser window automatically
       proxy: {
         '/api': {
-          target: 'https://localhost:5000/',
+          target: 'https://127.0.0.1:8081/',
           ws: true,
           secure: false,
-          changeOrigin: true,
+          changeOrigin: false,
           logLevel: 'debug'
         }
       }

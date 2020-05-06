@@ -13,6 +13,8 @@ export default {
     // Buttons
     searchBtn: 'Search',
     submitBtn: 'Submit',
+    loginBtn: 'Sign In',
+    logoutBtn: 'Log Out',
     createRecordBtn: 'Add record',
     // Sections
     createNew: 'Create New',
@@ -76,6 +78,7 @@ export default {
     notifications: 'Notifications'
   },
   messages: {
+    allowPopups: 'Please allow popups for login to work',
     failed: 'Action failed',
     success: 'Action was successful'
   }

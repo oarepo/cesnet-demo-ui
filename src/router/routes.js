@@ -3,6 +3,7 @@ import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
 import MainLayout from 'layouts/MainLayout'
 import { loginGuard } from 'src/router/guards'
+import Logout from 'pages/Logout'
 
 const routes = [
   routerCollection(
@@ -30,6 +31,11 @@ const routes = [
     name: 'Error404',
     path: '/error/404',
     component: Error404
+  },
+  {
+    name: 'Logout',
+    path: '/logout',
+    component: Logout
   },
   {
     name: 'records-create',
