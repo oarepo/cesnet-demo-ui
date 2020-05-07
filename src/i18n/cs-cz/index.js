@@ -84,8 +84,11 @@ export default {
   },
   messages: {
     validation: {
+      failed: 'Opravte prosím chyby a zkuste to znovu',
       fieldRequired: 'Toto pole je vyžadováno'
     },
+    creatingRecord: 'Vytvářím záznam',
+    recordCreateError: 'Při vytváření záznamu došlo k chybě',
     allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',
     success: 'Akce byla úspěšná'

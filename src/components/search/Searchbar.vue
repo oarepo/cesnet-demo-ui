@@ -2,15 +2,15 @@
 q-input.searchbar__input.q-my-xl.full-width(
   clearable
   type="search"
-  :hint="maximized? $t('labels.searchInput') + '…': ''"
   clear-icon="clear"
   dark
+  hide-bottom-space
   autofocus
   standout
   @clear="query.q = ''"
   @input="doSearch"
   :debounce="1000"
-  :placeholder="!maximized? $t('labels.searchInputMaximized') + '…': ''"
+  :placeholder="$t('labels.searchInputMaximized') + '…'"
   v-model.trim="query.q"
   @keydown.enter.prevent="doSearch")
   template(v-slot:append)

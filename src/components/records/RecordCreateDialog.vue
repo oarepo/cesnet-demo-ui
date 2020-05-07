@@ -76,9 +76,13 @@ q-dialog(
                   :label="$t('labels.fileInput')"
                   accept="application/json"
                 )
+      q-inner-loading(:showing="progress")
+        .text-h6.q-mb-md {{ $t('messages.creatingRecord') }}&hellip;
+        q-spinner-gears(size="50px" color="white")
       q-card-actions.q-pa-md.q-my-md
         q-btn(
           v-if="mode === modes.FORM"
+          :disabled="progress"
           @click="mode = modes.IMPORT"
           icon="unarchive"
           :label="$t('labels.importJSONBtn')"
@@ -87,6 +91,7 @@ q-dialog(
           q-tooltip(content-class="bg-white text-black") {{ $t('tooltips.importJSON') }}
         q-btn(
           v-else
+          :disabled="progress"
           @click="mode = modes.FORM"
           icon="list"
           :label="$t('labels.createFormBtn')"
@@ -94,6 +99,7 @@ q-dialog(
           color="primary")
         q-space
         q-btn.q-mr-lg(
+          :disabled="progress"
           icon="undo"
           @click="reset"
           :label="$t('labels.resetBtn')"
@@ -102,6 +108,8 @@ q-dialog(
           type="reset"
           color="white")
         q-btn.q-px-md(
+          :disabled="progress"
+          @click="submit"
           icon="save"
           :label="$t('labels.submitBtn')"
           size="lg"
@@ -111,6 +119,7 @@ q-dialog(
 
 <script>
 import { Component, Emit, Vue } from 'vue-property-decorator'
+import { uid, date } from 'quasar'
 
 export default @Component({
   name: 'RecordCreateDialog',
@@ -121,18 +130,9 @@ class RecordCreateDialog extends Vue {
   dialog = false
   maximized = true
   modes = Object.freeze({ FORM: 0, IMPORT: 1 })
+  progress = false
   mode = this.modes.FORM
   importJSONFile = null
-
-  created () {
-    this.ensureAuthenticated()
-  }
-
-  ensureAuthenticated () {
-    if (!this.$auth.loggedLocally) {
-      this.$auth.login(this)
-    }
-  }
 
   record = {
     title: [
@@ -157,6 +157,16 @@ class RecordCreateDialog extends Vue {
     ]
   }
 
+  created () {
+    this.ensureAuthenticated()
+  }
+
+  ensureAuthenticated () {
+    if (!this.$auth.loggedLocally) {
+      this.$auth.login(this)
+    }
+  }
+
   show () {
     this.$refs.dialog.show()
   }
@@ -169,8 +179,75 @@ class RecordCreateDialog extends Vue {
   onDialogHide () {
   }
 
-  submit () {
+  async validate () {
+    let success = false
+    const resPromise = await Promise.all([
+      this.$refs.title.validate(),
+      this.$refs.description.validate(),
+      this.$refs.abstract.validate(),
+      this.$refs.contributor.validate()
+    ])
+    if (resPromise.reduce((a, b) => (a && b), true)) {
+      success = true
+    }
+    return success
+  }
+
+  async submit () {
     this.ensureAuthenticated()
+    const valid = await this.validate()
+    if (!valid) {
+      this.$q.notify({
+        type: 'negative',
+        message: `${this.$t('messages.validation.failed')}`
+      })
+      return
+    }
+
+    // Generate additional record metadata
+    const nowTs = new Date()
+    this.record.identifier = uid()
+    this.record.created = date.formatDate(nowTs, 'YYYY-MM-DD')
+    this.record.modified = date.formatDate(nowTs, 'YYYY-MM-DD')
+    console.log(this.record.modified)
+
+    // TODO: refactor once there is a proper create action in invenio-api-vuex library
+    this.progress = true
+    this.$axios.post('/api/records/', this.record).then(resp => {
+      this.created(resp)
+    }).catch(err => {
+      this.createFailed(err.response)
+    }).finally(() => {
+      this.progress = false
+    })
+  }
+
+  @Emit('record-create')
+  recordCreated (resp) {
+    console.log(resp)
+    return resp
+  }
+
+  @Emit('create-failed')
+  createFailed (err) {
+    console.error(err)
+
+    const errors = this.apiValidationErrors(err)
+    if (errors) {
+      // TODO: maybe present failed fields to the user
+      console.error(errors)
+    }
+    this.$q.notify({
+      type: 'negative',
+      message: `${this.$t('messages.recordCreateError')} ${err.data.message || ''}`
+    })
+  }
+
+  apiValidationErrors (err) {
+    if (err.status === 400 && err.data.message === 'Validation error.') {
+      return err.data.errors
+    }
+    return null
   }
 
   resetValidation () {

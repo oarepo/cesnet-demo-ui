@@ -1,14 +1,15 @@
 <template lang="pug">
 q-toolbar.navbar.col-grow.text-grey-2
   q-toolbar(inset)
-    .row.justify-between.full-width.q-px-lg
+    .row.justify-between.full-width(:class="[ maximized? 'q-mx-lg': '']")
       .self-center(:class="[ maximized? 'col-6 q-mb-xl': 'col-auto']")
-        q-btn(v-if="!maximized" flat @click="toggleFacetsDrawer" round dense icon="menu")
-        q-btn(flat @click="goHome")
-          img.q-mb-md(
+        q-btn.q-mr-md(v-if="!maximized" flat @click="toggleFacetsDrawer" round dense icon="menu")
+        q-btn(flat @click="goHome" :class="[ maximized? 'q-mb-xl': '']")
+          img(
             src="statics/logos/datacare_White.svg"
             :class="[ maximized? 'navbar__logo__maximized': 'navbar__logo']")
-      q-toolbar-title.navbar__toolbar-title.text-center(:class="[ maximized? 'col-12 col-md-10' : 'col6']")
+      q-toolbar-title.self-center.navbar__toolbar-title.text-center(
+        :class="[ maximized? 'col-12 col-md-10' : 'col6']")
         .row.navbar__collection-title(v-if="maximized")
           h3.col-auto {{ $t('collection.title') }}
           q-space.col-auto
@@ -17,9 +18,9 @@ q-toolbar.navbar.col-grow.text-grey-2
           small {{ $t('collection.description') }}
         .row.search-input
           searchbar(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
-      .col-auto.self-center.full-height.q-pb-md.q-ml-lg(v-if="!maximized")
+      .col-auto.self-center.full-height.q-ml-lg(v-if="!maximized")
         locale-switcher
-      .col-auto.self-center.full-height.q-pb-md.q-ml-md(v-if="!maximized")
+      .col-auto.self-center.full-height.q-ml-md(v-if="!maximized")
         account-dropdown(v-if="loggedIn" @create-record="createRecord")
         q-chip(clickable @click="login()" size="xl" icon="https" v-else)
           .text-caption.text-uppercase {{ $t('labels.loginBtn') }}

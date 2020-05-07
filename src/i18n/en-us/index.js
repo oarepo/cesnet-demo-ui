@@ -84,8 +84,11 @@ export default {
   },
   messages: {
     validation: {
+      failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'
     },
+    creatingRecord: 'Creating Record',
+    recordCreateError: 'Failed to create record',
     allowPopups: 'Please allow popups for login to work',
     failed: 'Action failed',
     success: 'Action was successful'
