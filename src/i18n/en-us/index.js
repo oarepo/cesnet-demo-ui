@@ -9,12 +9,17 @@ export default {
     searchInputMaximized: 'Search by title',
     fileInput: 'Pick a file',
     // Buttons
+    closeBtn: 'Zavřít',
     createFormBtn: 'Back to form',
     searchBtn: 'Search',
     submitBtn: 'Submit',
+    importBtn: 'Import',
+    importManyBtn: 'Import {num} records',
     resetBtn: 'Reset',
     loginBtn: 'Sign In',
     logoutBtn: 'Log Out',
+    tryAgainBtn: 'Try Again',
+    createMoreBtn: 'Create more',
     createRecordBtn: 'Add record',
     importJSONBtn: 'Import from JSON',
     // Sections
@@ -87,6 +92,8 @@ export default {
       failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'
     },
+    recordCreateSuccess: 'Record successfully created',
+    importingRecord: 'Importing Record',
     creatingRecord: 'Creating Record',
     recordCreateError: 'Failed to create record',
     allowPopups: 'Please allow popups for login to work',

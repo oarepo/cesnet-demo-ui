@@ -1,5 +1,5 @@
 <template lang="pug">
-q-expansion-item.q-my-lg(
+q-expansion-item.full-width.q-my-lg(
   group="records"
   expand-separator
   header-class="bg-grey-2 shadow-1"
@@ -18,7 +18,7 @@ q-expansion-item.q-my-lg(
   q-separator
   q-card
     q-card-section(horizontal)
-      q-card-section.q-pt-xs
+      q-card-section.col-8.q-pt-xs
         .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.creator') }}
         .text-caption {{ metadata.creator }}
         .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.contributors') }}

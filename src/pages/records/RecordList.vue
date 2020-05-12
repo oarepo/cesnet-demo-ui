@@ -1,7 +1,7 @@
 <template lang="pug">
 q-page(padding).q-pb-xl
   .row.q-my-xl
-    q-list(separator).records__list
+    q-list.full-width.records__list(separator)
       q-item-label(header) {{ $t('labels.recordList.header', { num: totalRecords }) }}
         transition-group(
           appear

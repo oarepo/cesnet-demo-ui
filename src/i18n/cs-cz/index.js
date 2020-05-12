@@ -9,12 +9,17 @@ export default {
     searchInputMaximized: 'Hledat podle názvu',
     fileInput: 'Vyberte soubor',
     // Buttons
+    closeBtn: 'Zavřít',
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
     searchBtn: 'Hledat',
     resetBtn: 'Vrátit změny',
     submitBtn: 'Uložit',
+    importBtn: 'Importovat',
+    importManyBtn: 'Importovat {num} záznamů',
+    tryAgainBtn: 'Zkusit znovu',
     createFormBtn: 'Zpět na formulář',
+    createMoreBtn: 'Vytvořit další',
     createRecordBtn: 'Přidat záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
@@ -87,7 +92,9 @@ export default {
       failed: 'Opravte prosím chyby a zkuste to znovu',
       fieldRequired: 'Toto pole je vyžadováno'
     },
+    importingRecord: 'Importuji záznam',
     creatingRecord: 'Vytvářím záznam',
+    recordCreateSuccess: 'Záznam uložen',
     recordCreateError: 'Při vytváření záznamu došlo k chybě',
     allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',

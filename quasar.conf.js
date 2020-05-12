@@ -75,6 +75,7 @@ module.exports = function (ctx) {
         'QIcon',
         'QImg',
         'QInnerLoading',
+        'QLinearProgress',
         'QSpinnerGears',
         'QInput',
         'QItem',
