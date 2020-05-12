@@ -3,30 +3,38 @@ export default {
     title: 'DEMO Repozitář',
     description: 'Kolekce ukázkových záznamů odpovídajících DCObject metadatovému schematu'
   },
-  menu: {
-    createRecord: 'Záznam'
-  },
   labels: {
     // Inputs
     searchInput: 'Hledám',
     searchInputMaximized: 'Hledat podle názvu',
+    fileInput: 'Vyberte soubor',
+    // Buttons
+    closeBtn: 'Zavřít',
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
-    // Buttons
     searchBtn: 'Hledat',
+    resetBtn: 'Vrátit změny',
     submitBtn: 'Uložit',
+    importBtn: 'Importovat',
+    importManyBtn: 'Importovat {num} záznamů',
+    tryAgainBtn: 'Zkusit znovu',
+    createFormBtn: 'Zpět na formulář',
+    createMoreBtn: 'Vytvořit další',
     createRecordBtn: 'Přidat záznam',
+    importJSONBtn: 'Importovat JSON',
     // Sections
-    createNew: 'Vytvořit',
+    createNew: 'Vytvořit záznam',
     // Other components
     localeSwitcher: 'Language',
     facets: {
       header: 'Filtry'
     },
     record: {
+      title: 'Název záznamu',
       creator: 'Autor',
       contributors: 'Spoluautoři',
       abstract: 'Abstrakt',
+      description: 'Krátký popis',
       identifier: 'ID záznamu',
       created: 'Datum vytvoření',
       updated: 'Datum poslední úpravy',
@@ -74,10 +82,20 @@ export default {
     }
   },
   tooltips: {
+    close: 'Zavřít',
+    importJSON: 'Importovat záznamy z JSON souboru odpovídajícího DCObject schematu',
     anonymous: 'Nepřihlášený uživatel',
     notifications: 'Notifikace'
   },
   messages: {
+    validation: {
+      failed: 'Opravte prosím chyby a zkuste to znovu',
+      fieldRequired: 'Toto pole je vyžadováno'
+    },
+    importingRecord: 'Importuji záznam',
+    creatingRecord: 'Vytvářím záznam',
+    recordCreateSuccess: 'Záznam uložen',
+    recordCreateError: 'Při vytváření záznamu došlo k chybě',
     allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',
     success: 'Akce byla úspěšná'

@@ -2,11 +2,12 @@
 q-layout(view="hHh Lpr fff" class="bg-grey-1")
   q-header(elevated)
     q-slide-transition(:duration="100")
-      .row.no-wrap.bg-primary.layout__header(:class="[view === views.INTRO? 'layout__header__maximized': 'layout__header__minimized']")
+      .row.no-wrap.layout__header(:class="[view === views.INTRO? 'layout__header__maximized': 'layout__header__minimized']")
         navbar(
           :maximized="view === views.INTRO"
           :query="query"
           @facets="facetsDrawer = !facetsDrawer"
+          @create-record="recordCreateDialog = true"
           @home="view = views.INTRO"
           @search="doSearch")
         transition(leave leave-active-class="animated slideOutRight")
@@ -14,7 +15,6 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
   q-slide-transition(appear)
     q-page-container.layout__content(v-if="view !== views.INTRO")
       record-list(v-if="view === views.LIST" :query="query" @remove-filter="resetPaging()")
-      record-create(v-if="view === views.CREATE")
   q-drawer(
     v-if="facetsDrawerEnabled"
     v-model="facetsDrawer"
@@ -33,7 +33,6 @@ import Navbar from 'components/navigation/Navbar'
 import ParticlesBox from 'components/landing/ParticlesBox'
 import FacetList from 'components/search/FacetList'
 import RecordList from 'pages/records/RecordList'
-import RecordCreate from 'pages/records/RecordCreate'
 
 export default @Component({
   name: 'MainLayout',
@@ -44,7 +43,6 @@ export default @Component({
     Navbar,
     FacetList,
     RecordList,
-    RecordCreate,
     ParticlesBox
   }
 })
@@ -53,15 +51,10 @@ class MainLayout extends Vue {
   facetsDrawer = false
   hideIntro = false
   facetsDrawerEnabled = false
-  views = Object.freeze({ INTRO: 0, LIST: 1, CREATE: 2 })
+  views = Object.freeze({ INTRO: 0, LIST: 1 })
   view = this.views.INTRO
 
   created () {
-    this.updateView()
-  }
-
-  @Watch('$route', { immediate: false, deep: true })
-  routeChanged (to) {
     this.updateView()
   }
 
@@ -75,10 +68,13 @@ class MainLayout extends Vue {
         this.view = this.views.INTRO
       } else if (this.hideIntro && crn.name === 'index') {
         this.view = this.views.LIST
-      } else if (crn.name === 'records-create') {
-        this.view = this.views.CREATE
       }
     }
+  }
+
+  @Watch('$route', { immediate: false, deep: true })
+  routeChanged (to) {
+    this.updateView()
   }
 
   @Watch('view')
@@ -95,10 +91,6 @@ class MainLayout extends Vue {
         this.hideIntro = true
         this.facetsDrawerEnabled = true
         this.facetsDrawer = true
-        break
-      case this.views.CREATE:
-        this.facetsDrawerEnabled = false
-        this.facetsDrawer = false
         break
     }
   }
@@ -127,6 +119,7 @@ class MainLayout extends Vue {
 <style lang="sass">
 .layout
   &__header
+    background: linear-gradient(145deg, $primary 11%, $dark-primary 75%)
     &__minimized
       height: 10vh !important
     &__maximized

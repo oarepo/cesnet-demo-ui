@@ -2,7 +2,6 @@ import { routerCollection } from '@oarepo/invenio-api-vuex'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
 import MainLayout from 'layouts/MainLayout'
-import { loginGuard } from 'src/router/guards'
 import Logout from 'pages/Logout'
 
 const routes = [
@@ -35,15 +34,6 @@ const routes = [
     name: 'Logout',
     path: '/logout',
     component: Logout
-  },
-  {
-    name: 'records-create',
-    path: '/records/create',
-    component: MainLayout,
-    beforeEnter: loginGuard,
-    props: query([
-      '1000:string:q'
-    ], {})
   }
 ]
 

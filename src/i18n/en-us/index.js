@@ -3,27 +3,35 @@ export default {
     title: 'Repository DEMO',
     description: 'A collection of a Demo Records that adhere to the DCObject metadata schema'
   },
-  menu: {
-    createRecord: 'Record'
-  },
   labels: {
     // Inputs
     searchInput: 'I\'m looking for',
     searchInputMaximized: 'Search by title',
+    fileInput: 'Pick a file',
     // Buttons
+    closeBtn: 'Zavřít',
+    createFormBtn: 'Back to form',
     searchBtn: 'Search',
     submitBtn: 'Submit',
+    importBtn: 'Import',
+    importManyBtn: 'Import {num} records',
+    resetBtn: 'Reset',
     loginBtn: 'Sign In',
     logoutBtn: 'Log Out',
+    tryAgainBtn: 'Try Again',
+    createMoreBtn: 'Create more',
     createRecordBtn: 'Add record',
+    importJSONBtn: 'Import from JSON',
     // Sections
-    createNew: 'Create New',
+    createNew: 'Create New Record',
     // Other components
     localeSwitcher: 'Language',
     record: {
+      title: 'Record title',
       creator: 'Author',
       contributors: 'Contributors',
       abstract: 'Abstract',
+      description: 'Description',
       identifier: 'Identifier',
       created: 'Creation date',
       updated: 'Last modification date',
@@ -74,10 +82,20 @@ export default {
     }
   },
   tooltips: {
+    close: 'Close',
+    importJSON: 'Import records from a DCObject schema compliant JSON file',
     anonymous: 'Anonymous user',
     notifications: 'Notifications'
   },
   messages: {
+    validation: {
+      failed: 'Please fill the required fields and try again',
+      fieldRequired: 'Field is required'
+    },
+    recordCreateSuccess: 'Record successfully created',
+    importingRecord: 'Importing Record',
+    creatingRecord: 'Creating Record',
+    recordCreateError: 'Failed to create record',
     allowPopups: 'Please allow popups for login to work',
     failed: 'Action failed',
     success: 'Action was successful'
