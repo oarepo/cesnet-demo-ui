@@ -8,6 +8,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
           :query="query"
           @facets="facetsDrawer = !facetsDrawer"
           @create-record="recordCreateDialog = true"
+          @change-record="recordsChanged"
           @home="view = views.INTRO"
           @search="doSearch")
         transition(leave leave-active-class="animated slideOutRight")
@@ -93,6 +94,10 @@ class MainLayout extends Vue {
         this.facetsDrawer = true
         break
     }
+  }
+
+  async recordsChanged () {
+    await this.$oarepo.collection.reload()
   }
 
   @Watch('$i18n.locale')

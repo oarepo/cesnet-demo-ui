@@ -338,11 +338,11 @@ class RecordCreateDialog extends Vue {
       this.mode = this.modes.FAILURE
       this.errors = JSON.stringify(errors, null, 2)
     } else {
-      this.mode = this.modes.DONE
+      this.recordCreated()
     }
   }
 
-  @Emit('record-create')
+  @Emit('ok')
   recordCreated (resp) {
     this.mode = this.modes.DONE
     return resp

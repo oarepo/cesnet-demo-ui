@@ -21,7 +21,7 @@ q-toolbar.navbar.col-grow.text-grey-2
       .col-auto.self-center.full-height.q-ml-lg(v-if="!maximized")
         locale-switcher
       .col-auto.self-center.full-height.q-ml-md(v-if="!maximized")
-        account-dropdown(v-if="loggedIn" @create-record="createRecord")
+        account-dropdown(v-if="loggedIn" @create-record="createRecord" @change-record="recordsChanged")
         q-chip(clickable @click="login()" size="xl" icon="https" v-else)
           .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
 </template>
@@ -55,6 +55,9 @@ class Navbar extends Vue {
 
   @Emit('create-record')
   createRecord () { }
+
+  @Emit('change-record')
+  recordsChanged () { }
 
   @Emit('search')
   doSearch () { }

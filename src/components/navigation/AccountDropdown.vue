@@ -54,11 +54,16 @@ class AccountDropdown extends Vue {
       persistent: true,
       parent: this,
       title: this.$t('labels.createNew')
+    }).onOk(data => {
+      this.recordsChanged()
     })
   }
 
   @Emit('create-record')
   doCreateRecord () { }
+
+  @Emit('change-record')
+  recordsChanged () { }
 
   @Emit('login')
   login () {
