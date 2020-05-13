@@ -13,13 +13,10 @@ q-toolbar.navbar.col-grow.text-grey-2
         .row.navbar__collection-title(v-if="maximized")
           h3.col-auto {{ $t('collection.title') }}
           q-space.col-auto
-          locale-switcher.col-2.gt-md
         .row.navbar__collection-description(v-if="maximized")
           small {{ $t('collection.description') }}
         .row.search-input
           searchbar(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
-      .col-auto.self-center.full-height.q-ml-lg(v-if="!maximized")
-        locale-switcher
       .col-auto.self-center.full-height.q-ml-md(v-if="!maximized")
         account-dropdown(
           :query="query"
@@ -32,7 +29,6 @@ q-toolbar.navbar.col-grow.text-grey-2
 
 <script>
 import { Vue, Component, Emit } from 'vue-property-decorator'
-import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
 import Searchbar from 'components/search/Searchbar'
 import AccountDropdown from 'components/navigation/AccountDropdown'
 
@@ -40,8 +36,7 @@ export default @Component({
   name: 'Navbar',
   components: {
     Searchbar,
-    AccountDropdown,
-    LocaleSwitcher
+    AccountDropdown
   },
   props: {
     query: Object,

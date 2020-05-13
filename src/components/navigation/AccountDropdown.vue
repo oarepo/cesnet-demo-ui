@@ -13,6 +13,8 @@ div
           img(src="https://cdn.quasar.dev/img/boy-avatar.png")
         .text-caption {{ auth.user.email }}
     q-list(bordered padding dark).account-dropdown__list.text-white.rounded-borders
+      q-item(clickable)
+        locale-switcher.full-width
       q-item(clickable v-close-popup @click="showRecordCreate")
         q-item-section
           q-item-label {{ $t('labels.createRecordBtn') }}
@@ -34,11 +36,13 @@ div
 <script>
 import { Component, Emit, Vue } from 'vue-property-decorator'
 import RecordCreateDialog from 'components/records/RecordCreateDialog'
+import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
 
 export default @Component({
   name: 'AccountDropdown',
   components: {
-    RecordCreateDialog
+    RecordCreateDialog,
+    LocaleSwitcher
   },
   props: {
     query: Object

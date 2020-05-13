@@ -268,7 +268,7 @@ class RecordCreateDialog extends Vue {
   }
 
   async submitRecord (record, onCreated, onFailed, progress = true) {
-    this.ensureAuthenticated()
+    await this.ensureAuthenticated()
 
     // Generate required record metadata if needed
     const nowTs = new Date()

@@ -2,8 +2,9 @@
 <template lang="pug">
   q-select(
     menu-anchor="bottom left"
-    standout
+    filled
     dark
+    color="white"
     icon="flag"
     v-model="lang"
     :options="langOptions"
