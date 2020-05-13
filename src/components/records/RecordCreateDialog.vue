@@ -68,6 +68,8 @@ q-dialog(
             q-form.justify-center
               .row.justify-center
                 file-reader-input(accept="application/json" @load="fileLoad")
+              .row.justify-center
+                .text-caption {{ $t('messages.importFileNotice') }}
         div(v-else-if="mode === modes.DONE")
           .col.self-center.text-center.q-pa-lg.q-gutter-lg
             q-icon(name="cloud_done" size="xl")
@@ -271,6 +273,7 @@ class RecordCreateDialog extends Vue {
     // Generate required record metadata if needed
     const nowTs = new Date()
     record.identifier = record.identifier || uid()
+    record.description = record.description || [{ lang: 'cs', value: '' }]
     record.created = record.created || date.formatDate(nowTs, 'YYYY-MM-DD')
     record.modified = record.modified || date.formatDate(nowTs, 'YYYY-MM-DD')
 

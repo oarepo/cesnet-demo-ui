@@ -93,6 +93,7 @@ export default {
       fieldRequired: 'Field is required'
     },
     recordCreateSuccess: 'Record successfully created',
+    importFileNotice: 'JSON files containing a list of records in a DCterms metadata schema are accepted',
     importingRecord: 'Importing Record',
     creatingRecord: 'Creating Record',
     recordCreateError: 'Failed to create record',

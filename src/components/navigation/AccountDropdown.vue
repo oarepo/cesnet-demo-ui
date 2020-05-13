@@ -3,9 +3,7 @@ div
   q-btn-dropdown.account-dropdown(
     unelevated
     no-wrap
-    rounded
     clickable
-    color="accent"
     size="sm"
     text-color="white"
     v-if="loggedIn")

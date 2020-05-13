@@ -83,7 +83,7 @@ export default {
   },
   tooltips: {
     close: 'Zavřít',
-    importJSON: 'Importovat záznamy z JSON souboru odpovídajícího DCObject schematu',
+    importJSON: 'Importovat záznamy z JSON souboru odpovídajícího DCterms schematu',
     anonymous: 'Nepřihlášený uživatel',
     notifications: 'Notifikace'
   },
@@ -92,6 +92,7 @@ export default {
       failed: 'Opravte prosím chyby a zkuste to znovu',
       fieldRequired: 'Toto pole je vyžadováno'
     },
+    importFileNotice: 'Akceptovány jsou soubory ve formátu JSON obsahující seznam záznamů odpovídajících schematu DCterms',
     importingRecord: 'Importuji záznam',
     creatingRecord: 'Vytvářím záznam',
     recordCreateSuccess: 'Záznam uložen',
