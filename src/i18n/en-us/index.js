@@ -13,6 +13,7 @@ export default {
     createFormBtn: 'Back to form',
     searchBtn: 'Search',
     submitBtn: 'Submit',
+    myRecordsBtn: 'My records',
     importBtn: 'Import',
     importManyBtn: 'Import {num} records',
     resetBtn: 'Reset',

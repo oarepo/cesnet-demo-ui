@@ -18,6 +18,12 @@ div
           q-item-label {{ $t('labels.createRecordBtn') }}
         q-item-section(side)
           q-avatar(square icon="add" text-color="white")
+      q-item(clickable v-close-popup @click="myRecords")
+        q-item-section
+          q-item-label {{ $t('labels.myRecordsBtn') }}
+        q-item-section(side)
+          q-avatar(square icon="all_inbox" text-color="white")
+      q-separator(inset color="grey-7")
       q-item(clickable v-close-popup @click="logout")
         q-item-section
           q-item-label {{ $t('labels.logoutBtn') }}
@@ -57,6 +63,11 @@ class AccountDropdown extends Vue {
     }).onOk(data => {
       this.recordsChanged()
     })
+  }
+
+  myRecords () {
+    this.query.page = 1
+    this.query.creator = this.auth.user.email
   }
 
   @Emit('create-record')

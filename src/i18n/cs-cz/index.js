@@ -15,6 +15,7 @@ export default {
     searchBtn: 'Hledat',
     resetBtn: 'Vrátit změny',
     submitBtn: 'Uložit',
+    myRecordsBtn: 'Moje záznamy',
     importBtn: 'Importovat',
     importManyBtn: 'Importovat {num} záznamů',
     tryAgainBtn: 'Zkusit znovu',
