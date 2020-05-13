@@ -12,7 +12,7 @@ div
         q-avatar(size="md")
           img(src="https://cdn.quasar.dev/img/boy-avatar.png")
         .text-caption {{ auth.user.email }}
-    q-list(separator).bg-dark.text-white.rounded-borders
+    q-list(bordered padding dark).account-dropdown__list.text-white.rounded-borders
       q-item(clickable v-close-popup @click="showRecordCreate")
         q-item-section
           q-item-label {{ $t('labels.createRecordBtn') }}
@@ -23,7 +23,7 @@ div
           q-item-label {{ $t('labels.myRecordsBtn') }}
         q-item-section(side)
           q-avatar(square icon="all_inbox" text-color="white")
-      q-separator(inset color="grey-7")
+      q-separator(inset dark)
       q-item(clickable v-close-popup @click="logout")
         q-item-section
           q-item-label {{ $t('labels.logoutBtn') }}
@@ -89,4 +89,7 @@ class AccountDropdown extends Vue {
 </script>
 
 <style lang="sass" scoped>
+.account-dropdown
+  &__list
+    background-color: $dark-accent
 </style>

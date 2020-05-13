@@ -61,7 +61,6 @@ class MainLayout extends Vue {
 
   updateView (to) {
     const crn = to || this.$router.currentRoute
-    console.log('update view for route', crn.name)
 
     if (this.query) {
       // Query dependent views
