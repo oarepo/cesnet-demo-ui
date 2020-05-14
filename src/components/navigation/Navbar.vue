@@ -53,8 +53,11 @@ class Navbar extends Vue {
     return this.auth$.loggedLocally
   }
 
+  @Emit('login')
   login () {
-    this.auth$.login(this)
+    this.$gdpr.showGdprPrompt(() => {
+      this.auth$.login(this)
+    }, this)
   }
 
   @Emit('create-record')

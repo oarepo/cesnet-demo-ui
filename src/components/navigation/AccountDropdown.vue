@@ -70,11 +70,6 @@ class AccountDropdown extends Vue {
   @Emit('change-record')
   recordsChanged () { }
 
-  @Emit('login')
-  login () {
-    this.auth$.login(this)
-  }
-
   @Emit('logout')
   logout () {
     window.location = this.auth$.authLogoutURL

@@ -9,7 +9,11 @@ export default {
     searchInputMaximized: 'Search by title',
     fileInput: 'Pick a file',
     // Buttons
+    tosBtn: 'Terms of Service',
+    privacyPolicyBtn: 'Privacy Policy',
     closeBtn: 'Zavřít',
+    acceptBtn: 'Accept',
+    declineBtn: 'Decline',
     createFormBtn: 'Back to form',
     searchBtn: 'Search',
     submitBtn: 'Submit',
@@ -91,6 +95,7 @@ export default {
     notifications: 'Notifications'
   },
   messages: {
+    gdprPrompt: 'By clicking on "Accept", you give your consent with our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong> for this service.',
     validation: {
       failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'

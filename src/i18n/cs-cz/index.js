@@ -9,6 +9,10 @@ export default {
     searchInputMaximized: 'Hledat podle názvu',
     fileInput: 'Vyberte soubor',
     // Buttons
+    tosBtn: 'Pravidla využití',
+    privacyPolicyBtn: 'Zpracování osobních údajů',
+    acceptBtn: 'Souhlasím',
+    declineBtn: 'Nesouhlasím',
     closeBtn: 'Zavřít',
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
@@ -91,6 +95,7 @@ export default {
     notifications: 'Notifikace'
   },
   messages: {
+    gdprPrompt: 'Kliknutím na "Souhlasím", vyjadřujete souhlas s našimi <strong>pravidly využití</strong> služeb a podmínkami zpracování <strong>osobních údajů</strong>.',
     validation: {
       failed: 'Opravte prosím chyby a zkuste to znovu',
       fieldRequired: 'Toto pole je vyžadováno'
