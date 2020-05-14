@@ -44,6 +44,11 @@ export default @Component({
   }
 })
 class Navbar extends Vue {
+  created () {
+    // Fetch user login state
+    this.auth$.loggedIn(false, false)
+  }
+
   get loggedIn () {
     return this.auth$.loggedLocally
   }

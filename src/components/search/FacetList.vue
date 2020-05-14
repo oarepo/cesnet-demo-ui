@@ -5,6 +5,7 @@ q-list(dark padding).rounded-borders.text-white
   q-expansion-item(
     v-for="facet of pagingFacets"
     :key="facet.code"
+    :icon="facetIcon(facet)"
     :label="facet.label")
     q-card.bg-grey-9
       q-card-section(v-if="facet.code === 'creator'")
@@ -26,6 +27,16 @@ q-list(dark padding).rounded-borders.text-white
             :label="fb.label"
             @click.native="checkboxChecked(facet.code, fb.value, $event)")
           q-badge.col-auto(color="secondary") {{ fb.count }}
+  q-separator.q-my-md
+  q-btn.full-width.text-left(
+    v-if="$auth.loggedLocally"
+    @click="myRecords"
+    unelevated
+    align="left"
+    icon-right=""
+    icon="all_inbox"
+    no-caps)
+    span.facet-list__myrecords__label {{ $t('labels.myRecordsBtn') }}
 </template>
 
 <script>
@@ -101,6 +112,23 @@ class FacetList extends Vue {
     }
   }
 
+  facetIcon (facet) {
+    switch (facet.code) {
+      case 'creator':
+        return 'perm_identity'
+      case 'title.lang':
+        return 'translate'
+      default:
+        return 'filter_list'
+    }
+  }
+
+  myRecords () {
+    this.query.q = ''
+    this.query.page = 1
+    this.query.owners = this.$auth.authInfo.user.id
+  }
+
   checkboxChecked (key, value, $event) {
     const list = this.query[key]
     if (!$event.ctrlKey && list.includes(value)) {
@@ -118,6 +146,9 @@ class FacetList extends Vue {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+.facet-list
+  &__myrecords
+    &__label
+      margin-left: 2rem
 </style>

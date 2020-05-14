@@ -50,7 +50,6 @@ q-dialog(
                 ref="creator"
                 standout
                 dark
-                readonly
                 hide-bottom-space
                 type="text"
                 :label="$t('labels.record.creator')"
@@ -170,7 +169,7 @@ class RecordCreateDialog extends Vue {
         value: ''
       }
     ],
-    creator: this.$auth.authInfo.user.email,
+    creator: this.$auth.authInfo.user_info.name,
     contributor: '',
     description: [
       {

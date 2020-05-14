@@ -22,12 +22,14 @@ export default {
     tryAgainBtn: 'Try Again',
     createMoreBtn: 'Create more',
     createRecordBtn: 'Add record',
+    updateRecordBtn: 'Update record',
     importJSONBtn: 'Import from JSON',
     // Sections
     createNew: 'Create New Record',
     // Other components
     localeSwitcher: 'Language',
     record: {
+      owner: 'Owner',
       title: 'Record title',
       creator: 'Author',
       contributors: 'Contributors',

@@ -22,6 +22,7 @@ export default {
     createFormBtn: 'Zpět na formulář',
     createMoreBtn: 'Vytvořit další',
     createRecordBtn: 'Přidat záznam',
+    updateRecordBtn: 'Upravit záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
     createNew: 'Vytvořit záznam',
@@ -31,6 +32,7 @@ export default {
       header: 'Filtry'
     },
     record: {
+      owner: 'Vlastník',
       title: 'Název záznamu',
       creator: 'Autor',
       contributors: 'Spoluautoři',
