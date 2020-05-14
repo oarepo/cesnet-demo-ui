@@ -30,6 +30,7 @@ export default {
     importJSONBtn: 'Import from JSON',
     // Sections
     createNew: 'Create New Record',
+    editRecord: 'Edit Record',
     // Other components
     localeSwitcher: 'Language',
     record: {

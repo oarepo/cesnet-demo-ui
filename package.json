@@ -27,6 +27,7 @@
     "pug": "^2.0.4",
     "pug-plain-loader": "^1.0.0",
     "quasar": "^1.0.0",
+    "rfc6902": "^3.0.4",
     "vue-class-component": "^7.2.3",
     "vue-i18n": "^8.0.0",
     "vue-particles": "^1.0.9",

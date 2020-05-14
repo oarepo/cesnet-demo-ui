@@ -48,16 +48,23 @@ q-expansion-item.full-width.q-my-lg(
       q-separator(v-if="owned" vertical)
       q-card-section(v-if="owned").q-pt-xs.col-4
         .col.justify-center
-          q-btn.full-width.text-grey-8(color="grey-2" icon="edit" size="md" unelevated)
+          q-btn.full-width.text-grey-8(
+            @click="showRecordEditor"
+            color="grey-2"
+            icon="edit"
+            size="md"
+            unelevated)
             span.q-ml-md {{ $t('labels.updateRecordBtn') }}
 </template>
 
 <script>
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Emit, Vue } from 'vue-property-decorator'
+import RecordEditDialog from 'components/records/RecordEditDialog'
 
 export default @Component({
   name: 'Record',
   props: {
+    id: String,
     metadata: Object,
     links: Object,
     created: String,
@@ -71,6 +78,22 @@ class RecordList extends Vue {
       return this.metadata.owners.includes(this.auth$.authInfo.user.id)
     }
     return false
+  }
+
+  @Emit('change-record')
+  recordChanged () { }
+
+  showRecordEditor () {
+    this.$q.dialog({
+      component: RecordEditDialog,
+      maximized: true,
+      parent: this,
+      title: this.$t('labels.editRecord'),
+      value: this.metadata,
+      id: this.id
+    }).onOk(data => {
+      this.recordChanged()
+    })
   }
 
   created () {

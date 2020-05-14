@@ -29,6 +29,7 @@ export default {
     updateRecordBtn: 'Upravit záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
+    editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
     // Other components
     localeSwitcher: 'Language',

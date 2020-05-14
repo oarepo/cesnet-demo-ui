@@ -4,7 +4,7 @@ q-dialog(
   ref="dialog"
   @hide="onDialogHide"
   position="top"
-  :maximized="maximized"
+  maximized
   transition-hide="slide-up"
   transition-show="slide-down")
     q-card.q-dialog-plugin.recordcreate__dialog.text-white
@@ -145,8 +145,6 @@ export default @Component({
   }
 })
 class RecordCreateDialog extends Vue {
-  dialog = false
-  maximized = true
   modes = Object.freeze({ FORM: 0, IMPORT: 1, DONE: 2, FAILURE: 3 })
   progress = false
   importInProgress = false

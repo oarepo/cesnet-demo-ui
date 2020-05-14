@@ -10,11 +10,13 @@ q-page(padding).q-pb-xl
           record(
             v-for="record in records"
             :key="record.id"
+            :id="record.id"
             :links="record.links"
             :revision="record.revision"
             :created="record.created"
             :updated="record.updated"
-            :metadata="record.metadata")
+            :metadata="record.metadata"
+            @change-record="recordChanged")
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
   active-filters(:query="filteredQueryParams" @remove="removeFilter")
@@ -69,6 +71,9 @@ class RecordList extends Vue {
   get facets () {
     return this.$oarepo.collection.facets
   }
+
+  @Emit('change-record')
+  recordChanged () { }
 
   @Emit('remove-filter')
   removeFilter (filter) {
