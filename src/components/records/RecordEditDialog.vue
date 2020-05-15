@@ -6,7 +6,7 @@ q-dialog(
   maximized
   transition-hide="slide-up"
   transition-show="slide-down")
-    q-card.q-dialog-plugin.recordcreate__dialog.text-white
+    q-card.q-dialog-plugin.recordupdate__dialog.text-white
       q-bar
         q-space
         q-btn(dense flat size="md" icon="close" v-close-popup)
@@ -61,24 +61,17 @@ q-dialog(
                 type="text"
                 :label="$t('labels.record.contributors')"
                 v-model="record.contributor")
-        div(v-else-if="mode === modes.IMPORT")
-          q-slide-transition(appear)
-            q-form.justify-center
-              .row.justify-center
-                file-reader-input(accept="application/json" @load="fileLoad")
-              .row.justify-center
-                .text-caption {{ $t('messages.importFileNotice') }}
         div(v-else-if="mode === modes.DONE")
           .col.self-center.text-center.q-pa-lg.q-gutter-lg
             q-icon(name="cloud_done" size="xl")
-            .text-h4 {{ $t('messages.recordCreateSuccess') }}
+            .text-h4 {{ $t('messages.recordUpdateSuccess') }}
         div(v-else-if="mode === modes.FAILURE")
           .col.self-center.text-center.q-pa-lg.q-gutter-lg
             q-icon(name="sentiment_very_dissatisfied" size="xl")
-            .text-h4 {{ $t('messages.recordCreateError') }}
+            .text-h4 {{ $t('messages.recordUpdateError') }}
             q-input.q-px-lg(v-if="errors" readonly autogrow rounded type="text" dark standout v-model="errors")
       q-inner-loading(:showing="progress" dark)
-        .text-h6.q-mb-md {{ $t('messages.creatingRecord') }}&hellip;
+        .text-h6.q-mb-md {{ $t('messages.updatingRecord') }}&hellip;
         q-spinner-gears(size="50px" color="white")
       q-card-actions.q-px-xl.q-py-md.q-my-md
         q-space
@@ -134,12 +127,16 @@ class RecordEditDialog extends Vue {
     this.ensureAuthenticated()
   }
 
-  @Watch('value')
-  valueChanged () {
-    // Assign a copy of props to model without reactivity watchers
+  frozenValue () {
+    // Get a copy of props to model without reactivity watchers
     // Right now, this is probably the only working way to do it:
     // https://forum.vuejs.org/t/how-to-clone-property-value-as-simple-object/40032/3
-    this.record = JSON.parse(JSON.stringify(this.value))
+    return JSON.parse(JSON.stringify(this.value))
+  }
+
+  @Watch('value')
+  valueChanged () {
+    this.record = this.frozenValue()
   }
 
   ensureAuthenticated () {
@@ -199,13 +196,8 @@ class RecordEditDialog extends Vue {
   async submitRecord (record, onSuccess, onFailed, progress = true) {
     await this.ensureAuthenticated()
 
-    if (progress) {
-      this.progress = true
-    }
-
     const cid = this.$oarepo.collection.collectionId
     const rid = this.id
-    console.log('loading ', cid, rid)
     this.$oarepo.record.load({ collectionId: cid, recordId: rid })
 
     if (!this.$oarepo.record.recordId) {
@@ -213,24 +205,45 @@ class RecordEditDialog extends Vue {
       return this.updateFailed()
     }
 
-    const patch = this.$jsonpatch.createPatch(this.values, record)
-    console.log('Applying patch between', this.$oarepo.record.metadata, record, patch)
+    const patch = this.$jsonpatch.createPatch(this.frozenValue(), record)
+    console.log('Diff between records', this.frozenValue(), record, patch)
+    if (patch.length === 0) {
+      this.errors = 'Unable to update record data'
+      return this.updateFailed()
+    }
+
+    if (progress) {
+      this.progress = true
+    }
 
     this.$oarepo.record.patch(patch)
-    return onSuccess()
+      .then(() => {
+        return onSuccess()
+      })
+      .catch(err => {
+        return onFailed(err.response)
+      })
+      .finally(() => {
+        this.progress = false
+      })
   }
 
-  @Emit('ok')
   recordUpdated (resp) {
     this.mode = this.modes.DONE
-    this.progress = false
+    this.$nextTick(() => setTimeout(() => {
+      this.$emit('ok')
+      this.hide()
+    }, 1500))
     return resp
   }
 
-  @Emit('create-failed')
-  updateFailed () {
+  @Emit('update-failed')
+  updateFailed (err) {
+    if (err) {
+      console.error(err)
+      this.errors = err.data.message || err.data
+    }
     this.mode = this.modes.FAILURE
-    this.progress = false
   }
 
   resetValidation () {
@@ -258,9 +271,7 @@ class RecordEditDialog extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass" scoped>
-.recordcreate
+.recordupdate
   &__dialog
     background-color: $dark-accent
-  &__fileimport
-    max-width: 500px
 </style>

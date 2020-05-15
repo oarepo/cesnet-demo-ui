@@ -75,6 +75,7 @@ export default {
       }
     },
     activeFilters: {
+      owned: 'Moje záznamy',
       title: {
         lang: 'Jazyk'
       },
@@ -104,7 +105,10 @@ export default {
     importFileNotice: 'Akceptovány jsou soubory ve formátu JSON obsahující seznam záznamů odpovídajících schematu DCterms',
     importingRecord: 'Importuji záznam',
     creatingRecord: 'Vytvářím záznam',
+    updatingRecord: 'Aktualizuji záznam',
+    recordUpdateSuccess: 'Změny uloženy',
     recordCreateSuccess: 'Záznam uložen',
+    recordUpdateError: 'Při ukládání záznamu došlo k chybě',
     recordCreateError: 'Při vytváření záznamu došlo k chybě',
     allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',

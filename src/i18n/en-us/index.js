@@ -53,6 +53,7 @@ export default {
       header: 'Filters'
     },
     activeFilters: {
+      owned: 'My records',
       title: {
         lang: 'Language'
       },
@@ -101,10 +102,13 @@ export default {
       failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'
     },
+    recordUpdateSuccess: 'Record successfully updated',
     recordCreateSuccess: 'Record successfully created',
     importFileNotice: 'JSON files containing a list of records in a DCterms metadata schema are accepted',
     importingRecord: 'Importing Record',
     creatingRecord: 'Creating Record',
+    updatingRecord: 'Updating Record',
+    recordUpdateError: 'Failed to save changes',
     recordCreateError: 'Failed to create record',
     allowPopups: 'Please allow popups for login to work',
     failed: 'Action failed',

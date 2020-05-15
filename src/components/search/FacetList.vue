@@ -126,7 +126,7 @@ class FacetList extends Vue {
   myRecords () {
     this.query.q = ''
     this.query.page = 1
-    this.query.owners = this.$auth.authInfo.user.id
+    this.query.owned = 'true'
   }
 
   checkboxChecked (key, value, $event) {

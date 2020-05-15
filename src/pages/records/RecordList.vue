@@ -9,7 +9,7 @@ q-page(padding).q-pb-xl
           leave-active-class="animated fadeOut")
           record(
             v-for="record in records"
-            :key="record.id"
+            :key="`${record.id}-v${record.revision}`"
             :id="record.id"
             :links="record.links"
             :revision="record.revision"
@@ -17,6 +17,7 @@ q-page(padding).q-pb-xl
             :updated="record.updated"
             :metadata="record.metadata"
             @change-record="recordChanged")
+            span {{ record.id }} {{ record.revision }}
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
   active-filters(:query="filteredQueryParams" @remove="removeFilter")
@@ -77,10 +78,19 @@ class RecordList extends Vue {
 
   @Emit('remove-filter')
   removeFilter (filter) {
-    if (filter.name === 'q') {
-      this.query.q = ''
-    } else {
-      this.query._remove(filter.name, filter.value)
+    switch (filter.name) {
+      case 'q': {
+        this.query.q = ''
+        break
+      }
+      case 'owned': {
+        this.query.owned = false
+        break
+      }
+      default: {
+        this.query._remove(filter.name, filter.value)
+        break
+      }
     }
   }
 }
