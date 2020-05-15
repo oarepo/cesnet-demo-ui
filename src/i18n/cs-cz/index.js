@@ -9,6 +9,10 @@ export default {
     searchInputMaximized: 'Hledat podle názvu',
     fileInput: 'Vyberte soubor',
     // Buttons
+    tosBtn: 'Pravidla využití',
+    privacyPolicyBtn: 'Zpracování osobních údajů',
+    acceptBtn: 'Souhlasím',
+    declineBtn: 'Nesouhlasím',
     closeBtn: 'Zavřít',
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
@@ -22,8 +26,10 @@ export default {
     createFormBtn: 'Zpět na formulář',
     createMoreBtn: 'Vytvořit další',
     createRecordBtn: 'Přidat záznam',
+    updateRecordBtn: 'Upravit záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
+    editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
     // Other components
     localeSwitcher: 'Language',
@@ -31,6 +37,7 @@ export default {
       header: 'Filtry'
     },
     record: {
+      owner: 'Vlastník',
       title: 'Název záznamu',
       creator: 'Autor',
       contributors: 'Spoluautoři',
@@ -68,6 +75,7 @@ export default {
       }
     },
     activeFilters: {
+      owned: 'Moje záznamy',
       title: {
         lang: 'Jazyk'
       },
@@ -89,6 +97,7 @@ export default {
     notifications: 'Notifikace'
   },
   messages: {
+    gdprPrompt: 'Kliknutím na "Souhlasím", vyjadřujete souhlas s našimi <strong>pravidly využití</strong> služeb a podmínkami zpracování <strong>osobních údajů</strong>.',
     validation: {
       failed: 'Opravte prosím chyby a zkuste to znovu',
       fieldRequired: 'Toto pole je vyžadováno'
@@ -96,7 +105,10 @@ export default {
     importFileNotice: 'Akceptovány jsou soubory ve formátu JSON obsahující seznam záznamů odpovídajících schematu DCterms',
     importingRecord: 'Importuji záznam',
     creatingRecord: 'Vytvářím záznam',
+    updatingRecord: 'Aktualizuji záznam',
+    recordUpdateSuccess: 'Změny uloženy',
     recordCreateSuccess: 'Záznam uložen',
+    recordUpdateError: 'Při ukládání záznamu došlo k chybě',
     recordCreateError: 'Při vytváření záznamu došlo k chybě',
     allowPopups: 'Pro funkci přihlášení prosím povolte vyskakovací okna',
     failed: 'Operace se nezdařila',

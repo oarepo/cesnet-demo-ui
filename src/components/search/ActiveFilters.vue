@@ -12,7 +12,7 @@ transition(appear appear-to-class="animated slideInDown")
           :key="name"
           :icon="icon(name)"
           removable
-          :label="$t('labels.activeFilters.' + name) + ': '+ value"
+          :label="$t('labels.activeFilters.' + name) + (name === 'owned' ? '' : `: ${value}`)"
           @remove="remove(name, value)"
           )
 </template>
@@ -28,8 +28,12 @@ export default @Component({
 })
 class ActiveFilters extends Vue {
   icon (filterName) {
-    if (filterName === 'q') {
-      return 'search'
+    switch (filterName) {
+      case 'q': {
+        return 'search'
+      }
+      case 'owned':
+        return 'all_inbox'
     }
   }
 

@@ -9,7 +9,11 @@ export default {
     searchInputMaximized: 'Search by title',
     fileInput: 'Pick a file',
     // Buttons
+    tosBtn: 'Terms of Service',
+    privacyPolicyBtn: 'Privacy Policy',
     closeBtn: 'Zavřít',
+    acceptBtn: 'Accept',
+    declineBtn: 'Decline',
     createFormBtn: 'Back to form',
     searchBtn: 'Search',
     submitBtn: 'Submit',
@@ -22,12 +26,15 @@ export default {
     tryAgainBtn: 'Try Again',
     createMoreBtn: 'Create more',
     createRecordBtn: 'Add record',
+    updateRecordBtn: 'Update record',
     importJSONBtn: 'Import from JSON',
     // Sections
     createNew: 'Create New Record',
+    editRecord: 'Edit Record',
     // Other components
     localeSwitcher: 'Language',
     record: {
+      owner: 'Owner',
       title: 'Record title',
       creator: 'Author',
       contributors: 'Contributors',
@@ -46,6 +53,7 @@ export default {
       header: 'Filters'
     },
     activeFilters: {
+      owned: 'My records',
       title: {
         lang: 'Language'
       },
@@ -89,14 +97,18 @@ export default {
     notifications: 'Notifications'
   },
   messages: {
+    gdprPrompt: 'By clicking on "Accept", you give your consent with our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong> for this service.',
     validation: {
       failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'
     },
+    recordUpdateSuccess: 'Record successfully updated',
     recordCreateSuccess: 'Record successfully created',
     importFileNotice: 'JSON files containing a list of records in a DCterms metadata schema are accepted',
     importingRecord: 'Importing Record',
     creatingRecord: 'Creating Record',
+    updatingRecord: 'Updating Record',
+    recordUpdateError: 'Failed to save changes',
     recordCreateError: 'Failed to create record',
     allowPopups: 'Please allow popups for login to work',
     failed: 'Action failed',

@@ -44,12 +44,20 @@ export default @Component({
   }
 })
 class Navbar extends Vue {
+  created () {
+    // Fetch user login state
+    this.auth$.loggedIn(false, false)
+  }
+
   get loggedIn () {
     return this.auth$.loggedLocally
   }
 
+  @Emit('login')
   login () {
-    this.auth$.login(this)
+    this.$gdpr.showGdprPrompt(() => {
+      this.auth$.login(this)
+    }, this)
   }
 
   @Emit('create-record')

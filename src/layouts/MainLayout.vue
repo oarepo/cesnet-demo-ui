@@ -15,7 +15,11 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
           particles-box(v-show="view === views.INTRO")
   q-slide-transition(appear)
     q-page-container.layout__content(v-if="view !== views.INTRO")
-      record-list(v-if="view === views.LIST" :query="query" @remove-filter="resetPaging()")
+      record-list(
+        v-if="view === views.LIST"
+        :query="query"
+        @change-record="recordsChanged"
+        @remove-filter="resetPaging()")
   q-drawer(
     v-if="facetsDrawerEnabled"
     v-model="facetsDrawer"

@@ -17,7 +17,9 @@ module.exports = function (ctx) {
       'renderer',
       'validations',
       'editor',
-      'particles'
+      'particles',
+      'gdpr',
+      'patch'
     ],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
@@ -103,6 +105,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
+        'Cookies',
         'Dialog',
         'Notify',
         'Meta'

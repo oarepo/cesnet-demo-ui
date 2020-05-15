@@ -4,7 +4,7 @@ q-dialog(
   ref="dialog"
   @hide="onDialogHide"
   position="top"
-  :maximized="maximized"
+  maximized
   transition-hide="slide-up"
   transition-show="slide-down")
     q-card.q-dialog-plugin.recordcreate__dialog.text-white
@@ -50,7 +50,6 @@ q-dialog(
                 ref="creator"
                 standout
                 dark
-                readonly
                 hide-bottom-space
                 type="text"
                 :label="$t('labels.record.creator')"
@@ -146,8 +145,6 @@ export default @Component({
   }
 })
 class RecordCreateDialog extends Vue {
-  dialog = false
-  maximized = true
   modes = Object.freeze({ FORM: 0, IMPORT: 1, DONE: 2, FAILURE: 3 })
   progress = false
   importInProgress = false
@@ -170,7 +167,7 @@ class RecordCreateDialog extends Vue {
         value: ''
       }
     ],
-    creator: this.$auth.authInfo.user.email,
+    creator: this.$auth.authInfo.user_info.name,
     contributor: '',
     description: [
       {

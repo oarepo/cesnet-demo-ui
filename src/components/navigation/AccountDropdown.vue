@@ -11,7 +11,7 @@ div
       .row.items-center.no-wrap.q-gutter-sm.q-py-xs
         q-avatar(size="md")
           img(src="https://cdn.quasar.dev/img/boy-avatar.png")
-        .text-caption {{ auth.user.email }}
+        .text-caption {{ auth.user_info.name }}
     q-list(bordered padding dark).account-dropdown__list.text-white.rounded-borders
       q-item(clickable)
         locale-switcher.full-width
@@ -20,11 +20,6 @@ div
           q-item-label {{ $t('labels.createRecordBtn') }}
         q-item-section(side)
           q-avatar(square icon="add" text-color="white")
-      q-item(clickable v-close-popup @click="myRecords")
-        q-item-section
-          q-item-label {{ $t('labels.myRecordsBtn') }}
-        q-item-section(side)
-          q-avatar(square icon="all_inbox" text-color="white")
       q-separator(inset dark)
       q-item(clickable v-close-popup @click="logout")
         q-item-section
@@ -69,21 +64,11 @@ class AccountDropdown extends Vue {
     })
   }
 
-  myRecords () {
-    this.query.page = 1
-    this.query.creator = this.auth.user.email
-  }
-
   @Emit('create-record')
   doCreateRecord () { }
 
   @Emit('change-record')
   recordsChanged () { }
-
-  @Emit('login')
-  login () {
-    this.auth$.login(this)
-  }
 
   @Emit('logout')
   logout () {
