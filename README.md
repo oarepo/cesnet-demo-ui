@@ -1,6 +1,6 @@
-# Cesnet Demo UI (cesnet-demo-ui)
+# Cesnet Video Repository UI (video-repository-ui)
 
-CESNET OpenAccess Repository demo site user interface
+CESNET Video Repository site user interface
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 - Yarn
 - [Quasar CLI](https://quasar.dev/quasar-cli/installation)
 - Docker
-- A running instance of [oarepo-micro-api](https://github.com/oarepo/oarepo-micro-api) (its location can be tweaked in [quasar.conf.js](quasar.conf.js))
+- A running instance of [oarepo-micro-api](https://github.com/CESNET/video-repository-api) (its location can be tweaked in [quasar.conf.js](quasar.conf.js))
 
 ## Install the dependencies
 ```bash

@@ -937,7 +937,7 @@
   resolved "https://registry.yarnpkg.com/@oarepo/data-renderer/-/data-renderer-2.4.3.tgz#6012551e6ede0e11a04aa16cb5304910d0bb85c9"
   integrity sha512-CdStp2sAJ6hkIG4Hw0SERJDSR2vUPjeFdNCDfLXBG4DOXIbu6wyKi6VERKO8OPnHp9N46CwPTPRJTyVW/adqvA==
 
-"@oarepo/invenio-api-vuex@2.3.1":
+"@oarepo/invenio-api-vuex@2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@oarepo/invenio-api-vuex/-/invenio-api-vuex-2.3.0.tgz#6f1a2641f00f51d7669990050bf5c34b20e8fab2"
   integrity sha512-7tnw8HAp5STvP3jKjKGmgiEwsZ9uaYOsVbewhwrUSMrIfGMcGqB6xSq4JEG4gXOcb5FyP/y1FbcDgXZ1bScH3w==

@@ -1,9 +1,9 @@
 {
-  "name": "cesnet-demo-ui",
+  "name": "video-repository-ui",
   "version": "0.0.1",
-  "description": "CESNET OpenAccess Repository demo site user interface",
-  "productName": "Cesnet Demo UI",
-  "cordovaId": "cz.cesnet.oarepo.demo",
+  "description": "CESNET Video Repository site user interface",
+  "productName": "Cesnet Video Repository UI",
+  "cordovaId": "cz.cesnet.oarepo.video-repository",
   "capacitorId": "",
   "author": "Miroslav Bauer <bauer@cesnet.cz>",
   "private": true,

@@ -3,25 +3,25 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   namespace: default
-  name: cesnet-demo-ui
+  name: video-repository-ui
   labels:
-    app: cesnet-demo-ui
-    project: cesnet-demo-ui
+    app: video-repository-ui
+    project: video-repository-ui
 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: cesnet-demo-ui
-      project: cesnet-demo-ui
+      app: video-repository-ui
+      project: video-repository-ui
   template:
     metadata:
       labels:
-        app: cesnet-demo-ui
-        project: cesnet-demo-ui
+        app: video-repository-ui
+        project: video-repository-ui
     spec:
       containers:
-        - name: cesnet-demo-ui
+        - name: video-repository-ui
           image: oarepo-demo-ui:latest
           startupProbe:
             httpGet:

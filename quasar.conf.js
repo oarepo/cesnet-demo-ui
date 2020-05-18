@@ -250,7 +250,7 @@ module.exports = function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: 'cesnet-demo-ui'
+        appId: 'video-repository-ui'
       },
 
       // More info: https://quasar.dev/quasar-cli/developing-electron-apps/node-integration
