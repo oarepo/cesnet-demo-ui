@@ -19,7 +19,7 @@ q-list(dark padding).rounded-borders.text-white
           :placeholder="$t(`labels.facetList.filters.${facet.code}`)")
       q-card-section(v-for="fb in filteredFacets(facet)" :key="fb.code")
         .row.justify-between
-          q-checkbox.col-auto(
+          q-checkbox.q-mr-sm.col-10(
             dense
             v-model="facet.model"
             color="primary"
@@ -104,7 +104,7 @@ class FacetList extends Vue {
   }
 
   valueLabel (code, value) {
-    if (['creator'].includes(code)) {
+    if (['creator', 'license', 'event.title.value.keyword', 'formats.title.value.keyword'].includes(code)) {
       // Untranslated facets
       return value
     } else {
@@ -116,6 +116,14 @@ class FacetList extends Vue {
     switch (facet.code) {
       case 'creator':
         return 'perm_identity'
+      case 'difficulty':
+        return 'fitness_center'
+      case 'event.title.value.keyword':
+        return 'insert_invitation'
+      case 'formats.title.value.keyword':
+        return 'hd'
+      case 'license':
+        return 'closed_caption'
       case 'title.lang':
         return 'translate'
       default:

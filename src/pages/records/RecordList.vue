@@ -8,6 +8,7 @@ q-page(padding).q-pb-xl
           enter-active-class="animated slideInUp"
           leave-active-class="animated fadeOut")
           record(
+            @expand="recordExpanded"
             v-for="record in records"
             :key="`${record.id}-v${record.revision}`"
             :id="record.id"
@@ -25,6 +26,7 @@ q-page(padding).q-pb-xl
 </template>
 
 <script>
+import { scrollToElement } from 'src/utils/scrolling'
 import { State } from '@oarepo/invenio-api-vuex'
 import { Component, Emit, Vue } from 'vue-property-decorator'
 import Record from 'components/records/Record'
@@ -71,6 +73,12 @@ class RecordList extends Vue {
 
   get facets () {
     return this.$oarepo.collection.facets
+  }
+
+  recordExpanded (el) {
+    this.$nextTick(() => {
+      scrollToElement(el.$el)
+    })
   }
 
   @Emit('change-record')

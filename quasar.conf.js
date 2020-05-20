@@ -70,6 +70,8 @@ module.exports = function (ctx) {
         'QDialog',
         'QDrawer',
         'QExpansionItem',
+        'QFab',
+        'QFabAction',
         'QFile',
         'QFooter',
         'QForm',
@@ -85,6 +87,7 @@ module.exports = function (ctx) {
         'QItemLabel',
         'QLayout',
         'QList',
+        'QMarkupTable',
         'QMenu',
         'QPage',
         'QPageContainer',
@@ -97,7 +100,9 @@ module.exports = function (ctx) {
         'QSpinnerGears',
         'QToolbar',
         'QToolbarTitle',
-        'QTooltip'
+        'QTooltip',
+        'QTree',
+        'QVideo'
       ],
       directives: [
         'ClosePopup'

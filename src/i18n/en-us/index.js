@@ -1,7 +1,7 @@
 export default {
   collection: {
-    title: 'Repository DEMO',
-    description: 'A collection of a Demo Records that adhere to the DCObject metadata schema'
+    title: 'Video Repository DEMO',
+    description: 'A collection of recordings of public presentations of (not limited to) CESNET employees on topics related to CESNET services'
   },
   labels: {
     // Inputs
@@ -9,6 +9,7 @@ export default {
     searchInputMaximized: 'Search by title',
     fileInput: 'Pick a file',
     // Buttons
+    actionsBtn: 'Actions',
     tosBtn: 'Terms of Service',
     privacyPolicyBtn: 'Privacy Policy',
     closeBtn: 'Zavřít',
@@ -26,7 +27,7 @@ export default {
     tryAgainBtn: 'Try Again',
     createMoreBtn: 'Create more',
     createRecordBtn: 'Add record',
-    updateRecordBtn: 'Update record',
+    updateRecordBtn: 'Edit',
     importJSONBtn: 'Import from JSON',
     // Sections
     createNew: 'Create New Record',
@@ -37,8 +38,11 @@ export default {
       owner: 'Owner',
       title: 'Record title',
       creator: 'Author',
+      event: 'Event',
       contributors: 'Contributors',
+      difficulty: 'Difficulty',
       abstract: 'Abstract',
+      formats: 'Formats available',
       description: 'Description',
       identifier: 'Identifier',
       created: 'Creation date',
@@ -54,6 +58,21 @@ export default {
     },
     activeFilters: {
       owned: 'My records',
+      difficulty: 'Difficulty',
+      event: {
+        title: {
+          value: {
+            keyword: 'Event'
+          }
+        }
+      },
+      formats: {
+        title: {
+          value: {
+            keyword: 'Format'
+          }
+        }
+      },
       title: {
         lang: 'Language'
       },
@@ -67,11 +86,33 @@ export default {
       },
       facets: {
         creator: 'Author',
+        difficulty: 'Difficulty',
+        event: {
+          title: {
+            value: {
+              keyword: 'Event'
+            }
+          }
+        },
+        formats: {
+          title: {
+            value: {
+              keyword: 'Format'
+            }
+          }
+        },
+        license: 'Licence',
         title: {
           lang: 'Language'
         }
       },
       values: {
+        difficulty: {
+          beginner: 'Beginner',
+          intermediate: 'Intermediate',
+          advanced: 'Advanced',
+          hacker: 'Hacker'
+        },
         title: {
           lang: {
             cs: 'Czech',

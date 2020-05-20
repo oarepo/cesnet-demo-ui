@@ -23,7 +23,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
   q-drawer(
     v-if="facetsDrawerEnabled"
     v-model="facetsDrawer"
-    :width="300"
+    :width="320"
     :breakpoint="700"
     bordered
     content-class="bg-secondary text-white")

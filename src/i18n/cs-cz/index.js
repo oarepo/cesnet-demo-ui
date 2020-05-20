@@ -1,7 +1,7 @@
 export default {
   collection: {
-    title: 'DEMO Repozitář',
-    description: 'Kolekce ukázkových záznamů odpovídajících DCObject metadatovému schematu'
+    title: 'DEMO Video Repozitář',
+    description: 'Kolekce záznamů z veřejných vystoupení (nejen) zaměstnanců sdružení CESNET o tématech týkajících se CESNETích služeb'
   },
   labels: {
     // Inputs
@@ -9,6 +9,7 @@ export default {
     searchInputMaximized: 'Hledat podle názvu',
     fileInput: 'Vyberte soubor',
     // Buttons
+    actionsBtn: 'Akce',
     tosBtn: 'Pravidla využití',
     privacyPolicyBtn: 'Zpracování osobních údajů',
     acceptBtn: 'Souhlasím',
@@ -26,7 +27,7 @@ export default {
     createFormBtn: 'Zpět na formulář',
     createMoreBtn: 'Vytvořit další',
     createRecordBtn: 'Přidat záznam',
-    updateRecordBtn: 'Upravit záznam',
+    updateRecordBtn: 'Upravit',
     importJSONBtn: 'Importovat JSON',
     // Sections
     editRecord: 'Upravit záznam',
@@ -41,6 +42,9 @@ export default {
       title: 'Název záznamu',
       creator: 'Autor',
       contributors: 'Spoluautoři',
+      difficulty: 'Obtížnost',
+      formats: 'Dostupné formáty',
+      event: 'Událost',
       abstract: 'Abstrakt',
       description: 'Krátký popis',
       identifier: 'ID záznamu',
@@ -58,11 +62,33 @@ export default {
       },
       facets: {
         creator: 'Autor',
+        difficulty: 'Obtížnost',
+        event: {
+          title: {
+            value: {
+              keyword: 'Událost'
+            }
+          }
+        },
+        formats: {
+          title: {
+            value: {
+              keyword: 'Formát'
+            }
+          }
+        },
+        license: 'Licence',
         title: {
           lang: 'Jazyk'
         }
       },
       values: {
+        difficulty: {
+          beginner: 'Začátečník',
+          intermediate: 'Středně pokročilý',
+          advanced: 'Pokročilý',
+          hacker: 'Hacker'
+        },
         title: {
           lang: {
             cs: 'Česky',
@@ -76,8 +102,23 @@ export default {
     },
     activeFilters: {
       owned: 'Moje záznamy',
+      difficulty: 'Obtížnost',
       title: {
         lang: 'Jazyk'
+      },
+      event: {
+        title: {
+          value: {
+            keyword: 'Událost'
+          }
+        }
+      },
+      formats: {
+        title: {
+          value: {
+            keyword: 'Formát'
+          }
+        }
       },
       creator: 'Autor',
       header: 'Aktivní filtry',
