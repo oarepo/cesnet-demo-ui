@@ -33,7 +33,7 @@ export default {
     editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
     // Other components
-    localeSwitcher: 'Language',
+    localeSwitcher: 'Jazyk',
     facets: {
       header: 'Filtry'
     },
@@ -42,16 +42,24 @@ export default {
       title: 'Název záznamu',
       creator: 'Autor',
       contributors: 'Spoluautoři',
-      difficulty: 'Obtížnost',
+      difficulty: 'Náročnost',
       formats: 'Dostupné formáty',
       event: 'Událost',
+      license: 'Licence',
       abstract: 'Abstrakt',
       description: 'Krátký popis',
       identifier: 'ID záznamu',
       created: 'Datum vytvoření',
       updated: 'Datum poslední úpravy',
       revision: 'Verze',
+      source: 'URL adresa videozáznamu',
       links: 'Odkazy'
+    },
+    recordForm: {
+      recordingLicense: 'Licence multimediálního záznamu',
+      expectedAudience: 'Očekávaná úroveň posluchačů',
+      mediaRecordingMetadata: 'Informace o multimediálním záznamu',
+      basicMetadata: 'Základní informace'
     },
     recordList: {
       header: 'Nalezeno {num} záznamů'
@@ -62,7 +70,7 @@ export default {
       },
       facets: {
         creator: 'Autor',
-        difficulty: 'Obtížnost',
+        difficulty: 'Náročnost',
         event: {
           title: {
             value: {
@@ -102,7 +110,7 @@ export default {
     },
     activeFilters: {
       owned: 'Moje záznamy',
-      difficulty: 'Obtížnost',
+      difficulty: 'Náročnost',
       title: {
         lang: 'Jazyk'
       },
@@ -127,7 +135,9 @@ export default {
   },
   values: {
     lang: {
+      cs: 'Česky',
       csCZ: 'Česky',
+      en: 'Anglicky',
       enUS: 'Anglicky'
     }
   },
@@ -141,7 +151,8 @@ export default {
     gdprPrompt: 'Kliknutím na "Souhlasím", vyjadřujete souhlas s našimi <strong>pravidly využití</strong> služeb a podmínkami zpracování <strong>osobních údajů</strong>.',
     validation: {
       failed: 'Opravte prosím chyby a zkuste to znovu',
-      fieldRequired: 'Toto pole je vyžadováno'
+      fieldRequired: 'Toto pole je vyžadováno',
+      invalidURL: 'Zadané URL je neplatné'
     },
     importFileNotice: 'Akceptovány jsou soubory ve formátu JSON obsahující seznam záznamů odpovídajících schematu DCterms',
     importingRecord: 'Importuji záznam',

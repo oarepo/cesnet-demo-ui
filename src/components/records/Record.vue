@@ -27,6 +27,7 @@ q-expansion-item.record.full-width.q-my-lg(
       record-basic-metadata.record__basic-metadata(
         :class="[ systemInfoVisible ? 'col-8' : 'col-12']"
         :creator="metadata.creator"
+        :license="metadata.license"
         :difficulty="metadata.difficulty"
         :abstract="metadata.abstract"
         :formats="metadata.formats"
@@ -142,7 +143,6 @@ class Record extends Vue {
 </script>
 
 <style lang="sass">
-
 .record
   &__basic-metadata
     transition: width 1s ease

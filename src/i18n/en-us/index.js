@@ -39,6 +39,7 @@ export default {
       title: 'Record title',
       creator: 'Author',
       event: 'Event',
+      license: 'License',
       contributors: 'Contributors',
       difficulty: 'Difficulty',
       abstract: 'Abstract',
@@ -48,7 +49,14 @@ export default {
       created: 'Creation date',
       updated: 'Last modification date',
       revision: 'Revision',
+      source: 'Recording source URI',
       links: 'Links'
+    },
+    recordForm: {
+      recordingLicense: 'License of the recording',
+      expectedAudience: 'Expected audience level',
+      mediaRecordingMetadata: 'Multimedia Record Metadata',
+      basicMetadata: 'Basic Information'
     },
     recordList: {
       header: 'Found {num} records'
@@ -127,7 +135,9 @@ export default {
   },
   values: {
     lang: {
+      cs: 'Czech',
       csCZ: 'Czech',
+      en: 'English',
       enUS: 'English'
     }
   },
@@ -140,6 +150,7 @@ export default {
   messages: {
     gdprPrompt: 'By clicking on "Accept", you give your consent with our <strong>Terms of Service</strong> and <strong>Privacy Policy</strong> for this service.',
     validation: {
+      invalidURL: 'Invalid URL',
       failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'
     },

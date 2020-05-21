@@ -4,6 +4,10 @@ q-card-section.q-pt-xs
     .col-8
       .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.creator') }}
       .text-weight-medium {{ creator }}
+    .col-auto.text-center.justify-center.q-mr-md
+      .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.license') }}
+      .text-caption.text-center
+        q-badge.self-center.q-mt-sm(size="sm" color="secondary").text-bold {{ license }}
     .col-auto.text-center.justify-center
       .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.difficulty') }}
       .text-caption.text-center.q-pl-md
@@ -32,6 +36,7 @@ export default @Component({
     creator: String,
     difficulty: String,
     event: Object,
+    license: String,
     contributors: String,
     abstract: Array,
     formats: Array
