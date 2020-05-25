@@ -102,6 +102,7 @@ q-form.q-gutter-md
       dark
       type="url"
       :label="$t('labels.record.source')"
+      :hint="$t('messages.recordSourceHint')"
       v-model="$v.model.source.$model"
       :error="$v.model.source.$error"
       :error-message="$t(errorMessage($v.model.source))"
@@ -200,6 +201,10 @@ class RecordForm extends Vue {
   async submit () {
     this.$v.validationGroup.$touch()
     return { valid: !this.$v.validationGroup.$error, record: this.model }
+  }
+
+  clear () {
+    Object.assign(this.$data, this.$options.data.apply(this))
   }
 
   eventChanged (event) {

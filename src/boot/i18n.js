@@ -17,7 +17,9 @@ export default ({ app, Vue }) => {
       return ''
     }
     const title = rec.title || []
-    const ret = title.filter(y => y.lang === 'cs')
+    const locale = Quasar.lang.getLocale() || 'cs'
+
+    const ret = title.filter(y => y.lang === locale)
     if (ret.length) {
       return ret[0].value
     } else if (title.length) {

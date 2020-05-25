@@ -16,51 +16,7 @@ q-dialog(
       q-card-section.q-pa-xl
         div(v-if="mode === modes.FORM")
           q-slide-transition(leave)
-            q-form(
-              @submit="submitForm"
-              @reset="reset"
-              class="q-gutter-md")
-              q-input(
-                ref="title"
-                autofocus
-                standout
-                dark
-                type="text"
-                :label="$t('labels.record.title') + ' (' + $t('values.lang.csCZ') + ')'"
-                :rules="[$rules.required()]"
-                v-model="record.title[0].value")
-              q-input(
-                ref="description"
-                standout
-                dark
-                type="text"
-                :label="$t('labels.record.description')"
-                :rules="[$rules.required()]"
-                v-model="record.description[0].value")
-              q-input(
-                ref="abstract"
-                standout
-                dark
-                type="textarea"
-                :label="$t('labels.record.abstract') + ' (' + $t('values.lang.csCZ') + ')'"
-                :rules="[$rules.required()]"
-                v-model="record.abstract[0].value")
-              q-input(
-                ref="creator"
-                standout
-                dark
-                hide-bottom-space
-                type="text"
-                :label="$t('labels.record.creator')"
-                :rules="[$rules.required()]"
-                v-model="record.creator")
-              q-input(
-                ref="contributor"
-                standout
-                dark
-                type="text"
-                :label="$t('labels.record.contributors')"
-                v-model="record.contributor")
+            record-form(:initial="frozenValue()" ref="editForm")
         div(v-else-if="mode === modes.DONE")
           .col.self-center.text-center.q-pa-lg.q-gutter-lg
             q-icon(name="cloud_done" size="xl")
@@ -106,12 +62,16 @@ q-dialog(
 
 <script>
 import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
+import RecordForm from 'components/forms/RecordForm'
 
 export default @Component({
   name: 'RecordEditDialog',
   props: {
     id: String,
     value: Object
+  },
+  components: {
+    RecordForm
   }
 })
 class RecordEditDialog extends Vue {
@@ -181,8 +141,8 @@ class RecordEditDialog extends Vue {
   }
 
   async submitForm () {
-    const valid = await this.validate()
-    if (!valid) {
+    const result = await this.$refs.editForm.submit()
+    if (!result.valid) {
       this.$q.notify({
         type: 'negative',
         message: `${this.$t('messages.validation.failed')}`
@@ -190,7 +150,7 @@ class RecordEditDialog extends Vue {
       return
     }
 
-    return this.submitRecord(this.record, this.recordUpdated, this.updateFailed)
+    return this.submitRecord(result.record, this.recordUpdated, this.updateFailed)
   }
 
   async submitRecord (record, onSuccess, onFailed, progress = true) {
@@ -247,10 +207,7 @@ class RecordEditDialog extends Vue {
   }
 
   resetValidation () {
-    this.$refs.title.resetValidation()
-    this.$refs.description.resetValidation()
-    this.$refs.abstract.resetValidation()
-    this.$refs.contributor.resetValidation()
+    this.$refs.editForm.resetValidation()
   }
 
   reset () {

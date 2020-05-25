@@ -154,6 +154,7 @@ export default {
       fieldRequired: 'Toto pole je vyžadováno',
       invalidURL: 'Zadané URL je neplatné'
     },
+    recordSourceHint: 'URL adresa videa určená pro vkládání do stránek',
     importFileNotice: 'Akceptovány jsou soubory ve formátu JSON obsahující seznam záznamů odpovídajících schematu DCterms',
     importingRecord: 'Importuji záznam',
     creatingRecord: 'Vytvářím záznam',

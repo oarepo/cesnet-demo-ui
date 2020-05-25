@@ -46,6 +46,7 @@ q-expansion-item.record.full-width.q-my-lg(
     q-separator(inset)
     q-card-section.q-pt-xs(horizontal)
       q-fab.absolute-bottom-right.q-ma-lg(
+        v-if="owned"
         v-model="actionFab"
         :label="$t('labels.actionsBtn')"
         vertical-actions-align="right"

@@ -154,6 +154,7 @@ export default {
       failed: 'Please fill the required fields and try again',
       fieldRequired: 'Field is required'
     },
+    recordSourceHint: 'URL embed video address',
     recordUpdateSuccess: 'Record successfully updated',
     recordCreateSuccess: 'Record successfully created',
     importFileNotice: 'JSON files containing a list of records in a DCterms metadata schema are accepted',

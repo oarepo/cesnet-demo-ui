@@ -91,7 +91,7 @@ q-dialog(
 
 <script>
 import { Component, Emit, Vue } from 'vue-property-decorator'
-import { uid, date } from 'quasar'
+import { date } from 'quasar'
 import FileReaderInput from 'components/files/FileReaderInput'
 import RecordForm from 'components/forms/RecordForm'
 
@@ -163,20 +163,6 @@ class RecordCreateDialog extends Vue {
   onDialogHide () {
   }
 
-  async validate () {
-    let success = false
-    const resPromise = await Promise.all([
-      this.$refs.title.validate(),
-      this.$refs.description.validate(),
-      this.$refs.abstract.validate(),
-      this.$refs.contributor.validate()
-    ])
-    if (resPromise.reduce((a, b) => (a && b), true)) {
-      success = true
-    }
-    return success
-  }
-
   async submit () {
     switch (this.mode) {
       case this.modes.FORM:
@@ -208,7 +194,7 @@ class RecordCreateDialog extends Vue {
 
     // Generate required record metadata if needed
     const nowTs = new Date()
-    record.identifier = record.identifier || uid()
+    record.identifier = record.identifier || record.source.substring(record.source.lastIndexOf('/') + 1)
     record.description = record.description || [{ lang: 'cs', value: '' }]
     record.created = record.created || date.formatDate(nowTs, 'YYYY-MM-DD')
     record.modified = record.modified || date.formatDate(nowTs, 'YYYY-MM-DD')
@@ -306,10 +292,7 @@ class RecordCreateDialog extends Vue {
   }
 
   resetValidation () {
-    this.$refs.title.resetValidation()
-    this.$refs.description.resetValidation()
-    this.$refs.abstract.resetValidation()
-    this.$refs.contributor.resetValidation()
+    this.$refs.createForm.resetValidation()
   }
 
   reset () {
@@ -322,6 +305,7 @@ class RecordCreateDialog extends Vue {
     }
 
     Object.assign(this.$data, this.$options.data.apply(this))
+    this.$refs.createForm.clear()
     this.$nextTick(() => this.resetValidation())
   }
 }
