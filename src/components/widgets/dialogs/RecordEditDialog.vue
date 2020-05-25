@@ -62,7 +62,7 @@ q-dialog(
 
 <script>
 import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
-import RecordForm from 'components/forms/RecordForm'
+import RecordForm from 'components/widgets/forms/RecordForm'
 
 export default @Component({
   name: 'RecordEditDialog',

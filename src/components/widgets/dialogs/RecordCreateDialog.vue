@@ -93,7 +93,7 @@ q-dialog(
 import { Component, Emit, Vue } from 'vue-property-decorator'
 import { date } from 'quasar'
 import FileReaderInput from 'components/files/FileReaderInput'
-import RecordForm from 'components/forms/RecordForm'
+import RecordForm from 'components/widgets/forms/RecordForm'
 
 export default @Component({
   name: 'RecordCreateDialog',

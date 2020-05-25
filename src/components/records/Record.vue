@@ -69,7 +69,7 @@ q-expansion-item.record.full-width.q-my-lg(
 <script>
 import { Component, Emit, Vue } from 'vue-property-decorator'
 import RecordHeader from 'components/records/RecordHeader'
-import RecordEditDialog from 'components/records/RecordEditDialog'
+import RecordEditDialog from 'components/widgets/dialogs/RecordEditDialog'
 import RecordSystemMetadata from 'components/records/RecordSystemMetadata'
 import RecordBasicMetadata from 'components/records/RecordBasicMetadata'
 import RecordLinks from 'components/records/RecordLinks'

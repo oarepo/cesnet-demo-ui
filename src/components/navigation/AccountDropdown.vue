@@ -30,7 +30,7 @@ div
 
 <script>
 import { Component, Emit, Vue } from 'vue-property-decorator'
-import RecordCreateDialog from 'components/records/RecordCreateDialog'
+import RecordCreateDialog from 'components/widgets/dialogs/RecordCreateDialog'
 import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
 
 export default @Component({
