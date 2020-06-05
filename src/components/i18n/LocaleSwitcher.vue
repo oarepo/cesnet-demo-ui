@@ -4,6 +4,7 @@
     menu-anchor="bottom left"
     filled
     dark
+    :popup-content-style="{ backgroundColor: '#640034' }"
     color="white"
     icon="flag"
     v-model="lang"

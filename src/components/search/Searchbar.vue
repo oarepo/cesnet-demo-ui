@@ -1,5 +1,5 @@
 <template lang="pug">
-q-input.searchbar__input.q-my-xl.full-width(
+q-input.searchbar__input.full-width(
   clearable
   type="search"
   clear-icon="clear"

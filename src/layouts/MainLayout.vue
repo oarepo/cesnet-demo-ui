@@ -138,7 +138,7 @@ class MainLayout extends Vue {
   &__header
     background: linear-gradient(145deg, $primary 11%, $dark-primary 75%)
     &__minimized
-      height: 10vh !important
+      height: 80px !important
     &__maximized
       height: 100vh !important
     transition: 1s cubic-bezier(.7,.28,.47,1.15) height
