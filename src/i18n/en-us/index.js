@@ -15,7 +15,7 @@ export default {
     acceptBtn: 'Accept',
     declineBtn: 'Decline',
     createFormBtn: 'Back to form',
-    searchBtn: 'Search',
+    searchBtn: 'Browse',
     submitBtn: 'Submit',
     myRecordsBtn: 'My records',
     importBtn: 'Import',

@@ -16,7 +16,7 @@ export default {
     closeBtn: 'Zavřít',
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
-    searchBtn: 'Hledat',
+    searchBtn: 'Procházet záznamy',
     resetBtn: 'Vrátit změny',
     submitBtn: 'Uložit',
     myRecordsBtn: 'Moje záznamy',

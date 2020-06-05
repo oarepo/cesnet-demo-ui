@@ -1,5 +1,18 @@
 <template lang="pug">
 q-toolbar.navbar.col-grow.text-grey-2
+  .row.q-col-gutter-lg.absolute-top.items-center.justify-end.q-px-xl.q-pt-lg(v-if="maximized")
+    .col-2
+      locale-switcher
+    .col-auto
+      account-dropdown(
+        :query="query"
+        v-if="loggedIn"
+        @create-record="createRecord"
+        @change-record="recordsChanged")
+      q-btn(flat color="grey-4" @click="login()" v-else)
+        q-avatar
+          q-icon(name="https")
+        .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
   q-toolbar(inset)
     .row.justify-between.full-width(:class="[ maximized? 'q-mx-lg': '']")
       .self-center(:class="[ maximized? 'col-6 q-mb-xl': 'col-auto']")
@@ -17,13 +30,20 @@ q-toolbar.navbar.col-grow.text-grey-2
           small {{ $t('collection.description') }}
         .row.search-input
           searchbar(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
+        .row(v-if="maximized")
+          q-btn.navbar__collection-action(
+            square
+            flat
+            size="xl"
+            @click="doSearch"
+            :label="$t('labels.searchBtn')")
       .col-auto.self-center.full-height.q-ml-md(v-if="!maximized")
         account-dropdown(
           :query="query"
           v-if="loggedIn"
           @create-record="createRecord"
           @change-record="recordsChanged")
-        q-chip(clickable @click="login()" size="xl" icon="https" v-else)
+        q-chip(clickable outline color="grey-4" @click="login()" size="xl" icon="https" v-else)
           .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
 </template>
 
@@ -31,12 +51,14 @@ q-toolbar.navbar.col-grow.text-grey-2
 import { Vue, Component, Emit } from 'vue-property-decorator'
 import Searchbar from 'components/search/Searchbar'
 import AccountDropdown from 'components/navigation/AccountDropdown'
+import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
 
 export default @Component({
   name: 'Navbar',
   components: {
     Searchbar,
-    AccountDropdown
+    AccountDropdown,
+    LocaleSwitcher
   },
   props: {
     query: Object,
@@ -86,6 +108,8 @@ class Navbar extends Vue {
       margin-left: -20px
   &__collection-title h3
     letter-spacing: .2rem
+  &__collection-action
+    background-color: $dark-primary
   &__toolbar-title
     white-space: normal
 </style>

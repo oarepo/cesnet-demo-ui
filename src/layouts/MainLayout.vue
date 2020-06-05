@@ -60,7 +60,13 @@ class MainLayout extends Vue {
   view = this.views.INTRO
 
   created () {
-    this.updateView()
+    this.auth$.loggedIn(false, false).then((loggedIn) => {
+      if (loggedIn) {
+        this.hideIntro = true
+        this.view = this.views.LIST
+      }
+      this.updateView()
+    })
   }
 
   updateView (to) {
@@ -68,9 +74,12 @@ class MainLayout extends Vue {
 
     if (this.query) {
       // Query dependent views
+      console.log(this.hideIntro)
       if (!this.hideIntro && crn.name === 'index') {
+        console.log('set intro')
         this.view = this.views.INTRO
       } else if (this.hideIntro && crn.name === 'index') {
+        console.log('set list')
         this.view = this.views.LIST
       }
     }

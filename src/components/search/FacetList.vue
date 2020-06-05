@@ -18,8 +18,8 @@ q-list(dark padding).rounded-borders.text-white
           clearable
           :placeholder="$t(`labels.facetList.filters.${facet.code}`)")
       q-card-section(v-for="fb in filteredFacets(facet)" :key="fb.code")
-        .row.justify-between
-          q-checkbox.col-auto(
+        .row.justify-between.no-wrap
+          q-checkbox.col-10(
             dense
             v-model="facet.model"
             color="primary"
