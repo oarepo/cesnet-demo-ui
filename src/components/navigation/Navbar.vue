@@ -26,14 +26,14 @@ q-toolbar.navbar.col-grow.text-grey-2
         .row.navbar__collection-title(v-if="maximized")
           h3.col-auto {{ $t('collection.title') }}
           q-space.col-auto
-        .row.navbar__collection-description(v-if="maximized")
+        .row.navbar__collection-description.q-mb-xl(v-if="maximized")
           small {{ $t('collection.description') }}
         .row.search-input
           searchbar(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
         .row(v-if="maximized")
           q-btn.navbar__collection-action(
             square
-            flat
+            unelevated
             size="xl"
             @click="doSearch"
             :label="$t('labels.searchBtn')")
