@@ -30,11 +30,11 @@ q-toolbar.navbar.col-grow.text-grey-2
           small {{ $t('collection.description') }}
         .row.search-input
           searchbar(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
-        .row(v-if="maximized")
+        .row.q-mt-sm(v-if="maximized")
           q-btn.navbar__collection-action(
             square
             unelevated
-            size="xl"
+            size="lg"
             @click="doSearch"
             :label="$t('labels.searchBtn')")
       .col-auto.self-center.full-height.q-ml-md(v-if="!maximized")
@@ -66,9 +66,9 @@ export default @Component({
   }
 })
 class Navbar extends Vue {
-  created () {
+  mounted () {
     // Fetch user login state
-    this.auth$.loggedIn(false, false)
+    this.auth$.loggedIn({ vue: this, ensureLoggedIn: false })
   }
 
   get loggedIn () {
@@ -78,7 +78,7 @@ class Navbar extends Vue {
   @Emit('login')
   login () {
     this.$gdpr.showGdprPrompt(() => {
-      this.auth$.login(this)
+      this.auth$.login({ vue: this })
     }, this)
   }
 
