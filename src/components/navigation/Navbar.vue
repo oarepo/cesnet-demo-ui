@@ -16,7 +16,15 @@ q-toolbar.navbar.col-grow.text-grey-2
   q-toolbar(inset)
     .row.justify-between.full-width(:class="[ maximized? 'q-mx-lg': '']")
       .self-center(:class="[ maximized? 'col-6 q-mb-xl': 'col-auto']")
-        q-btn.q-mr-md(v-if="!maximized" flat @click="toggleFacetsDrawer" round dense icon="menu")
+        q-btn.q-mr-md.q-pa-sm(
+          v-if="detail"
+          flat
+          v-go-back.single
+          rounded
+          dense
+          icon="arrow_back"
+          :label="$t('labels.goBackBtn')")
+        q-btn.q-mr-md(v-else-if="!maximized" flat @click="toggleFacetsDrawer" round dense icon="menu")
         q-btn(flat @click="goHome" :class="[ maximized? 'q-mb-xl': '']")
           img(
             src="statics/logos/datacare_White.svg"
@@ -61,6 +69,7 @@ export default @Component({
     LocaleSwitcher
   },
   props: {
+    detail: Boolean,
     query: Object,
     maximized: Boolean
   }

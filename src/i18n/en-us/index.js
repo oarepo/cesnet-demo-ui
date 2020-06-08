@@ -9,6 +9,8 @@ export default {
     searchInputMaximized: 'Search by title',
     fileInput: 'Pick a file',
     // Buttons
+    recordDetailsBtn: 'Show Record Details',
+    goBackBtn: 'Go Back',
     tosBtn: 'Terms of Service',
     privacyPolicyBtn: 'Privacy Policy',
     closeBtn: 'Zavřít',
@@ -29,6 +31,7 @@ export default {
     updateRecordBtn: 'Update record',
     importJSONBtn: 'Import from JSON',
     // Sections
+    recordDetail: 'Record',
     createNew: 'Create New Record',
     editRecord: 'Edit Record',
     // Other components
