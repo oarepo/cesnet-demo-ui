@@ -60,7 +60,7 @@ class MainLayout extends Vue {
   view = this.views.INTRO
 
   created () {
-    this.auth$.login({ vue: this, ensureLoggedIn: false }).then((loggedIn) => {
+    this.auth$.loggedIn({ vue: this, ensureLoggedIn: false }).then((loggedIn) => {
       if (loggedIn) {
         this.hideIntro = true
         this.view = this.views.LIST

@@ -68,7 +68,7 @@ export default @Component({
 class Navbar extends Vue {
   mounted () {
     // Fetch user login state
-    this.auth$.login({ vue: this, ensureLoggedIn: false })
+    this.auth$.loggedIn({ vue: this, ensureLoggedIn: false })
   }
 
   get loggedIn () {
