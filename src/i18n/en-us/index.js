@@ -31,6 +31,8 @@ export default {
     updateRecordBtn: 'Update record',
     importJSONBtn: 'Import from JSON',
     // Sections
+    attachments: 'Attachments',
+    uploadAttachment: 'Upload Attachment',
     recordDetail: 'Record',
     createNew: 'Create New Record',
     editRecord: 'Edit Record',
@@ -95,6 +97,7 @@ export default {
   },
   tooltips: {
     close: 'Close',
+    download: 'Download attachment',
     importJSON: 'Import records from a DCObject schema compliant JSON file',
     anonymous: 'Anonymous user',
     notifications: 'Notifications'

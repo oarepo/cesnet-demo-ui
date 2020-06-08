@@ -31,6 +31,8 @@ export default {
     updateRecordBtn: 'Upravit záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
+    attachments: 'Přílohy',
+    uploadAttachment: 'Nahrát přílohu',
     recordDetail: 'Detail záznamu',
     editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
@@ -95,6 +97,7 @@ export default {
   },
   tooltips: {
     close: 'Zavřít',
+    download: 'Stáhnout přílohu',
     importJSON: 'Importovat záznamy z JSON souboru odpovídajícího DCterms schematu',
     anonymous: 'Nepřihlášený uživatel',
     notifications: 'Notifikace'
