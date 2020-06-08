@@ -79,6 +79,7 @@ class Navbar extends Vue {
   login () {
     this.$gdpr.showGdprPrompt(() => {
       this.auth$.login({ vue: this })
+      this.doSearch()
     }, this)
   }
 
