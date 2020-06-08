@@ -97,7 +97,8 @@ module.exports = function (ctx) {
         'QSpinnerGears',
         'QToolbar',
         'QToolbarTitle',
-        'QTooltip'
+        'QTooltip',
+        'QUploader'
       ],
       directives: [
         'ClosePopup',

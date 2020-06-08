@@ -9,7 +9,7 @@ q-toolbar.navbar.col-grow.text-grey-2
         v-if="loggedIn"
         @create-record="createRecord"
         @change-record="recordsChanged")
-      q-btn(flat color="grey-4" @click="login()" v-else)
+      q-btn.z-top(flat color="grey-4" @click="login()" v-else)
         q-avatar
           q-icon(name="https")
         .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
