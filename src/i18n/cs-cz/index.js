@@ -31,6 +31,7 @@ export default {
     updateRecordBtn: 'Upravit záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
+    noAttachments: 'žádné Přílohy',
     attachments: 'Přílohy',
     uploadAttachment: 'Nahrát přílohu',
     recordDetail: 'Detail záznamu',

@@ -20,7 +20,7 @@ q-page(padding).q-pb-xl
         .text-h5 {{ $t('labels.attachments') }}
       q-separator
       q-card-section
-        q-list(separator dense)
+        q-list(separator dense v-if="latestVersionAttachments.length > 0")
           q-item(v-for="file in latestVersionAttachments" key="file.key")
             q-item-section(thumbnail)
               q-icon(:name="fileIcon(file)")
@@ -39,8 +39,10 @@ q-page(padding).q-pb-xl
                   .row.justify-end
                     q-btn.col-auto(@click="downloadAttachment(file)" flat color="positive" icon="save_alt")
                       q-tooltip {{ $t('tooltips.download') }}
+        q-item.row.justify-center.text-center(v-else)
+          .text-subtitle1.text-weight-light ~ {{ $t('labels.noAttachments') | capitalize }} ~
       q-separator
-      q-card-section
+      q-card-section(v-if="owned")
         .text-subtitle1 {{ $t('labels.uploadAttachment') }}
         q-card-section
           file-uploader.full-width(
@@ -71,6 +73,13 @@ export default @Component({
 class RecordDetail extends Vue {
   loading = false
   attachments = []
+
+  get owned () {
+    if (this.auth$.loggedLocally) {
+      return this.record.metadata.owners.includes(this.auth$.authInfo.user.id)
+    }
+    return false
+  }
 
   created () {
     this.loadAttachments()
