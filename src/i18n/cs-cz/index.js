@@ -9,6 +9,8 @@ export default {
     searchInputMaximized: 'Hledat podle názvu',
     fileInput: 'Vyberte soubor',
     // Buttons
+    goBackBtn: 'Zpět',
+    recordDetailsBtn: 'Přejít na detail',
     tosBtn: 'Pravidla využití',
     privacyPolicyBtn: 'Zpracování osobních údajů',
     acceptBtn: 'Souhlasím',
@@ -29,6 +31,7 @@ export default {
     updateRecordBtn: 'Upravit záznam',
     importJSONBtn: 'Importovat JSON',
     // Sections
+    recordDetail: 'Detail záznamu',
     editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
     // Other components

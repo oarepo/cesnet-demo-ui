@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-  q-btn-dropdown.full-height.account-dropdown(
+  q-btn-dropdown.full-height.account-dropdown.z-top(
     unelevated
     no-wrap
     clickable

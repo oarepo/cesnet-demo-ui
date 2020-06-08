@@ -100,7 +100,8 @@ module.exports = function (ctx) {
         'QTooltip'
       ],
       directives: [
-        'ClosePopup'
+        'ClosePopup',
+        'GoBack'
       ],
 
       // Quasar plugins

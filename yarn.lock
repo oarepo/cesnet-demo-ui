@@ -942,10 +942,10 @@
   resolved "https://registry.yarnpkg.com/@oarepo/invenio-api-vuex/-/invenio-api-vuex-2.3.0.tgz#6f1a2641f00f51d7669990050bf5c34b20e8fab2"
   integrity sha512-7tnw8HAp5STvP3jKjKGmgiEwsZ9uaYOsVbewhwrUSMrIfGMcGqB6xSq4JEG4gXOcb5FyP/y1FbcDgXZ1bScH3w==
 
-"@oarepo/vue-popup-login@^1.1.2":
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/@oarepo/vue-popup-login/-/vue-popup-login-1.1.2.tgz#18f5563bff67f337048b3ec1f971f68da9a5c34b"
-  integrity sha512-FzlOTVogCvG6WlFe91lpKPvvNJgaQst0YzPxM9r2gcK3jmbq94oJFcMK/LUjeKEt76zdTLzFinjHiKUo+aQ8sA==
+"@oarepo/vue-popup-login@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@oarepo/vue-popup-login/-/vue-popup-login-1.2.0.tgz#7b349146ae7b9e5fd3fdefecefb9d0a541339664"
+  integrity sha512-DbhVVHM0O/zEPDvIWxZi83xW9kBgOB5EebFMesJElIPNCEqK/xMuzBP88aH029KN8EA7uDX7v4NsPlMHINeRtw==
 
 "@oarepo/vue-query-synchronizer@^1.4.1":
   version "1.4.1"
