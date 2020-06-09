@@ -4,7 +4,7 @@ q-page(padding).q-pb-xl
     record(
       detail
       v-if="loaded"
-      :id="record.id"
+      :id="recid"
       :links="record.links"
       :revision="record.revision"
       :created="record.created"

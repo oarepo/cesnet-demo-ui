@@ -70,8 +70,9 @@
           q-fab-action(
             external-label
             v-if="!detail"
+            label-position="top"
             @click="showRecordDetail"
-            color="grey-2"
+            color="black"
             icon="fullscreen"
             :label="$t('labels.recordDetailsBtn')")
         record-links(:links="links")
