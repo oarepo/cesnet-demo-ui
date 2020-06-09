@@ -157,7 +157,11 @@ class Record extends Vue {
   created () {
     // TODO: add handle link just for demo purposes
     this.links.video = this.metadata.source.replace('youtube.com/embed', 'youtube.com')
-    this.links.handle = 'https://hdl.handle.net/20.500.12618/DEMO-RECORD-HANDLE-LEADING-NOWHERE'
+    this.links.handle = `https://hdl.handle.net/20.500.12618/9999-${this.id}`
+  }
+
+  mount () {
+    this.links.handle = `https://hdl.handle.net/20.500.12618/9999-${this.id}`
   }
 }
 </script>
