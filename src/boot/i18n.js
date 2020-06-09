@@ -5,8 +5,16 @@ import messages from 'src/i18n'
 
 Vue.use(VueI18n)
 
+let browserLocale = Quasar.lang.getLocale()
+
+if (browserLocale === 'cs') {
+  browserLocale = 'cs-cz'
+} if (browserLocale === 'en') {
+  browserLocale = 'en-us'
+}
+
 const i18n = new VueI18n({
-  locale: Quasar.lang.getLocale(),
+  locale: browserLocale,
   fallbackLocale: 'en-us',
   messages
 })

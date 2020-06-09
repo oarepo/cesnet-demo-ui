@@ -10,6 +10,8 @@ export default {
     fileInput: 'Vyberte soubor',
     // Buttons
     actionsBtn: 'Akce',
+    goBackBtn: 'Zpět',
+    recordDetailsBtn: 'Přejít na detail',
     tosBtn: 'Pravidla využití',
     privacyPolicyBtn: 'Zpracování osobních údajů',
     acceptBtn: 'Souhlasím',
@@ -17,7 +19,7 @@ export default {
     closeBtn: 'Zavřít',
     loginBtn: 'Přihlásit se',
     logoutBtn: 'Odhlásit se',
-    searchBtn: 'Hledat',
+    searchBtn: 'Procházet záznamy',
     resetBtn: 'Vrátit změny',
     submitBtn: 'Uložit',
     myRecordsBtn: 'Moje záznamy',
@@ -30,6 +32,7 @@ export default {
     updateRecordBtn: 'Upravit',
     importJSONBtn: 'Importovat JSON',
     // Sections
+    recordDetail: 'Detail záznamu',
     editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
     // Other components

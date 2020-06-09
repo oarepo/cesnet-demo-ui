@@ -10,13 +10,15 @@ export default {
     fileInput: 'Pick a file',
     // Buttons
     actionsBtn: 'Actions',
+    recordDetailsBtn: 'Show Record Details',
+    goBackBtn: 'Go Back',
     tosBtn: 'Terms of Service',
     privacyPolicyBtn: 'Privacy Policy',
     closeBtn: 'Zavřít',
     acceptBtn: 'Accept',
     declineBtn: 'Decline',
     createFormBtn: 'Back to form',
-    searchBtn: 'Search',
+    searchBtn: 'Browse',
     submitBtn: 'Submit',
     myRecordsBtn: 'My records',
     importBtn: 'Import',
@@ -30,6 +32,7 @@ export default {
     updateRecordBtn: 'Edit',
     importJSONBtn: 'Import from JSON',
     // Sections
+    recordDetail: 'Record',
     createNew: 'Create New Record',
     editRecord: 'Edit Record',
     // Other components

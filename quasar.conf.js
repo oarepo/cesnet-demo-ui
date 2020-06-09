@@ -108,7 +108,8 @@ module.exports = function (ctx) {
         'QVideo'
       ],
       directives: [
-        'ClosePopup'
+        'ClosePopup',
+        'GoBack'
       ],
 
       // Quasar plugins

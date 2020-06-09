@@ -1,7 +1,8 @@
-import { routerCollection } from '@oarepo/invenio-api-vuex'
+import { routerCollection, routerRecord } from '@oarepo/invenio-api-vuex'
 import { query } from '@oarepo/vue-query-synchronizer'
 import Error404 from 'pages/Error404'
 import MainLayout from 'layouts/MainLayout'
+import RecordDetailLayout from 'layouts/RecordDetailLayout'
 import Logout from 'pages/Logout'
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
         collectionId: 'records'
       })
     }),
+  routerRecord({
+    path: '/:collectionId/:recordId',
+    name: 'record',
+    component: RecordDetailLayout
+  }),
   {
     name: 'Error404',
     path: '/error/404',
