@@ -50,7 +50,7 @@
       q-separator(inset)
       q-card-section.q-pt-xs(horizontal)
         q-fab.absolute-bottom-right.q-ma-lg(
-          v-if="owned"
+          v-if="!detail || owned"
           v-model="actionFab"
           :label="$t('labels.actionsBtn')"
           vertical-actions-align="right"
@@ -61,6 +61,7 @@
           icon="keyboard_arrow_left"
           direction="left")
           q-fab-action(
+            v-if="owned"
             external-label
             label-position="top"
             color="secondary"
@@ -70,7 +71,7 @@
           q-fab-action(
             external-label
             v-if="!detail"
-            label-position="top"
+            label-position="bottom"
             @click="showRecordDetail"
             color="black"
             icon="fullscreen"

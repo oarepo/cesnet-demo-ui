@@ -30,7 +30,12 @@ const routes = [
   routerRecord({
     path: '/:collectionId/:recordId',
     name: 'record',
-    component: RecordDetailLayout
+    component: RecordDetailLayout,
+    meta: {
+      preloader: {
+        store: 'oarepoRecord'
+      }
+    }
   }),
   {
     name: 'Error404',

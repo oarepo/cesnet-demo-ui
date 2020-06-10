@@ -70,6 +70,14 @@ q-dialog(
           size="md"
           type="reset"
           color="white")
+        q-btn.q-mr-lg(
+          v-if="mode === modes.DONE && createdId"
+          icon="fullscreen"
+          @click="showRecordDetail"
+          :label="$t('labels.recordDetailsBtn')"
+          flat
+          size="md"
+          color="white")
         q-btn.q-px-md(
           v-if="[modes.FORM, modes.IMPORT].includes(mode)"
           :disabled="progress || importInProgress || (mode === modes.IMPORT && !fileData)"
@@ -105,6 +113,7 @@ export default @Component({
 class RecordCreateDialog extends Vue {
   modes = Object.freeze({ FORM: 0, IMPORT: 1, DONE: 2, FAILURE: 3 })
   progress = false
+  createdId = null
   importInProgress = false
   importProgress = null
   mode = this.modes.FORM
@@ -125,6 +134,13 @@ class RecordCreateDialog extends Vue {
   fileLoad (data) {
     this.progress = false
     this.fileData = data
+  }
+
+  showRecordDetail () {
+    this.$router.push({
+      name: 'record',
+      params: { collectionId: 'records', recordId: this.createdId }
+    })
   }
 
   show () {
@@ -266,6 +282,7 @@ class RecordCreateDialog extends Vue {
 
   @Emit('ok')
   recordCreated (resp) {
+    this.createdId = resp.data.id
     this.mode = this.modes.DONE
     return resp
   }
@@ -297,6 +314,7 @@ class RecordCreateDialog extends Vue {
 
   reset () {
     this.errors = null
+    this.createdId = null
 
     if (this.mode === this.modes.FAILURE) {
       // Don't clear data on failure, let the user correct it and try again

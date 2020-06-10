@@ -1,17 +1,16 @@
 <template lang="pug">
 q-page(padding).q-pb-xl
-  .row.q-my-xl
+  .row.q-mt-lg
     record(
       detail
       v-if="loaded"
-      :id="recid"
+      :id="$route.params.recordId"
       :links="record.links"
       :revision="record.revision"
       :created="record.created"
       :updated="record.updated"
       :metadata="record.metadata"
       @change-record="recordChanged")
-      span {{ record.id }} {{ record.revision }}
       q-inner-loading(:showing="!loaded")
         q-spinner-gears(size="100px" color="accent")
 </template>
@@ -33,10 +32,6 @@ export default @Component({
 class RecordDetail extends Vue {
   get record () {
     return this.$oarepo.record
-  }
-
-  get recid () {
-    return this.$oarepo.record.id
   }
 
   get loaded () {
