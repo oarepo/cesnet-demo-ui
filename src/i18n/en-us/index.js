@@ -9,6 +9,7 @@ export default {
     searchInputMaximized: 'Search by title',
     fileInput: 'Pick a file',
     // Buttons
+    actionsBtn: 'Actions',
     recordDetailsBtn: 'Show Record Details',
     goBackBtn: 'Go Back',
     tosBtn: 'Terms of Service',
