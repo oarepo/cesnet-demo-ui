@@ -1,16 +1,16 @@
 <template lang="pug">
 q-uploader.full-width(flat ref="uploader"
   editable=true
-  auto-upload=false
-  :url="url"
+  auto-upload
+  :factory="getUrl"
   @added="fileAdded"
   multiple=false
+  :label="$t('labels.uploadAttachment')"
   send-raw
   method="PUT"
   with-credentials
   @uploaded="fileUploaded"
-  @start="fileUploading"
-  accept=".jpg,image/*,application/pdf")
+  @start="fileUploading")
 </template>
 
 <script>
@@ -34,8 +34,11 @@ class FileUploader extends Vue {
     }
   }
 
-  get url () {
-    return `${this.uploadUrl}/${this.file}`
+  getUrl (files) {
+    return {
+      url: `${this.uploadUrl}/${files[0].name}`,
+      method: 'PUT'
+    }
   }
 
   @Emit('fileUploading')

@@ -98,6 +98,7 @@ export default {
   },
   tooltips: {
     close: 'Close',
+    delete: 'Delete',
     download: 'Download attachment',
     importJSON: 'Import records from a DCObject schema compliant JSON file',
     anonymous: 'Anonymous user',

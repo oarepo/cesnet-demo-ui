@@ -98,6 +98,7 @@ export default {
   },
   tooltips: {
     close: 'Zavřít',
+    delete: 'Smazat',
     download: 'Stáhnout přílohu',
     importJSON: 'Importovat záznamy z JSON souboru odpovídajícího DCterms schematu',
     anonymous: 'Nepřihlášený uživatel',
