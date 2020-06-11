@@ -1,6 +1,6 @@
 <template lang="pug">
 q-page(padding).q-pb-xl
-  .row.q-mt-lt
+  .row.q-mt-lg
     record(
       detail
       v-if="loaded"
@@ -36,19 +36,15 @@ q-page(padding).q-pb-xl
                     q-item-label.col-auto(caption) {{ file.checksum }}
                   .row.justify-end
                     q-item-label.col-auto(caption) {{ Number(file.size/1024).toFixed(0) }} kb
-                  .row.justify-end
-                    q-btn.col-auto(@click="downloadAttachment(file)" flat color="positive" icon="save_alt")
+                  q-btn-group.justify-end(flat)
+                    q-btn(@click="downloadAttachment(file)" flat color="positive" icon="save_alt")
                       q-tooltip {{ $t('tooltips.download') }}
         q-item.row.justify-center.text-center(v-else)
           .text-subtitle1.text-weight-light ~ {{ $t('labels.noAttachments') | capitalize }} ~
-      q-separator
-      q-card-section(v-if="owned")
-        .text-subtitle1 {{ $t('labels.uploadAttachment') }}
-        q-card-section
-          file-uploader.full-width(
-            @fileUploaded="loadAttachments()"
-            :uploadUrl="record.links.files",
-            accept=".jpg,image/*,application/pdf")
+      file-uploader.bg-grey-2.full-width(
+        v-if="owned"
+        @fileUploaded="loadAttachments()"
+        :uploadUrl="record.links.files")
       q-inner-loading(:showing="loading")
         q-spinner-gears(size="100px" color="accent")
 </template>
@@ -87,6 +83,20 @@ class RecordDetail extends Vue {
 
   downloadAttachment (file) {
     FileSaver.saveAs(`${this.record.links.files}/${file.key}`, file.key)
+  }
+
+  deleteAttachment (file) {
+    this.$q.dialog({
+      title: 'Confirm',
+      message: 'Would you like to turn on the wifi?',
+      cancel: true,
+      persistent: true
+    }).onOk(() => {
+      const deleteUrl = `${this.record.links.files}/${file.key}`
+
+      this.$axios.delete(deleteUrl).then(resp => {
+      })
+    })
   }
 
   loadAttachments () {

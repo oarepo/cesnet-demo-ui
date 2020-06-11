@@ -61,6 +61,7 @@ module.exports = function (ctx) {
         'QBar',
         'QBtn',
         'QBtnDropdown',
+        'QBtnGroup',
         'QCard',
         'QCardActions',
         'QCardSection',
