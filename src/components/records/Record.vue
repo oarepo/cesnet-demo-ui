@@ -3,80 +3,95 @@
   .text-h4(v-if="detail") {{ $t('labels.recordDetail') }}
   q-expansion-item.full-width.q-my-lg(
     ref="recordExpansion"
+    :class="shadowClass"
+    @after-show="onShow"
+    @hide="onHide"
     group="records"
-    expand-separator
     :default-opened="detail"
     :disable="detail"
-    header-class="bg-grey-2 shadow-1"
+    :header-class="headerClass"
     popup
     clickable
     ripple)
     template(v-slot:header)
       q-item-section(avatar top)
         q-icon(name="book" size="34px")
-      q-item-section(top lines="1")
-        q-item-label(overline lines="1").q-py-sm
-          .row.items-center.justify-between
-            .text-weight-bold.record__title {{ metadata.title[0].value }}
-            q-badge(v-if="owned" color="accent").text-caption.text-lowercase {{ $t('labels.record.owner') }}
-        q-item-label.text-grey-9.q-py-xs {{ metadata.creator }}
-        q-item-label.q-body-2.q-py-sm.text-justify  {{ metadata.description[0].value }}
+      record-header(:owned="owned" :metadata="metadata")
       q-item-section(side top)
     q-separator
     q-card
-      q-card-section(horizontal)
-        q-card-section.col-8.q-pt-xs
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.creator') }}
-          .text-caption {{ metadata.creator }}
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.contributors') }}
-          .text-caption {{ metadata.contributor }}
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.abstract') }}
-          .text-caption {{ metadata.abstract[0].value }}
-        q-separator(vertical)
-        q-card-section.q-pt-xs.col-4
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.identifier') }}
-          .text-caption {{ metadata.identifier }}
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.created') }}
-          .text-caption {{ created | formatDate }}
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.updated') }}
-          .text-caption {{ updated | formatDate }}
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.revision') }}
-          .text-caption {{ revision }}
-      q-separator
+      q-card-section.q-pa-md.overflow-hidden(horizontal)
+        q-btn.absolute-right.vertical-middle.q-mr-lg.q-mb-sm(
+          style="z-index: 999"
+          flat
+          square
+          @click="systemInfoVisible = !systemInfoVisible"
+          color="secondary"
+          :icon="systemInfoVisible ? 'keyboard_arrow_right' : 'keyboard_arrow_left'")
+        record-basic-metadata.record__basic-metadata(
+          :class="[ systemInfoVisible ? 'col-8' : 'col-12']"
+          :creator="metadata.creator"
+          :abstract="metadata.abstract"
+          :contributors="metadata.contributors")
+        q-separator(vertical inset v-show="systemInfoVisible")
+        transition(
+          leave
+          enter-active-class="animated slideInRight"
+          leave-active-class="animated slideOutRight")
+          record-system-metadata(
+            v-show="systemInfoVisible"
+            :identifier="metadata.identifier"
+            :created="created"
+            :updated="updated"
+            :revision="revision")
+      q-separator(inset)
       q-card-section.q-pt-xs(horizontal)
-        q-card-section.q-pt-xs.col-8
-          .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.links') }}
-          .text-caption.text-weight-bold(v-for="(uri, name) in links" :key="name")
-              q-badge(outline color="primary") {{ name }}:
-              q-space
-              a(:href="uri" target="_blank") {{ uri }}
-        q-separator(vertical)
-        q-card-section.q-pt-xs.col-4
-          .col.justify-center.q-gutter-sm
-            q-btn.full-width.text-grey-8(
-              v-if="owned"
-              @click="showRecordEditor"
-              color="grey-2"
-              icon="edit"
-              size="md"
-              unelevated)
-              span.q-ml-md {{ $t('labels.updateRecordBtn') }}
-            q-btn.full-width.text-grey-8(
-              v-if="!detail"
-              @click="showRecordDetail"
-              color="grey-2"
-              icon="fullscreen"
-              size="md"
-              unelevated)
-              span.q-ml-md {{ $t('labels.recordDetailsBtn') }}
+        q-fab.absolute-bottom-right.q-ma-lg(
+          v-if="!detail || owned"
+          v-model="actionFab"
+          :label="$t('labels.actionsBtn')"
+          vertical-actions-align="right"
+          label-position="top"
+          label-class="bg-grey-3 text-black"
+          external-label
+          color="primary"
+          icon="keyboard_arrow_left"
+          direction="left")
+          q-fab-action(
+            v-if="owned"
+            external-label
+            label-position="top"
+            color="secondary"
+            @click="showRecordEditor"
+            icon="edit"
+            :label="$t('labels.updateRecordBtn')")
+          q-fab-action(
+            external-label
+            v-if="!detail"
+            label-position="bottom"
+            @click="showRecordDetail"
+            color="black"
+            icon="fullscreen"
+            :label="$t('labels.recordDetailsBtn')")
+        record-links(:links="links" :handle="handleLink")
 </template>
 
 <script>
 import { Component, Emit, Vue } from 'vue-property-decorator'
 import RecordEditDialog from 'components/records/RecordEditDialog'
+import RecordBasicMetadata from 'components/records/RecordBasicMetadata'
+import RecordSystemMetadata from 'components/records/RecordSystemMetadata'
+import RecordHeader from 'components/records/RecordHeader'
+import RecordLinks from 'components/records/RecordLinks'
 
 export default @Component({
   name: 'Record',
+  components: {
+    RecordLinks,
+    RecordHeader,
+    RecordSystemMetadata,
+    RecordBasicMetadata
+  },
   props: {
     detail: Boolean,
     id: String,
@@ -88,6 +103,23 @@ export default @Component({
   }
 })
 class RecordList extends Vue {
+  actionFab = false
+  systemInfoVisible = true
+  headerClass = 'bg-grey-3'
+  shadowClass = ''
+
+  @Emit('expand')
+  onShow () {
+    this.shadowClass = 'shadow-5'
+    this.headerClass = 'record__expanded text-white'
+    return this.$refs.recordExpansion
+  }
+
+  onHide () {
+    this.shadowClass = ''
+    this.headerClass = 'bg-grey-3'
+  }
+
   get owned () {
     if (this.auth$.loggedLocally) {
       return this.metadata.owners.includes(this.auth$.authInfo.user.id)
@@ -118,14 +150,24 @@ class RecordList extends Vue {
     })
   }
 
-  created () {
-    // TODO: add handle link just for demo purposes
-    this.links.handle = `https://hdl.handle.net/20.500.12618/9999-${this.id}`
+  get handleLink () {
+    return `https://hdl.handle.net/20.500.12618/9999-${this.id}`
   }
 }
 </script>
 
-<style lang="sass" scoped>
-.record__title
-  font-size: 1.1rem
+<style lang="sass">
+.record
+  &__basic-metadata
+    transition: width 1s ease
+  &__title
+    font-size: 1.1rem
+  &__expanded
+    transition: background-color 1.5s ease
+    color: white !important
+    background-color: $dark-accent
+.q-expansion-item--expanded
+  padding: 0 !important
+.q-expansion-item--popup > .q-expansion-item__container
+  border: 0
 </style>

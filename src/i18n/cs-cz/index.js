@@ -9,6 +9,7 @@ export default {
     searchInputMaximized: 'Hledat podle názvu',
     fileInput: 'Vyberte soubor',
     // Buttons
+    actionsBtn: 'Akce',
     goBackBtn: 'Zpět',
     recordDetailsBtn: 'Přejít na detail',
     tosBtn: 'Pravidla využití',
