@@ -1,5 +1,10 @@
 <template lang="pug">
-q-uploader.full-width(flat ref="uploader"
+q-uploader.full-width(
+  flat
+  square
+  text-color="grey-9"
+  color="grey-4"
+  ref="uploader"
   editable=true
   auto-upload
   :factory="getUrl"
@@ -8,6 +13,7 @@ q-uploader.full-width(flat ref="uploader"
   :label="$t('labels.uploadAttachment')"
   send-raw
   method="PUT"
+  no-thumbnails
   with-credentials
   @uploaded="fileUploaded"
   @start="fileUploading")

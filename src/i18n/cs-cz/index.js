@@ -54,7 +54,13 @@ export default {
       created: 'Datum vytvoření',
       updated: 'Datum poslední úpravy',
       revision: 'Verze',
-      links: 'Odkazy'
+      links: 'Odkazy',
+      attachment: {
+        filename: 'Název souboru',
+        created: 'Nahráno',
+        checksum: 'Kontrolní součet',
+        filesize: 'Velikost'
+      }
     },
     recordList: {
       header: 'Nalezeno {num} záznamů'

@@ -51,7 +51,13 @@ export default {
       created: 'Creation date',
       updated: 'Last modification date',
       revision: 'Revision',
-      links: 'Links'
+      links: 'Links',
+      attachment: {
+        filename: 'File Name',
+        created: 'Uploaded',
+        checksum: 'Checksum',
+        filesize: 'Size'
+      }
     },
     recordList: {
       header: 'Found {num} records'
