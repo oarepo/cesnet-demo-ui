@@ -1,5 +1,5 @@
 <template lang="pug">
-q-card.col-12
+q-card.col-12(v-if="latestVersionAttachments.length > 0 || owned")
   q-markup-table(flat wrap-cells bordered)
     thead.bg-grey-3
       tr
@@ -19,7 +19,7 @@ q-card.col-12
         th.text-left {{ $t('labels.record.attachment.filesize') }}
         th.text-left {{ $t('labels.record.attachment.checksum') }}
         th
-    tbody(v-if="latestVersionAttachments.length > 0")
+    tbody
       tr(v-for="file in latestVersionAttachments" key="file.key")
         td
           .row
@@ -36,7 +36,7 @@ q-card.col-12
           q-btn-group.justify-end(flat)
             q-btn(@click="downloadAttachment(file)" flat color="positive" icon="save_alt")
               q-tooltip {{ $t('tooltips.download') }}
-    tfoot.shadow-0.row.justify-center.text-center(v-else-if="owned")
+    tfoot.shadow-0.row.justify-center.text-center(v-if="latestVersionAttachments.length === 0")
       tr
         td.text-weight-light(colspan=5) ~ {{ $t('labels.noAttachments') | capitalize }} ~
   q-inner-loading(:showing="loading")
