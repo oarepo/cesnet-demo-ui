@@ -35,6 +35,8 @@
     "vue-property-decorator": "^8.4.0",
     "vue-runtime-helpers": "^1.1.2",
     "vue-uid": "^0.4.5",
+    "vuelidate": "^0.7.5",
+    "vuelidate-property-decorators": "^1.0.28",
     "vuex-class-modules": "^1.1.2"
   },
   "devDependencies": {

@@ -32,7 +32,7 @@
           :class="[ systemInfoVisible ? 'col-8' : 'col-12']"
           :creator="metadata.creator"
           :abstract="metadata.abstract"
-          :contributors="metadata.contributors")
+          :contributors="metadata.contributor")
         q-separator(vertical inset v-show="systemInfoVisible")
         transition(
           leave
@@ -97,8 +97,8 @@ export default @Component({
     id: String,
     metadata: Object,
     links: Object,
-    created: String,
-    updated: String,
+    created: String | Date,
+    updated: String | Date,
     revision: Number
   }
 })

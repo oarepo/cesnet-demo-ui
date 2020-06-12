@@ -17,51 +17,7 @@ q-dialog(
       q-card-section.q-pa-xl
         div(v-if="mode === modes.FORM")
           q-slide-transition(leave)
-            q-form(
-              @submit="submit"
-              @reset="reset"
-              class="q-gutter-md")
-              q-input(
-                ref="title"
-                autofocus
-                standout
-                dark
-                type="text"
-                :label="$t('labels.record.title') + ' (' + $t('values.lang.csCZ') + ')'"
-                :rules="[$rules.required()]"
-                v-model="record.title[0].value")
-              q-input(
-                ref="description"
-                standout
-                dark
-                type="text"
-                :label="$t('labels.record.description')"
-                :rules="[$rules.required()]"
-                v-model="record.description[0].value")
-              q-input(
-                ref="abstract"
-                standout
-                dark
-                type="textarea"
-                :label="$t('labels.record.abstract') + ' (' + $t('values.lang.csCZ') + ')'"
-                :rules="[$rules.required()]"
-                v-model="record.abstract[0].value")
-              q-input(
-                ref="creator"
-                standout
-                dark
-                hide-bottom-space
-                type="text"
-                :label="$t('labels.record.creator')"
-                :rules="[$rules.required()]"
-                v-model="record.creator")
-              q-input(
-                ref="contributor"
-                standout
-                dark
-                type="text"
-                :label="$t('labels.record.contributors')"
-                v-model="record.contributor")
+            record-form(ref="createForm")
         div(v-else-if="mode === modes.IMPORT")
           q-slide-transition(appear)
             q-form.justify-center
@@ -145,11 +101,13 @@ q-dialog(
 import { Component, Emit, Vue } from 'vue-property-decorator'
 import { uid, date } from 'quasar'
 import FileReaderInput from 'components/files/FileReaderInput'
+import RecordForm from 'components/widgets/forms/RecordForm'
 
 export default @Component({
   name: 'RecordCreateDialog',
   components: {
-    FileReaderInput
+    FileReaderInput,
+    RecordForm
   }
 })
 class RecordCreateDialog extends Vue {
@@ -162,29 +120,6 @@ class RecordCreateDialog extends Vue {
   errors = null
 
   fileData = null
-
-  record = {
-    title: [
-      {
-        lang: 'cs',
-        value: ''
-      }
-    ],
-    abstract: [
-      {
-        lang: 'cs',
-        value: ''
-      }
-    ],
-    creator: this.$auth.authInfo.user_info.name,
-    contributor: '',
-    description: [
-      {
-        lang: 'cs',
-        value: ''
-      }
-    ]
-  }
 
   created () {
     this.ensureAuthenticated()
@@ -268,8 +203,8 @@ class RecordCreateDialog extends Vue {
   }
 
   async submitForm () {
-    const valid = await this.validate()
-    if (!valid) {
+    const result = await this.$refs.createForm.submit()
+    if (!result.valid) {
       this.$q.notify({
         type: 'negative',
         message: `${this.$t('messages.validation.failed')}`
@@ -277,7 +212,7 @@ class RecordCreateDialog extends Vue {
       return
     }
 
-    return this.submitRecord(this.record, this.recordCreated, this.createFailed)
+    return this.submitRecord(result.record, this.recordCreated, this.createFailed)
   }
 
   async submitRecord (record, onCreated, onFailed, progress = true) {
@@ -401,6 +336,7 @@ class RecordCreateDialog extends Vue {
     }
 
     Object.assign(this.$data, this.$options.data.apply(this))
+    this.$refs.createForm.clear()
     this.$nextTick(() => this.resetValidation())
   }
 }

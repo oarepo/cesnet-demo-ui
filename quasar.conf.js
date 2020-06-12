@@ -95,6 +95,7 @@ module.exports = function (ctx) {
         'QPageSticky',
         'QPagination',
         'QScrollArea',
+        'QSelect',
         'QSeparator',
         'QSlideTransition',
         'QSpace',

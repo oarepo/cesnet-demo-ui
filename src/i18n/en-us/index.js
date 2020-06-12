@@ -93,7 +93,9 @@ export default {
   },
   values: {
     lang: {
+      cs: 'Czech',
       csCZ: 'Czech',
+      en: 'English',
       enUS: 'English'
     }
   },

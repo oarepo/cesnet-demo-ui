@@ -39,7 +39,7 @@ export default {
     editRecord: 'Upravit záznam',
     createNew: 'Vytvořit záznam',
     // Other components
-    localeSwitcher: 'Language',
+    localeSwitcher: 'Jazyk',
     facets: {
       header: 'Filtry'
     },
@@ -93,7 +93,9 @@ export default {
   },
   values: {
     lang: {
+      cs: 'Česky',
       csCZ: 'Česky',
+      en: 'Anglicky',
       enUS: 'Anglicky'
     }
   },
