@@ -144,14 +144,15 @@ class RecordList extends Vue {
       parent: this,
       title: this.$t('labels.editRecord'),
       value: this.metadata,
-      id: this.id
+      id: this.id || this.$route.params.recordId
     }).onOk(data => {
       this.recordChanged()
     })
   }
 
   get handleLink () {
-    return `https://hdl.handle.net/20.500.12618/9999-${this.id}`
+    const rid = this.id || this.$route.params.recordId
+    return `https://hdl.handle.net/20.500.12618/9999-${rid}`
   }
 }
 </script>
