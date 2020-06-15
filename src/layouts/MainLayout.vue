@@ -11,7 +11,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
           @change-record="recordsChanged"
           @home="view = views.INTRO"
           @search="doSearch")
-        transition(leave leave-active-class="animated slideOutRight")
+        transition.gt-md.orientation-landscape(leave leave-active-class="animated slideOutRight")
           particles-box(v-show="view === views.INTRO")
   q-slide-transition(appear)
     q-page-container.layout__content(v-if="view !== views.INTRO")
@@ -135,7 +135,7 @@ class MainLayout extends Vue {
   &__header
     background: linear-gradient(145deg, $primary 11%, $dark-primary 75%)
     &__minimized
-      height: 80px !important
+      height: 85px !important
     &__maximized
       height: 100vh !important
     transition: 1s cubic-bezier(.7,.28,.47,1.15) height
