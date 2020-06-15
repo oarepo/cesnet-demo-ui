@@ -32,6 +32,7 @@ export default {
     updateRecordBtn: 'Update record',
     importJSONBtn: 'Import from JSON',
     // Sections
+    preferences: 'Preferences',
     noAttachments: 'No Attachments',
     attachments: 'Attachments',
     uploadAttachment: 'Upload Attachment',

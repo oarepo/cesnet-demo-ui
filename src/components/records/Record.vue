@@ -69,7 +69,7 @@
             external-label
             v-if="!detail"
             label-position="bottom"
-            @click="showRecordDetail"
+            @click="showRecordDetail(id)"
             color="black"
             icon="fullscreen"
             :label="$t('labels.recordDetailsBtn')")
@@ -77,12 +77,16 @@
 </template>
 
 <script>
-import { Component, Emit, Vue } from 'vue-property-decorator'
-import RecordEditDialog from 'components/records/RecordEditDialog'
+import { Component, Emit } from 'vue-property-decorator'
 import RecordBasicMetadata from 'components/records/RecordBasicMetadata'
 import RecordSystemMetadata from 'components/records/RecordSystemMetadata'
 import RecordHeader from 'components/records/RecordHeader'
 import RecordLinks from 'components/records/RecordLinks'
+import { OwnedMixin } from 'src/mixins/OwnedMixin'
+import { mixins } from 'vue-class-component'
+import { RecordEditMixin } from 'src/mixins/RecordEditMixin'
+import { RecordDetailMixin } from 'src/mixins/RecordDetailMixin'
+import { HandleMixin } from 'src/mixins/HandleMixin'
 
 export default @Component({
   name: 'Record',
@@ -102,7 +106,11 @@ export default @Component({
     revision: Number
   }
 })
-class RecordList extends Vue {
+class RecordList extends mixins(
+    OwnedMixin,
+    RecordEditMixin,
+    RecordDetailMixin,
+    HandleMixin) {
   actionFab = false
   systemInfoVisible = true
   headerClass = 'bg-grey-3'
@@ -118,41 +126,6 @@ class RecordList extends Vue {
   onHide () {
     this.shadowClass = ''
     this.headerClass = 'bg-grey-3'
-  }
-
-  get owned () {
-    if (this.auth$.loggedLocally) {
-      return this.metadata.owners.includes(this.auth$.authInfo.user.id)
-    }
-    return false
-  }
-
-  @Emit('change-record')
-  recordChanged () { }
-
-  showRecordDetail () {
-    this.$router.push({
-      name: 'record',
-      params: { collectionId: 'records', recordId: this.id }
-    })
-  }
-
-  showRecordEditor () {
-    this.$q.dialog({
-      component: RecordEditDialog,
-      maximized: true,
-      parent: this,
-      title: this.$t('labels.editRecord'),
-      value: this.metadata,
-      id: this.id || this.$route.params.recordId
-    }).onOk(data => {
-      this.recordChanged()
-    })
-  }
-
-  get handleLink () {
-    const rid = this.id || this.$route.params.recordId
-    return `https://hdl.handle.net/20.500.12618/9999-${rid}`
   }
 }
 </script>

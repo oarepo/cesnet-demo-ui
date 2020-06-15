@@ -29,9 +29,13 @@ div
 </template>
 
 <script>
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import RecordCreateDialog from 'components/records/RecordCreateDialog'
 import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
+import { RecordCreateMixin } from 'src/mixins/RecordCreateMixin'
+import { mixins } from 'vue-class-component'
+import { LogoutMixin } from 'src/mixins/LogoutMixin'
+import { AuthStateMixin } from 'src/mixins/AuthStateMixin'
 
 export default @Component({
   name: 'AccountDropdown',
@@ -43,37 +47,10 @@ export default @Component({
     query: Object
   }
 })
-class AccountDropdown extends Vue {
-  get loggedIn () {
-    return this.auth$.loggedLocally
-  }
-
-  get auth () {
-    return this.auth$.authInfo
-  }
-
-  showRecordCreate () {
-    this.$q.dialog({
-      component: RecordCreateDialog,
-      maximized: true,
-      persistent: true,
-      parent: this,
-      title: this.$t('labels.createNew')
-    }).onOk(data => {
-      this.recordsChanged()
-    })
-  }
-
-  @Emit('create-record')
-  doCreateRecord () { }
-
-  @Emit('change-record')
-  recordsChanged () { }
-
-  @Emit('logout')
-  logout () {
-    window.location = this.auth$.authLogoutURL
-  }
+class AccountDropdown extends mixins(
+    RecordCreateMixin,
+    LogoutMixin,
+    AuthStateMixin) {
 }
 </script>
 

@@ -8,7 +8,7 @@
         v-if="loggedIn"
         @create-record="createRecord"
         @change-record="recordsChanged")
-      q-btn.q-mx-sm.col-auto(flat color="grey-4" @click="login()" v-else)
+      q-btn.q-mx-sm.col-auto(flat color="grey-4" @click="login(doSearch)" v-else)
         q-avatar
           q-icon(name="https")
         .text-caption.text-uppercase {{ $t('labels.loginBtn') }}
@@ -34,9 +34,13 @@
 </template>
 
 <script>
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
 import LocaleSwitcher from 'components/i18n/LocaleSwitcher'
 import AccountDropdown from 'components/widgets/dropdowns/AccountDropdown'
+import { AuthStateMixin } from 'src/mixins/AuthStateMixin'
+import { mixins } from 'vue-class-component'
+import { RecordCreateMixin } from 'src/mixins/RecordCreateMixin'
+import { SearchMixin } from 'src/mixins/SearchMixin'
 
 export default @Component({
   name: 'MenuDropdown',
@@ -48,33 +52,8 @@ export default @Component({
     LocaleSwitcher
   }
 })
-class MenuDropdown extends Vue {
+class MenuDropdown extends mixins(AuthStateMixin, SearchMixin, RecordCreateMixin) {
   expanded = false
-
-  get loggedIn () {
-    return this.auth$.loggedLocally
-  }
-
-  get auth () {
-    return this.auth$.authInfo
-  }
-
-  @Emit('create-record')
-  createRecord () { }
-
-  @Emit('change-record')
-  recordsChanged () { }
-
-  @Emit('search')
-  doSearch () { }
-
-  @Emit('login')
-  login () {
-    this.$gdpr.showGdprPrompt(() => {
-      this.auth$.login({ vue: this })
-      this.doSearch()
-    }, this)
-  }
 }
 </script>
 

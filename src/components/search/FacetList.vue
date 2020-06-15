@@ -27,8 +27,7 @@ q-list(dark padding).rounded-borders.text-white
             :label="fb.label"
             @click.native="checkboxChecked(facet.code, fb.value, $event)")
           q-badge.col-auto(color="secondary") {{ fb.count }}
-  q-separator.q-my-md
-  q-btn.full-width.text-left(
+  q-btn.q-my-sm.full-width.text-left(
     v-if="$auth.loggedLocally"
     @click="myRecords"
     unelevated

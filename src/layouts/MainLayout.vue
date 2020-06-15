@@ -30,6 +30,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
     q-scroll-area.fit
       .q-pa-md
         facet-list(:query="query")
+        account-settings
 </template>
 
 <script>
@@ -38,6 +39,7 @@ import Navbar from 'components/navigation/Navbar'
 import ParticlesBox from 'components/landing/ParticlesBox'
 import FacetList from 'components/search/FacetList'
 import RecordList from 'pages/records/RecordList'
+import AccountSettings from 'components/settings/AccountSettings'
 
 export default @Component({
   name: 'MainLayout',
@@ -48,7 +50,8 @@ export default @Component({
     Navbar,
     FacetList,
     RecordList,
-    ParticlesBox
+    ParticlesBox,
+    AccountSettings
   }
 })
 class MainLayout extends Vue {

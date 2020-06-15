@@ -73,7 +73,7 @@ q-dialog(
         q-btn.q-mr-lg(
           v-if="mode === modes.DONE && createdId"
           icon="fullscreen"
-          @click="showRecordDetail"
+          @click="showRecordDetail(createdId)"
           :label="$t('labels.recordDetailsBtn')"
           flat
           size="md"
@@ -98,10 +98,14 @@ q-dialog(
 </template>
 
 <script>
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import { Component, Emit } from 'vue-property-decorator'
 import { uid, date } from 'quasar'
 import FileReaderInput from 'components/files/FileReaderInput'
 import RecordForm from 'components/widgets/forms/RecordForm'
+import { RecordDetailMixin } from 'src/mixins/RecordDetailMixin'
+import { mixins } from 'vue-class-component'
+import { AuthStateMixin } from 'src/mixins/AuthStateMixin'
+import { DialogMixin } from 'src/mixins/DialogMixin'
 
 export default @Component({
   name: 'RecordCreateDialog',
@@ -110,7 +114,7 @@ export default @Component({
     RecordForm
   }
 })
-class RecordCreateDialog extends Vue {
+class RecordCreateDialog extends mixins(AuthStateMixin, DialogMixin, RecordDetailMixin) {
   modes = Object.freeze({ FORM: 0, IMPORT: 1, DONE: 2, FAILURE: 3 })
   progress = false
   createdId = null
@@ -125,30 +129,9 @@ class RecordCreateDialog extends Vue {
     this.ensureAuthenticated()
   }
 
-  ensureAuthenticated () {
-    if (!this.$auth.loggedLocally) {
-      this.$auth.login(this)
-    }
-  }
-
   fileLoad (data) {
     this.progress = false
     this.fileData = data
-  }
-
-  showRecordDetail () {
-    this.$router.push({
-      name: 'record',
-      params: { collectionId: 'records', recordId: this.createdId }
-    })
-  }
-
-  show () {
-    this.$refs.dialog.show()
-  }
-
-  hide () {
-    this.$refs.dialog.hide()
   }
 
   get submitLabel () {
@@ -173,10 +156,6 @@ class RecordCreateDialog extends Vue {
       default:
         return 'labels.resetBtn'
     }
-  }
-
-  @Emit('hide')
-  onDialogHide () {
   }
 
   async validate () {
@@ -318,13 +297,6 @@ class RecordCreateDialog extends Vue {
     return err
   }
 
-  resetValidation () {
-    this.$refs.title.resetValidation()
-    this.$refs.description.resetValidation()
-    this.$refs.abstract.resetValidation()
-    this.$refs.contributor.resetValidation()
-  }
-
   reset () {
     this.errors = null
     this.createdId = null
@@ -337,7 +309,6 @@ class RecordCreateDialog extends Vue {
 
     Object.assign(this.$data, this.$options.data.apply(this))
     this.$refs.createForm.clear()
-    this.$nextTick(() => this.resetValidation())
   }
 }
 </script>

@@ -16,7 +16,7 @@ q-dialog(
       q-card-section.q-pa-xl
         div(v-if="mode === modes.FORM")
           q-slide-transition(leave)
-            record-form(:initial="frozenValue()" ref="editForm")
+            record-form(:value="frozenValue()" ref="editForm")
         div(v-else-if="mode === modes.DONE")
           .col.self-center.text-center.q-pa-lg.q-gutter-lg
             q-icon(name="cloud_done" size="xl")
@@ -61,8 +61,12 @@ q-dialog(
 </template>
 
 <script>
-import { Component, Emit, Vue, Watch } from 'vue-property-decorator'
+import { Component, Emit, Watch } from 'vue-property-decorator'
 import RecordForm from 'components/widgets/forms/RecordForm'
+import { AuthStateMixin } from 'src/mixins/AuthStateMixin'
+import { mixins } from 'vue-class-component'
+import { FrozenValueMixin } from 'src/mixins/FrozenValueMixin'
+import { DialogMixin } from 'src/mixins/DialogMixin'
 
 export default @Component({
   name: 'RecordEditDialog',
@@ -74,7 +78,7 @@ export default @Component({
     RecordForm
   }
 })
-class RecordEditDialog extends Vue {
+class RecordEditDialog extends mixins(AuthStateMixin, DialogMixin, FrozenValueMixin) {
   modes = Object.freeze({ FORM: 0, DONE: 2, FAILURE: 3 })
   progress = false
   mode = this.modes.FORM
@@ -87,30 +91,9 @@ class RecordEditDialog extends Vue {
     this.ensureAuthenticated()
   }
 
-  frozenValue () {
-    // Get a copy of props to model without reactivity watchers
-    // Right now, this is probably the only working way to do it:
-    // https://forum.vuejs.org/t/how-to-clone-property-value-as-simple-object/40032/3
-    return JSON.parse(JSON.stringify(this.value))
-  }
-
   @Watch('value')
   valueChanged () {
     this.record = this.frozenValue()
-  }
-
-  ensureAuthenticated () {
-    if (!this.$auth.loggedLocally) {
-      this.$auth.login(this)
-    }
-  }
-
-  show () {
-    this.$refs.dialog.show()
-  }
-
-  hide () {
-    this.$refs.dialog.hide()
   }
 
   get resetLabel () {
@@ -120,10 +103,6 @@ class RecordEditDialog extends Vue {
       default:
         return 'labels.resetBtn'
     }
-  }
-
-  @Emit('hide')
-  onDialogHide () {
   }
 
   async submitForm () {
