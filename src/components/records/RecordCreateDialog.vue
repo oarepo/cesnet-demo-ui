@@ -42,8 +42,8 @@ q-dialog(
       q-inner-loading(:showing="progress" dark)
         .text-h6.q-mb-md {{ $t('messages.creatingRecord') }}&hellip;
         q-spinner-gears(size="50px" color="white")
-      q-card-actions.q-px-xl.q-py-md.q-my-md
-        q-btn(
+      q-card-actions.q-px-xl.q-py-md.q-my-md.justify-xs-center.justify-sm-center
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-my-md(
           v-if="mode === modes.FORM"
           :disabled="progress || importInProgress"
           @click="mode = modes.IMPORT"
@@ -52,7 +52,7 @@ q-dialog(
           size="md"
           color="primary")
           q-tooltip(content-class="bg-white text-black") {{ $t('tooltips.importJSON') }}
-        q-btn(
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-my-md(
           v-else-if="mode === modes.IMPORT"
           :disabled="progress || importInProgress"
           @click="mode = modes.FORM"
@@ -60,8 +60,8 @@ q-dialog(
           :label="$t('labels.createFormBtn')"
           size="md"
           color="primary")
-        q-space
-        q-btn.q-mr-lg(
+        q-space.gt-sm
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-my-md(
           :disabled="progress || importInProgress"
           :icon="mode === modes.DONE? 'add': 'undo'"
           @click="reset"
@@ -70,7 +70,7 @@ q-dialog(
           size="md"
           type="reset"
           color="white")
-        q-btn.q-mr-lg(
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-mr-lg.q-my-md(
           v-if="mode === modes.DONE && createdId"
           icon="fullscreen"
           @click="showRecordDetail(createdId)"
@@ -78,7 +78,7 @@ q-dialog(
           flat
           size="md"
           color="white")
-        q-btn.q-px-md(
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-px-md.q-my-md(
           v-if="[modes.FORM, modes.IMPORT].includes(mode)"
           :disabled="progress || importInProgress || (mode === modes.IMPORT && !fileData)"
           @click="submit"
@@ -87,7 +87,7 @@ q-dialog(
           size="lg"
           type="submit"
           color="positive")
-        q-btn.q-px-md(
+        q-btn.col-xs-12.col-sm-10.col-auto.q-px-md.q-my-md(
           v-if="[modes.DONE, modes.FAILURE].includes(mode)"
           :disabled="progress || importInProgress"
           @click="hide"

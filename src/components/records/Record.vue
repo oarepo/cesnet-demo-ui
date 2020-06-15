@@ -28,12 +28,11 @@
           @click="systemInfoVisible = !systemInfoVisible"
           color="secondary"
           :icon="systemInfoVisible ? 'keyboard_arrow_right' : 'keyboard_arrow_left'")
-        record-basic-metadata.record__basic-metadata(
-          :class="[ systemInfoVisible ? 'col-8' : 'col-12']"
+        record-basic-metadata.q-pr-xl.col-12.record__basic-metadata(
+          v-show="!systemInfoVisible"
           :creator="metadata.creator"
           :abstract="metadata.abstract"
           :contributors="metadata.contributor")
-        q-separator(vertical inset v-show="systemInfoVisible")
         transition(
           leave
           enter-active-class="animated slideInRight"
@@ -45,7 +44,7 @@
             :updated="updated"
             :revision="revision")
       q-separator(inset)
-      q-card-section.q-pt-xs(horizontal)
+      q-card-section.q-pt-xs(horizontal).wrap
         q-fab.absolute-bottom-right.q-ma-lg(
           v-if="!detail || owned"
           v-model="actionFab"
@@ -73,7 +72,7 @@
             color="black"
             icon="fullscreen"
             :label="$t('labels.recordDetailsBtn')")
-        record-links(:links="links" :handle="handleLink")
+        record-links.col-auto(:links="links" :handle="handleLink")
 </template>
 
 <script>
@@ -112,7 +111,7 @@ class RecordList extends mixins(
     RecordDetailMixin,
     HandleMixin) {
   actionFab = false
-  systemInfoVisible = true
+  systemInfoVisible = false
   headerClass = 'bg-grey-3'
   shadowClass = ''
 

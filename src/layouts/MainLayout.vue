@@ -103,7 +103,9 @@ class MainLayout extends Vue {
       case this.views.LIST:
         this.hideIntro = true
         this.facetsDrawerEnabled = true
-        this.facetsDrawer = true
+        if (!this.$q.platform.is.mobile) {
+          this.facetsDrawer = true
+        }
         break
     }
   }

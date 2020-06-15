@@ -1,7 +1,7 @@
 <template lang="pug">
 q-card-section.q-pt-xs
   .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.links') }}
-  q-markup-table(flat)
+  q-markup-table.max-width(flat wrap-cells)
     tbody
       tr(v-for="(uri, name) in links" :key="name")
         td
