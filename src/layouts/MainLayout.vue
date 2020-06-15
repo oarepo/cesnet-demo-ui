@@ -11,7 +11,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
           @change-record="recordsChanged"
           @home="view = views.INTRO"
           @search="doSearch")
-        transition(leave leave-active-class="animated slideOutRight")
+        transition.gt-md.orientation-landscape(leave leave-active-class="animated slideOutRight")
           particles-box(v-show="view === views.INTRO")
   q-slide-transition(appear)
     q-page-container.layout__content(v-if="view !== views.INTRO")
@@ -30,6 +30,7 @@ q-layout(view="hHh Lpr fff" class="bg-grey-1")
     q-scroll-area.fit
       .q-pa-md
         facet-list(:query="query")
+        account-settings
 </template>
 
 <script>
@@ -38,6 +39,7 @@ import Navbar from 'components/navigation/Navbar'
 import ParticlesBox from 'components/landing/ParticlesBox'
 import FacetList from 'components/search/FacetList'
 import RecordList from 'pages/records/RecordList'
+import AccountSettings from 'components/settings/AccountSettings'
 
 export default @Component({
   name: 'MainLayout',
@@ -48,7 +50,8 @@ export default @Component({
     Navbar,
     FacetList,
     RecordList,
-    ParticlesBox
+    ParticlesBox,
+    AccountSettings
   }
 })
 class MainLayout extends Vue {
@@ -100,7 +103,9 @@ class MainLayout extends Vue {
       case this.views.LIST:
         this.hideIntro = true
         this.facetsDrawerEnabled = true
-        this.facetsDrawer = true
+        if (!this.$q.platform.is.mobile) {
+          this.facetsDrawer = true
+        }
         break
     }
   }
@@ -135,7 +140,7 @@ class MainLayout extends Vue {
   &__header
     background: linear-gradient(145deg, $primary 11%, $dark-primary 75%)
     &__minimized
-      height: 80px !important
+      height: 85px !important
     &__maximized
       height: 100vh !important
     transition: 1s cubic-bezier(.7,.28,.47,1.15) height

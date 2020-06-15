@@ -42,8 +42,8 @@ q-dialog(
       q-inner-loading(:showing="progress" dark)
         .text-h6.q-mb-md {{ $t('messages.creatingRecord') }}&hellip;
         q-spinner-gears(size="50px" color="white")
-      q-card-actions.q-px-xl.q-py-md.q-my-md
-        q-btn(
+      q-card-actions.q-px-xl.q-py-md.q-my-md.justify-xs-center.justify-sm-center
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-my-md(
           v-if="mode === modes.FORM"
           :disabled="progress || importInProgress"
           @click="mode = modes.IMPORT"
@@ -52,7 +52,7 @@ q-dialog(
           size="md"
           color="primary")
           q-tooltip(content-class="bg-white text-black") {{ $t('tooltips.importJSON') }}
-        q-btn(
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-my-md(
           v-else-if="mode === modes.IMPORT"
           :disabled="progress || importInProgress"
           @click="mode = modes.FORM"
@@ -60,8 +60,8 @@ q-dialog(
           :label="$t('labels.createFormBtn')"
           size="md"
           color="primary")
-        q-space
-        q-btn.q-mr-lg(
+        q-space.gt-sm
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-my-md(
           :disabled="progress || importInProgress"
           :icon="mode === modes.DONE? 'add': 'undo'"
           @click="reset"
@@ -70,15 +70,15 @@ q-dialog(
           size="md"
           type="reset"
           color="white")
-        q-btn.q-mr-lg(
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-mr-lg.q-my-md(
           v-if="mode === modes.DONE && createdId"
           icon="fullscreen"
-          @click="showRecordDetail"
+          @click="showRecordDetail(createdId)"
           :label="$t('labels.recordDetailsBtn')"
           flat
           size="md"
           color="white")
-        q-btn.q-px-md(
+        q-btn.col-xs-12.col-sm-10.col-md-auto.q-mr-lg.q-px-md.q-my-md(
           v-if="[modes.FORM, modes.IMPORT].includes(mode)"
           :disabled="progress || importInProgress || (mode === modes.IMPORT && !fileData)"
           @click="submit"
@@ -87,7 +87,7 @@ q-dialog(
           size="lg"
           type="submit"
           color="positive")
-        q-btn.q-px-md(
+        q-btn.col-xs-12.col-sm-10.col-auto.q-px-md.q-my-md(
           v-if="[modes.DONE, modes.FAILURE].includes(mode)"
           :disabled="progress || importInProgress"
           @click="hide"
@@ -98,10 +98,14 @@ q-dialog(
 </template>
 
 <script>
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import { Component, Emit } from 'vue-property-decorator'
 import { uid, date } from 'quasar'
 import FileReaderInput from 'components/files/FileReaderInput'
 import RecordForm from 'components/widgets/forms/RecordForm'
+import { RecordDetailMixin } from 'src/mixins/RecordDetailMixin'
+import { mixins } from 'vue-class-component'
+import { AuthStateMixin } from 'src/mixins/AuthStateMixin'
+import { DialogMixin } from 'src/mixins/DialogMixin'
 
 export default @Component({
   name: 'RecordCreateDialog',
@@ -110,7 +114,7 @@ export default @Component({
     RecordForm
   }
 })
-class RecordCreateDialog extends Vue {
+class RecordCreateDialog extends mixins(AuthStateMixin, DialogMixin, RecordDetailMixin) {
   modes = Object.freeze({ FORM: 0, IMPORT: 1, DONE: 2, FAILURE: 3 })
   progress = false
   createdId = null
@@ -125,30 +129,9 @@ class RecordCreateDialog extends Vue {
     this.ensureAuthenticated()
   }
 
-  ensureAuthenticated () {
-    if (!this.$auth.loggedLocally) {
-      this.$auth.login(this)
-    }
-  }
-
   fileLoad (data) {
     this.progress = false
     this.fileData = data
-  }
-
-  showRecordDetail () {
-    this.$router.push({
-      name: 'record',
-      params: { collectionId: 'records', recordId: this.createdId }
-    })
-  }
-
-  show () {
-    this.$refs.dialog.show()
-  }
-
-  hide () {
-    this.$refs.dialog.hide()
   }
 
   get submitLabel () {
@@ -173,10 +156,6 @@ class RecordCreateDialog extends Vue {
       default:
         return 'labels.resetBtn'
     }
-  }
-
-  @Emit('hide')
-  onDialogHide () {
   }
 
   async validate () {
@@ -318,13 +297,6 @@ class RecordCreateDialog extends Vue {
     return err
   }
 
-  resetValidation () {
-    this.$refs.title.resetValidation()
-    this.$refs.description.resetValidation()
-    this.$refs.abstract.resetValidation()
-    this.$refs.contributor.resetValidation()
-  }
-
   reset () {
     this.errors = null
     this.createdId = null
@@ -337,7 +309,6 @@ class RecordCreateDialog extends Vue {
 
     Object.assign(this.$data, this.$options.data.apply(this))
     this.$refs.createForm.clear()
-    this.$nextTick(() => this.resetValidation())
   }
 }
 </script>

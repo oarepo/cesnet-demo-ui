@@ -1,5 +1,5 @@
 <template lang="pug">
-q-card-section.q-pt-xs.col-4
+q-card-section.q-pt-xs.col-sm-10.col-md-4
   .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.identifier') }}
   .text-caption {{ identifier }}
   .text-overline.text-weight-bold.text-uppercase {{ $t('labels.record.created') }}

@@ -18,7 +18,9 @@ q-input.searchbar__input.full-width(
 </template>
 
 <script>
-import { Component, Emit, Vue } from 'vue-property-decorator'
+import { Component } from 'vue-property-decorator'
+import { SearchMixin } from 'src/mixins/SearchMixin'
+import { mixins } from 'vue-class-component'
 
 export default @Component({
   name: 'Searchbar',
@@ -27,10 +29,7 @@ export default @Component({
     maximized: Boolean
   }
 })
-class Searchbar extends Vue {
-  @Emit('search')
-  doSearch () {
-  }
+class Searchbar extends mixins(SearchMixin) {
 }
 </script>
 
