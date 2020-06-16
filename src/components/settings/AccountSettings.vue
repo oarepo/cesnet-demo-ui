@@ -5,7 +5,17 @@ div
     q-separator
     q-btn.q-mt-sm.full-width.text-left(
       flat
-      v-if="$auth.loggedLocally"
+      v-if="!loggedIn"
+      @click="login()"
+      unelevated
+      align="left"
+      icon-right=""
+      icon="https"
+      no-caps)
+      span.account-settings__button-label {{ $t('labels.loginBtn') }}
+    q-btn.q-mt-sm.full-width.text-left(
+      flat
+      v-if="loggedIn"
       @click="showRecordCreate"
       unelevated
       align="left"
@@ -15,7 +25,7 @@ div
       span.account-settings__button-label {{ $t('labels.createRecordBtn') }}
     q-btn.q-mt-sm.full-width.text-left(
       flat
-      v-if="$auth.loggedLocally"
+      v-if="loggedIn"
       @click="logout"
       unelevated
       align="left"
