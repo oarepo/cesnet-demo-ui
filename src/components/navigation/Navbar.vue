@@ -35,7 +35,7 @@ div(:class="[ maximized? 'col-xs-12 col-lg-7 q-mb-xl': 'col-12']")
             .row.search-input.q-mr-xs-none.q-mr-sm.none.q-mr-md-lg
               searchbar.col-12(:maximized="maximized" v-if="query || maximized" :query="query" @search="doSearch")
             .row.justify-sm-center.justify-xs-center.justify-md-center.justify-lg-start.q-mt-sm(v-if="maximized")
-              q-btn.col-10.col-md-auto.navbar__collection-action(
+              q-btn.bg-dark-primary.col-10.col-md-auto.navbar__collection-action(
                 square
                 unelevated
                 size="lg"
@@ -101,8 +101,6 @@ class Navbar extends mixins(RecordCreateMixin, SearchMixin, AuthStateMixin) {
       margin-left: -50px
   &__collection-title h3
     letter-spacing: .2rem
-  &__collection-action
-    background-color: $dark-primary
   &__toolbar-title
     white-space: normal
 </style>

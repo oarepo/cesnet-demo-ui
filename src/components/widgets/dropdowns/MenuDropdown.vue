@@ -24,9 +24,9 @@
     size="sm"
     text-color="white")
     q-list.full-width(flat dark)
-      q-item.bg-grey-9(clickable)
+      q-item.bg-dark-primary(clickable)
         locale-switcher.full-width
-      q-item.bg-grey-9(clickable v-close-popup @click="login()")
+      q-item.bg-dark-primary(clickable v-close-popup @click="login()")
         q-item-section(side)
           q-avatar(square icon="https")
         q-item-section
