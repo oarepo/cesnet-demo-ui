@@ -41,6 +41,17 @@ div(:class="[ maximized? 'col-xs-12 col-lg-7 q-mb-xl': 'col-12']")
                 size="lg"
                 @click="doSearch"
                 :label="$t('labels.searchBtn')")
+          .col-auto.gt-sm.self-center.full-height.q-ml-xs(v-if="!maximized")
+            q-btn.q-ma-xs.text-left(
+              flat
+              v-if="loggedIn"
+              @click="showRecordCreate"
+              unelevated
+              align="left"
+              icon-right=""
+              icon="add"
+              no-caps)
+              q-tooltip {{ $t('labels.createRecordBtn') }}
           .col-auto.gt-sm.self-center.full-height.q-ml-md(v-if="!maximized")
             account-dropdown(
               :query="query"
