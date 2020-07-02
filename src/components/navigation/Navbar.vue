@@ -51,7 +51,7 @@ div(:class="[ maximized? 'col-xs-12 col-lg-7 q-mb-xl': 'col-12']")
               icon-right=""
               icon="add"
               no-caps)
-              span.account-settings__button-label {{ $t('labels.createRecordBtn') }}
+              q-tooltip {{ $t('labels.createRecordBtn') }}
           .col-auto.gt-sm.self-center.full-height.q-ml-md(v-if="!maximized")
             account-dropdown(
               :query="query"
