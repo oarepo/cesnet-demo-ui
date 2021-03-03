@@ -25,7 +25,7 @@
     "file-saver": "^2.0.2",
     "jsonpath-plus": "^3.0.0",
     "lodash.startcase": "^4.4.0",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "quasar": "^1.0.0",
     "rfc6902": "^3.0.4",
